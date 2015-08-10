@@ -16,7 +16,10 @@ Invoke `Voucherify.initialize(...)` when your application starts up:
 
 ```javascript
 $(function () {
-    Voucherify.initialize("YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS", "YOUR-CLIENT-TOKEN-FROM-SETTINGS");
+    Voucherify.initialize(
+        "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS", 
+        "YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+    );
 });
 ```
 
@@ -28,31 +31,31 @@ Now you can validate vouchers, by this simple *API*:
 Voucherify.validate("VOUCHER-CODE", function callback (response) {
     /*
     {
-      "valid": true,
-      "type": "amount",
-      "discount": 9.99
+        "valid": true,
+        "type": "amount",
+        "discount": 9.99
     }
 
     OR
 
     {
-      "valid": true,
-      "type": "percent",
-      "discount": 15
+        "valid": true,
+        "type": "percent",
+        "discount": 15
     }
 
     OR
 
     {
-      "valid": false
+        "valid": false
     }
 
     OR
 
     {
-      "type": "error",
-      "message": "More details will be here."
-      "context": "Here you will receive context of that error."
+        "type": "error",
+        "message": "More details will be here."
+        "context": "Here you will receive context of that error."
     }
     */
 });
@@ -65,32 +68,32 @@ Voucherify.validate("VOUCHER-CODE")
   .done(function (data) {
     /*
     {
-      "valid": true,
-      "type": "unit",
-      "discount": 25.23
+        "valid": true,
+        "type": "unit",
+        "discount": 25.23
     }
 
     OR
 
     {
-      "valid": true,
-      "type": "percentage",
-      "discount": 10
+        "valid": true,
+        "type": "percentage",
+        "discount": 10
     }
 
     OR
 
     {
-      "valid": false
+        "valid": false
     }
     */
   })
   .fail(function (error) {
     /*
     {
-      "type": "error",
-      "message": "More details will be here."
-      "context": "Here you will receive context of that error."
+        "type": "error",
+        "message": "More details will be here."
+        "context": "Here you will receive context of that error."
     }
     */
   });
