@@ -146,7 +146,7 @@ window.Voucherify = (function (window, document, $) {
 
       var queryString = "?code=" + encodeURIComponent(code);
 
-      return xhrImplementation(queryString);
+      return xhrImplementation(queryString, callback);
     }
   };
 
