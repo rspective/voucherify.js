@@ -47,14 +47,16 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
     OR
 
     {
-        "valid": false
+        "valid": false,
+        "type": null,
+        "discount": null
     }
 
     OR
 
     {
         "type": "error",
-        "message": "More details will be here."
+        "message": "More details will be here.",
         "context": "Here you will receive context of that error."
     }
     */
@@ -84,7 +86,9 @@ Voucherify.validate("VOUCHER-CODE")
     OR
 
     {
-        "valid": false
+        "valid": false,
+        "type": null,
+        "discount": null
     }
     */
   })
@@ -92,7 +96,7 @@ Voucherify.validate("VOUCHER-CODE")
     /*
     {
         "type": "error",
-        "message": "More details will be here."
+        "message": "More details will be here.",
         "context": "Here you will receive context of that error."
     }
     */
