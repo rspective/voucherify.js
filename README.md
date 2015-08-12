@@ -63,7 +63,7 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 });
 ```
 
-If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises:
+If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
 
 ```javascript
 Voucherify.validate("VOUCHER-CODE")
