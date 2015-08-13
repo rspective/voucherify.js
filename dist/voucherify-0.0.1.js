@@ -20,6 +20,10 @@ window.Voucherify = (function (window, document, $) {
 
         url: OPTIONS.url + queryString,
 
+        xhrFields: {
+          withCredentials: true
+        },
+
         dataType: "json",
         headers: {
           "X-Client-Application-Id": OPTIONS.applicationId,
@@ -27,7 +31,7 @@ window.Voucherify = (function (window, document, $) {
         },
         timeout: OPTIONS.timeout,
 
-        success: function (data, status) {
+        success: function (data) {
           var result = null;
 
           if (data && typeof(data.valid) === "boolean") {
@@ -74,8 +78,9 @@ window.Voucherify = (function (window, document, $) {
     };
   } else {
     xhrImplementation = function (queryString, callback) {
-      var request = new XMLHttpRequest();
+      var request = new window.XMLHttpRequest();
 
+      request.withCredentials = true;
       request.open("GET", OPTIONS.url + queryString, true);
 
       request.setRequestHeader("X-Client-Application-Id", OPTIONS.applicationId);
