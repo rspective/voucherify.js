@@ -1,6 +1,6 @@
 {
     "name": "voucherify.js",
-    "version": "0.0.1",
+    "version": "1.0.0",
 
     "homepage": "http://www.voucherify.io",
     "description": "Client-side SDK for Voucherify.",
