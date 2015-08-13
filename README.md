@@ -7,7 +7,7 @@
 Attach `voucherify-${VERSION}.min.js` to your page, somewhere near `</body>`:
 
 ```html
-<script type="text/javascript" src="/js/voucherify-0.0.1.min.js"></script>
+<script type="text/javascript" src="/js/voucherify-${VERSION}.min.js"></script>
 ```
 
 ### 2. Initialize settings
