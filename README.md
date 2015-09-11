@@ -133,5 +133,6 @@ Voucherify.validate("VOUCHER-CODE")
 
 ### Changelog
 
+- **2015-09-11** - `1.0.1` - Updated backend URL.
 - **2015-08-10** - `1.0.0` - Official stable release.
 - **2015-08-10** - `0.0.1` - Initial version of the SDK.
