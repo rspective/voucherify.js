@@ -35,11 +35,11 @@ $(function () {
 });
 ```
 
-We are tracking users which are validating vouchers with those who consume them, by a `trackingId`. By that we are setting up an identity for the user. If you want to provide your custom value for `trackingId`, you can do it with this simple function:
+We are tracking users which are validating vouchers with those who consume them, by a `tracking_id`. By that we are setting up an identity for the user. If you want to provide your custom value for `tracking_id`, you can do it with this simple function:
 
 ```javascript
 $(function () {
-    Voucherify.setIdentity("Your format of trackingId e.g. Phone number or Email address.");
+    Voucherify.setIdentity("Your format of tracking_id e.g. Phone number or Email address.");
 });
 ```
 
@@ -56,7 +56,7 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
         "valid": true,
         "type": "amount",
         "discount": 9.99,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
 
     OR
@@ -65,7 +65,7 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
         "valid": true,
         "type": "percent",
         "discount": 15,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
 
     OR
@@ -74,7 +74,7 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
         "valid": false,
         "type": null,
         "discount": null,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
 
     OR
@@ -98,7 +98,7 @@ Voucherify.validate("VOUCHER-CODE")
         "valid": true,
         "type": "unit",
         "discount": 25.23,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
 
     OR
@@ -107,7 +107,7 @@ Voucherify.validate("VOUCHER-CODE")
         "valid": true,
         "type": "percentage",
         "discount": 10,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
 
     OR
@@ -116,7 +116,7 @@ Voucherify.validate("VOUCHER-CODE")
         "valid": false,
         "type": null,
         "discount": null,
-        "trackingId": "generated-or-passed-tracking-id"
+        "tracking_id": "generated-or-passed-tracking-id"
     }
     */
   })
@@ -133,6 +133,7 @@ Voucherify.validate("VOUCHER-CODE")
 
 ### Changelog
 
+- **2015-11-05** - `1.0.2` - Updated readme - trackingId renamed to tracking_id.
 - **2015-09-11** - `1.0.1` - Updated backend URL.
 - **2015-08-10** - `1.0.0` - Official stable release.
 - **2015-08-10** - `0.0.1` - Initial version of the SDK.
