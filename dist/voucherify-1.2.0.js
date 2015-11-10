@@ -218,7 +218,9 @@ window.Voucherify = (function (window, document, $) {
 
         } else if (voucher.discount_type === 'AMOUNT') {
           validateAmountDiscount(discount);
-          return roundValue(discount, e);
+          var newPrice = basePrice - discount;
+          return roundValue(newPrice > 0 ? discount : basePrice, e);
+
         } else {
           throw new Error("Unsupported voucher type.");
         }
