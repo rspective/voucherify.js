@@ -133,6 +133,7 @@ Voucherify.validate("VOUCHER-CODE")
 
 ### Changelog
 
+- **2015-11-10** - `1.2.0` - Add util for computing retrieved discount.
 - **2015-11-10** - `1.1.0` - Add util for computing price after discount (supports PERCENT and AMOUNT vouchers).
 - **2015-11-05** - `1.0.2` - Updated readme - trackingId renamed to tracking_id.
 - **2015-09-11** - `1.0.1` - Updated backend URL.
