@@ -137,6 +137,10 @@ window.Voucherify = (function (window, document, $) {
     };
   }
 
+  function roundValue(value, e) {
+    return Math.round(value * e) / e;
+  }
+
   var voucherify = {
     initialize: function (appId, token, timeout) {
       OPTIONS.applicationId = appId;
@@ -170,6 +174,32 @@ window.Voucherify = (function (window, document, $) {
       }
 
       return xhrImplementation(queryString, callback);
+    },
+
+    utils: {
+      calculatePrice: function (basePrice, voucher) {
+        var e = 100; // Number of digits after the decimal separator.
+        var discount = voucher.discount / e;
+
+        if (voucher.discount_type === 'PERCENT') {
+          if (!discount || discount < 0 || discount > 100) {
+            throw new Error('Invalid voucher, percent discount should be between 0-100.');
+          }
+
+          var priceDiscount = basePrice * (discount/100);
+          return roundValue(basePrice - priceDiscount, e);
+
+        } else if (voucher.discount_type === 'AMOUNT') {
+          if (!discount || discount < 0) {
+            throw new Error("Invalid voucher, amount discount must be higher than zero.");
+          }
+
+          var newPrice = basePrice - discount;
+          return roundValue(newPrice > 0 ? newPrice : 0, e);
+        } else {
+          throw new Error("Unsupported voucher type.");
+        }
+      }
     }
   };
 
