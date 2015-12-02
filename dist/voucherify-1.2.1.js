@@ -27,7 +27,8 @@ window.Voucherify = (function (window, document, $) {
         dataType: "json",
         headers: {
           "X-Client-Application-Id": OPTIONS.applicationId,
-          "X-Client-Token": OPTIONS.token
+          "X-Client-Token": OPTIONS.token,
+          "X-Voucherify-Channel": "Voucherify.js"
         },
         timeout: OPTIONS.timeout,
 
