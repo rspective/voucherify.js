@@ -87,7 +87,6 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -144,7 +143,6 @@ Voucherify.validate("VOUCHER-CODE")
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
