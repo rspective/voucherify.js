@@ -56,7 +56,7 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
         "valid": true,
         "discount": {
             "type": "AMOUNT",
-            "discount": 99900
+            "amount_off": 999
         }
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -67,7 +67,18 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
         "valid": true,
         "discount": {
             "type": "PERCENT",
-            "discount": 15.0
+            "percent_off": 15.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
         }
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -102,7 +113,7 @@ Voucherify.validate("VOUCHER-CODE")
         "valid": true,
         "discount": {
             "type": "AMOUNT",
-            "discount": 2523
+            "amount_off": 2523
         }
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -113,7 +124,18 @@ Voucherify.validate("VOUCHER-CODE")
         "valid": true,
         "discount": {
             "type": "PERCENT",
-            "discount": 10.0
+            "percent_off": 10.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+    
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
         }
         "tracking_id": "generated-or-passed-tracking-id"
     }
