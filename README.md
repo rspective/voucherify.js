@@ -54,8 +54,10 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
     /*
     {
         "valid": true,
-        "type": "amount",
-        "discount": 9.99,
+        "discount": {
+            "type": "AMOUNT",
+            "amount_off": 999
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -63,8 +65,21 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 
     {
         "valid": true,
-        "type": "percent",
-        "discount": 15,
+        "discount": {
+            "type": "PERCENT",
+            "percent_off": 15.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -72,7 +87,6 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -96,8 +110,10 @@ Voucherify.validate("VOUCHER-CODE")
     /*
     {
         "valid": true,
-        "type": "unit",
-        "discount": 25.23,
+        "discount": {
+            "type": "AMOUNT",
+            "amount_off": 2523
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -105,8 +121,21 @@ Voucherify.validate("VOUCHER-CODE")
 
     {
         "valid": true,
-        "type": "percentage",
-        "discount": 10,
+        "discount": {
+            "type": "PERCENT",
+            "percent_off": 10.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+    
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -114,7 +143,6 @@ Voucherify.validate("VOUCHER-CODE")
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -133,6 +161,7 @@ Voucherify.validate("VOUCHER-CODE")
 
 ### Changelog
 
+- **2015-12-10** - `1.3.0` - New discount model. Added UNIT - a new discount type.
 - **2015-11-23** - `1.2.1` - Added `X-Voucherify-Channel` header.
 - **2015-11-10** - `1.2.0` - Add util for computing retrieved discount.
 - **2015-11-10** - `1.1.0` - Add util for computing price after discount (supports PERCENT and AMOUNT vouchers).
