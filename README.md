@@ -1,6 +1,10 @@
 ## Voucherify - JavaScript SDK
 
-[Voucherify](http://voucherify.io) is an API-first voucher managment solution.
+[Voucherify](http://voucherify.io) has a new platform that will help your team  to automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that let growth teams:
+
+- **roll-out thousands** of vouchers **in minutes** instead of weeks,
+- **check status** or disable **every single** promo code in real time, 
+- **track redemption** history and build reports on the fly.
 
 This is a library to facilitate voucher codes validation on your web page.
 
