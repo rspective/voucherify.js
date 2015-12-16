@@ -1,5 +1,15 @@
 ## Voucherify - JavaScript SDK
 
+[Voucherify](http://voucherify.io?utm_source=inbound&utm_medium=github&utm_campaign=voucherify-js) has a new platform that will help your team  to automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that let growth teams:
+
+- **roll-out thousands** of vouchers **in minutes** instead of weeks,
+- **check status** or disable **every single** promo code in real time, 
+- **track redemption** history and build reports on the fly.
+
+This is a library to facilitate voucher codes validation on your web page.
+
+You can find full documentation on [voucherify.readme.io](https://voucherify.readme.io).
+
 ### Usage
 
 ### 1. Install script
@@ -11,6 +21,10 @@ Attach `voucherify-${VERSION}.min.js` to your page, somewhere near `</body>`:
 ```
 
 ### 2. Initialize settings
+
+[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+
+![](https://www.filepicker.io/api/file/uOLcUZuSwaJFgIOvBpJA)
 
 Invoke `Voucherify.initialize(...)` when your application starts up:
 
