@@ -1,5 +1,11 @@
 ## Voucherify - JavaScript SDK
 
+[Voucherify](http://voucherify.io) is an API-first voucher managment solution.
+
+This is a library to facilitate voucher codes validation on your web page.
+
+You can find full documentation on [voucherify.readme.io](https://voucherify.readme.io).
+
 ### Usage
 
 ### 1. Install script
@@ -11,6 +17,10 @@ Attach `voucherify-${VERSION}.min.js` to your page, somewhere near `</body>`:
 ```
 
 ### 2. Initialize settings
+
+[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+
+![](https://www.filepicker.io/api/file/uOLcUZuSwaJFgIOvBpJA)
 
 Invoke `Voucherify.initialize(...)` when your application starts up:
 
