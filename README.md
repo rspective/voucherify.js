@@ -1,6 +1,6 @@
 ## Voucherify - JavaScript SDK
 
-[Voucherify](http://voucherify.io) has a new platform that will help your team  to automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that let growth teams:
+[Voucherify](http://voucherify.io?utm_source=inbound&utm_medium=github&utm_campaign=voucherify-js) has a new platform that will help your team  to automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that let growth teams:
 
 - **roll-out thousands** of vouchers **in minutes** instead of weeks,
 - **check status** or disable **every single** promo code in real time, 
