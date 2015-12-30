@@ -1,5 +1,15 @@
 ## Voucherify - JavaScript SDK
 
+[Voucherify](http://voucherify.io?utm_source=inbound&utm_medium=github&utm_campaign=voucherify-js) has a new platform that will help your team automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that increases teams' productivity:
+
+- **roll-out thousands** of vouchers **in minutes** instead of weeks,
+- **check status** or disable **every single** promo code in real time, 
+- **track redemption** history and build reports on the fly.
+
+This is a library to facilitate voucher codes validation on your web page.
+
+You can find full documentation on [voucherify.readme.io](https://voucherify.readme.io).
+
 ### Usage
 
 ### 1. Install script
@@ -11,6 +21,10 @@ Attach `voucherify-${VERSION}.min.js` to your page, somewhere near `</body>`:
 ```
 
 ### 2. Initialize settings
+
+[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+
+![](https://www.filepicker.io/api/file/uOLcUZuSwaJFgIOvBpJA)
 
 Invoke `Voucherify.initialize(...)` when your application starts up:
 
@@ -54,8 +68,10 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
     /*
     {
         "valid": true,
-        "type": "amount",
-        "discount": 9.99,
+        "discount": {
+            "type": "AMOUNT",
+            "amount_off": 999
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -63,8 +79,21 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 
     {
         "valid": true,
-        "type": "percent",
-        "discount": 15,
+        "discount": {
+            "type": "PERCENT",
+            "percent_off": 15.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -72,7 +101,6 @@ Voucherify.validate("VOUCHER-CODE", function callback (response) {
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -96,8 +124,10 @@ Voucherify.validate("VOUCHER-CODE")
     /*
     {
         "valid": true,
-        "type": "unit",
-        "discount": 25.23,
+        "discount": {
+            "type": "AMOUNT",
+            "amount_off": 2523
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -105,8 +135,21 @@ Voucherify.validate("VOUCHER-CODE")
 
     {
         "valid": true,
-        "type": "percentage",
-        "discount": 10,
+        "discount": {
+            "type": "PERCENT",
+            "percent_off": 10.0
+        }
+        "tracking_id": "generated-or-passed-tracking-id"
+    }
+    
+    OR
+    
+    {
+        "valid": true,
+        "discount": {
+            "type": "UNIT",
+            "unit_off": 1.0
+        }
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -114,7 +157,6 @@ Voucherify.validate("VOUCHER-CODE")
 
     {
         "valid": false,
-        "type": null,
         "discount": null,
         "tracking_id": "generated-or-passed-tracking-id"
     }
@@ -133,6 +175,7 @@ Voucherify.validate("VOUCHER-CODE")
 
 ### Changelog
 
+- **2015-12-10** - `1.3.0` - New discount model. Added UNIT - a new discount type.
 - **2015-11-23** - `1.2.1` - Added `X-Voucherify-Channel` header.
 - **2015-11-10** - `1.2.0` - Add util for computing retrieved discount.
 - **2015-11-10** - `1.1.0` - Add util for computing price after discount (supports PERCENT and AMOUNT vouchers).
