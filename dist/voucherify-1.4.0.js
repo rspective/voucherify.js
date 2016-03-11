@@ -249,6 +249,136 @@ window.Voucherify = (function (window, document, $) {
           throw new Error("Unsupported voucher type.");
         }
       }
+    },
+    render: function(selector, options) {
+      var $element = $(selector);
+      if (!$element || !$element.length) {
+        throw new Error("Element '" + selector + "' cannot be found");
+      }
+      options = options || {};
+
+      function getCapitalizedName(name) {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      }
+      
+      function getPropertyName(prefix, name) {
+        return prefix + getCapitalizedName(name);
+      }
+      
+      function getConfigProperty(prefix, name) {
+        return options[getPropertyName(prefix, name)];
+      }
+
+      function create$control(type, name, $container, config) {
+        config = config || {};
+        var $control = null;
+        var configured$control = getConfigProperty("selector", name);
+        
+        if (config.configurable && configured$control) {
+          $control = $(configured$control);
+        }
+        
+        if (!$control || !$control.length) {
+          $control = $(document.createElement(type));
+          $container.append($control);
+          
+          for (var attribute in config) {
+            if (attribute !== "configurable" && config.hasOwnProperty(attribute)) {
+              $control.attr(attribute, config[attribute]);
+            }
+          }
+          
+          if (type === "input") {
+            $control.attr("name", getCapitalizedName("name", name) || getCapitalizedName("voucherify", name));
+          }
+          
+          if (type === "span" && config.text) {
+            $control.text(config.text);
+          }
+        }
+        
+        $control.addClass(typeof getConfigProperty("class", name) === "string" ? getConfigProperty("class", name) : getPropertyName("voucherify", name));
+        return $control;
+      }
+      
+      var $container    = create$control("div", "container", $element);
+      var $logo         = create$control("img", "logo", $container, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
+      var $code         = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
+      var $discountType = create$control("input", "discountType", $container, { type: "hidden", configurable: true });
+      var $percentOff   = create$control("input", "percentOff", $container, { type: "hidden", configurable: true });
+      var $amountOff    = create$control("input", "amountOff", $container, { type: "hidden", configurable: true });
+      var $unitOff      = create$control("input", "unitOff", $container, { type: "hidden", configurable: true });
+      var $tracking     = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
+      var $validate     = create$control("button", "validate", $container, {});
+      var $validateText = create$control("span", "validateText", $validate, { text: typeof options.textValidate === "string" ? options.textValidate : "Validate" });
+
+      var self = this;
+      var classInvalid = options.classInvalid === "string" ? options.classInvalid : "voucherifyInvalid";
+      var classValid = typeof options.classValid === "string" ? options.classValid : "voucherifyValid";
+      var classInvalidAnimation = options.classInvalidAnimation === "string" ? options.classInvalidAnimation : "voucherifyAnimationShake";
+      var classValidAnimation = options.classValidAnimation === "string" ? options.classValidAnimation : "voucherifyAnimationTada";
+
+      $code.on("keyup", function(event) {
+        $code.toggleClass(classInvalidAnimation, false);
+      });
+
+      $validate.on("click", function(event) {
+        $discountType.val("");
+        $amountOff.val("");
+        $unitOff.val("");
+        $percentOff.val("");
+        $tracking.val("");
+
+        $validate.toggleClass(classInvalid, false);
+        $validate.toggleClass(classValid, false);
+        
+        if (!$code.val()) {
+          $code.toggleClass(classInvalidAnimation, true)
+            .delay(1000)
+            .queue(function(){
+                $code.toggleClass(classInvalidAnimation, false);
+                $code.dequeue();
+            });
+          return;
+        }
+
+        self.validate($code.val(), function(response) {   
+          if (!response || !response.valid) {
+            $validate.toggleClass(classInvalid, true);
+            $validate.toggleClass(classValid, false);
+            $code.toggleClass(classInvalid, true);
+            $code.toggleClass(classValid, false);
+            $code.toggleClass(classInvalidAnimation, true)
+              .delay(1000)
+              .queue(function(){
+                $code.toggleClass(classInvalidAnimation, false);
+                $code.dequeue();
+              });
+            return;
+          }
+
+        $code.toggleClass(classInvalid, false);
+          $discountType.val(response.discount && response.discount.type || "");
+          $amountOff.val(response.discount && response.discount.amount_off || 0);
+          $unitOff.val(response.discount && response.discount.unit_off || 0);
+          $percentOff.val(response.discount && response.discount.percent_off || 0);
+          $tracking.val(response.tracking_id || "");
+        
+          $code.prop("disabled", true);
+          $validate.prop("disabled", true);
+
+          $code.toggleClass(classValid, true);
+          $validate.toggleClass(classValid, true);
+          $validate.toggleClass(classInvalid, false);
+          $code.toggleClass(classInvalid, false);
+            
+          $code.toggleClass(classValidAnimation, true)
+
+          if (options && options.onValidated && typeof options.onValidated === "function") {
+            options.onValidated(response);
+          }
+        });
+      });
     }
   };
 
