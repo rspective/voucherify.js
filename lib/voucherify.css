@@ -68,6 +68,7 @@ div.voucherifyContainer input.voucherifydiscountType {
 
 div.voucherifyContainer input.voucherifyCode {
     display: block;
+    box-sizing: border-box;
 
     height: 2.5em;
     width: 100%;
