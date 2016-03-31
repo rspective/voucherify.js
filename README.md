@@ -173,6 +173,30 @@ Voucherify.validate("VOUCHER-CODE")
   });
 ```
 
+### 4. Use utils to calculate discount and price after discount
+
+`Voucherify.utils.calculatePrice(productPrice, voucher, unitPrice [optional])`
+`Voucherify.utils.calculateDiscount(productPrice, voucher, unitPrice [optional])`
+
+### 5. Discount widget
+
+If you need a quick UI to validate vouchers on your website then use `Voucherify.render(selector, options)`:
+  
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - `classInvalid` - CSS class applied to the input when entered code is invalid
+       - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
+       - `classValid` - CSS class applied to the input when entered code is valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered code valid
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - **`onValidated`** - a callback function invoked when the entered code is valid, it takes the validation response as a parameter
+       - `textPlaceholder` - text displayed as a placeholder in the input field
+       - `textValidate` - a text displayed on the button (default: "Validate")
+
+This is how the widget looks like:
+
+![Discount Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
+
 ### Changelog
 
 - **2016-03-18** - `1.4.1` - Fix voucher checkout input style.
