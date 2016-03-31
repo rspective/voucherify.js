@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="../lib/voucherify.css">
+        <style>
+            #price {
+                font-family: sans-serif;
+                text-align: center;
+                box-sizing: border-box;
+                width: 12em;
+                margin: 2em auto;
+                padding: 1em 0;
+                border: 1px solid #E5E5E5;
+                border-radius: 1em;
+                background-color: #F1F1F1;
+                color: #222;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="price"></div>
+        <div id="voucher-checkout"></div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+        <script type="text/javascript" src="../lib/voucherify.js"></script>
+        <script>
+            var basePrice = 49.99;
+
+            function showPrice(value) {
+                document.getElementById("price").innerText = "price: $" + value.toFixed(2);
+            }
+
+            Voucherify.initialize(
+                    "011240bf-d5fc-4ef1-9e82-11eb68c43bf5",
+                    "9e2230c5-71fb-460a-91c6-fbee64707a20"
+            );
+            Voucherify.setIdentity("gustav@purpleson.com");
+            Voucherify.render("#voucher-checkout", {
+                textPlaceholder: "e.g. Testing7fjWdr",
+                onValidated: function(response) {
+                    var newPrice = Voucherify.utils.calculatePrice(basePrice, response);
+                    showPrice(newPrice);
+                }
+            });
+
+            showPrice(basePrice);
+        </script>
+    </body>
+</html>
