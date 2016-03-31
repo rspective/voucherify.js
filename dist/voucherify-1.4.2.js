@@ -289,7 +289,7 @@ window.Voucherify = (function (window, document, $) {
           }
           
           if (type === "input") {
-            $control.attr("name", getCapitalizedName("name", name) || getCapitalizedName("voucherify", name));
+            $control.attr("name", getPropertyName("voucherify", name));
           }
           
           if (type === "span" && config.text) {
