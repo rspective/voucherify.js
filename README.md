@@ -193,18 +193,22 @@ If you need a quick UI to validate vouchers on your website then use `Voucherify
        - `textPlaceholder` - text displayed as a placeholder in the input field
        - `textValidate` - a text displayed on the button (default: "Validate")
 
+The widget requires jQuery to work and voucherify.css to display properly.
+
 This is how the widget looks like:
 
 ![Discount Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
 
+You can find a working example in [example/discount-widget.html](example/discount-widget.html).
+
 ### Changelog
 
-- **2016-03-18** - `1.4.1` - Fix voucher checkout input style.
-- **2016-03-11** - `1.4.0` - Add sample checkout form to validating vouchers.
+- **2016-03-18** - `1.4.1` - Fixed voucher checkout input style.
+- **2016-03-11** - `1.4.0` - Added sample checkout form to validating vouchers.
 - **2015-12-10** - `1.3.0` - New discount model. Added UNIT - a new discount type.
 - **2015-11-23** - `1.2.1` - Added `X-Voucherify-Channel` header.
-- **2015-11-10** - `1.2.0` - Add util for computing retrieved discount.
-- **2015-11-10** - `1.1.0` - Add util for computing price after discount (supports PERCENT and AMOUNT vouchers).
+- **2015-11-10** - `1.2.0` - Added util for computing retrieved discount.
+- **2015-11-10** - `1.1.0` - Added util for computing price after discount (supports PERCENT and AMOUNT vouchers).
 - **2015-11-05** - `1.0.2` - Updated readme - trackingId renamed to tracking_id.
 - **2015-09-11** - `1.0.1` - Updated backend URL.
 - **2015-08-10** - `1.0.0` - Official stable release.
