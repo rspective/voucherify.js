@@ -203,6 +203,8 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-03-31** - `1.4.3` - Fixed logo.
+- **2016-03-31** - `1.4.2` - Fixed input names.
 - **2016-03-18** - `1.4.1` - Fixed voucher checkout input style.
 - **2016-03-11** - `1.4.0` - Added sample checkout form to validating vouchers.
 - **2015-12-10** - `1.3.0` - New discount model. Added UNIT - a new discount type.

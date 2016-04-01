@@ -18,7 +18,7 @@ div.voucherifyContainer {
     -webkit-font-smoothing: antialiased;
 }
 
-div.voucherifyContainer img.voucherifyLogo {
+div.voucherifyContainer figure.voucherifyLogo {
 	position: absolute;
 	top: -1.5em;
 	left: 5.5em;
@@ -36,6 +36,12 @@ div.voucherifyContainer img.voucherifyLogo {
     -webkit-box-shadow: 0px 0px 2px 2px rgba(229,229,229,0.2);
 	-moz-box-shadow: 0px 0px 2px 2px rgba(229,229,229,0.2);
 	box-shadow: 0px 0px 2px 2px rgba(229,229,229,0.2);
+}
+
+div.voucherifyContainer img.voucherifyLogo {
+    position: relative;
+    width: 2em;
+    height: 2em;
 }
 
 div.voucherifyContainer span.voucherifyMessage {

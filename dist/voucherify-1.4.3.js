@@ -289,7 +289,7 @@ window.Voucherify = (function (window, document, $) {
           }
           
           if (type === "input") {
-            $control.attr("name", getCapitalizedName("name", name) || getCapitalizedName("voucherify", name));
+            $control.attr("name", getPropertyName("voucherify", name));
           }
           
           if (type === "span" && config.text) {
@@ -301,16 +301,17 @@ window.Voucherify = (function (window, document, $) {
         return $control;
       }
       
-      var $container    = create$control("div", "container", $element);
-      var $logo         = create$control("img", "logo", $container, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
-      var $code         = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
-      var $discountType = create$control("input", "discountType", $container, { type: "hidden", configurable: true });
-      var $percentOff   = create$control("input", "percentOff", $container, { type: "hidden", configurable: true });
-      var $amountOff    = create$control("input", "amountOff", $container, { type: "hidden", configurable: true });
-      var $unitOff      = create$control("input", "unitOff", $container, { type: "hidden", configurable: true });
-      var $tracking     = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
-      var $validate     = create$control("button", "validate", $container, {});
-      var $validateText = create$control("span", "validateText", $validate, { text: typeof options.textValidate === "string" ? options.textValidate : "Validate" });
+      var $container     = create$control("div", "container", $element);
+      var $logoContainer = create$control("figure", "logo", $container);
+      var $logo          = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
+      var $code          = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
+      var $discountType  = create$control("input", "discountType", $container, { type: "hidden", configurable: true });
+      var $percentOff    = create$control("input", "percentOff", $container, { type: "hidden", configurable: true });
+      var $amountOff     = create$control("input", "amountOff", $container, { type: "hidden", configurable: true });
+      var $unitOff       = create$control("input", "unitOff", $container, { type: "hidden", configurable: true });
+      var $tracking      = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
+      var $validate      = create$control("button", "validate", $container, {});
+      var $validateText  = create$control("span", "validateText", $validate, { text: typeof options.textValidate === "string" ? options.textValidate : "Validate" });
 
       var self = this;
       var classInvalid = options.classInvalid === "string" ? options.classInvalid : "voucherifyInvalid";
