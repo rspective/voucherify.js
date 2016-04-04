@@ -203,6 +203,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-04-04** - `1.4.4` - Updated API URL.
 - **2016-03-31** - `1.4.3` - Fixed logo.
 - **2016-03-31** - `1.4.2` - Fixed input names.
 - **2016-03-18** - `1.4.1` - Fixed voucher checkout input style.
