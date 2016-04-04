@@ -199,7 +199,7 @@ This is how the widget looks like:
 
 ![Discount Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
 
-You can find a working example in [example/discount-widget.html](example/discount-widget.html).
+You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
 
 ### Changelog
 
