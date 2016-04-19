@@ -14,10 +14,16 @@ You can find full documentation on [voucherify.readme.io](https://voucherify.rea
 
 ### 1. Install script
 
-Attach `voucherify-${VERSION}.min.js` to your page, somewhere near `</body>`:
+Attach `voucherify.min.js` to your page, somewhere near `</body>`:
 
 ```html
-<script type="text/javascript" src="/js/voucherify-${VERSION}.min.js"></script>
+<script type="text/javascript" src="/libs/voucherify/voucherify.min.js"></script>
+```
+
+You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/voucherify.js):
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/voucherify.js/1.4.5/voucherify.min.js"></script>
 ```
 
 ### 2. Initialize settings
