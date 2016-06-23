@@ -82,7 +82,7 @@ where params is an object including:
 
 Example - check if can redeem $50 from 'gift100' voucher:
 
-`Voucherify.validate({code: "gift100", amount: 5000, function callback (response) { })`
+`Voucherify.validate({code: "gift100", amount: 5000}, function callback (response) { })`
 
 Example responses:
 
