@@ -77,8 +77,8 @@ or
 
 where params is an object including: 
 
-- `code`: required
-- `amount`: required for gift vouchers, integer, value in cents
+- `code` *(required)* - voucher's code
+- `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that a customer is going to pay by voucher
 
 Example - check if can redeem $50 from 'gift100' voucher:
 
