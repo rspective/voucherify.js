@@ -162,8 +162,8 @@ window.Voucherify = (function (window, document, $) {
   }
 
   var voucherify = {
-    initialize: function (appId, token, timeout) {
-      OPTIONS.applicationId = appId;
+    initialize: function (clientAppId, token, timeout) {
+      OPTIONS.applicationId = clientAppId;
       OPTIONS.token = token;
       OPTIONS.timeout = timeout || 5000;
     },
@@ -174,8 +174,15 @@ window.Voucherify = (function (window, document, $) {
 
     validate: function (code, callback) {
       if (!OPTIONS.applicationId && !OPTIONS.token) {
-        console.error("Voucherify client could not verify coupon - Lack of configuration - Missing Application ID or Token.");
+        console.error("Voucherify client could not verify coupon - Lack of configuration - Missing Client Application ID or Token.");
         return null;
+      }
+
+      var amount;
+
+      if (typeof(code) === "object") {
+        amount = code.amount;
+        code = code.code;
       }
 
       if (!!code) {
@@ -189,6 +196,10 @@ window.Voucherify = (function (window, document, $) {
 
       var queryString = "?code=" + encodeURIComponent(code);
 
+      if (amount) {
+        queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
+      }
+
       if (OPTIONS.trackingId) {
         queryString += "&tracking_id=" + encodeURIComponent(OPTIONS.trackingId);
       }
@@ -200,6 +211,10 @@ window.Voucherify = (function (window, document, $) {
       calculatePrice: function (basePrice, voucher, unitPrice) {
         var e = 100; // Number of digits after the decimal separator.
         var discount;
+
+        if (!voucher.discount) {
+          throw new Error("Unsupported voucher type.");
+        }
 
         if (voucher.discount.type === 'PERCENT') {
           discount = voucher.discount.percent_off;
@@ -220,13 +235,17 @@ window.Voucherify = (function (window, document, $) {
           return roundMoney(newPrice > 0 ? newPrice : 0);
 
         } else {
-          throw new Error("Unsupported voucher type.");
+          throw new Error("Unsupported discount type.");
         }
       },
 
       calculateDiscount: function(basePrice, voucher, unitPrice) {
         var e = 100; // Number of digits after the decimal separator.
         var discount;
+
+        if (!voucher.discount) {
+          throw new Error("Unsupported voucher type.");
+        }
 
         if (voucher.discount.type === 'PERCENT') {
           discount = voucher.discount.percent_off;
@@ -246,7 +265,7 @@ window.Voucherify = (function (window, document, $) {
           return roundMoney(priceDiscount > basePrice ? basePrice : priceDiscount);
 
         } else {
-          throw new Error("Unsupported voucher type.");
+          throw new Error("Unsupported discount type.");
         }
       }
     },
