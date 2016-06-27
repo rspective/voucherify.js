@@ -69,57 +69,110 @@ You will receive assigned value in the validation response. If you don't pass it
 
 Now you can validate vouchers, by this simple *API*:
 
+`Voucherify.validate("VOUCHER-CODE", function callback (response) { })`
+
+or 
+
+`Voucherify.validate(params, function callback (response) { })`
+
+where params is an object including: 
+
+- `code` *(required)* - voucher's code
+- `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that a customer is going to pay by voucher
+
+Example - check if can redeem $50 from 'gift100' voucher:
+
+`Voucherify.validate({code: "gift100", amount: 5000}, function callback (response) { })`
+
+Example responses:
+
+Valid amount discount response:
+
+
 ```javascript
-Voucherify.validate("VOUCHER-CODE", function callback (response) {
-    /*
-    {
-        "valid": true,
-        "discount": {
-            "type": "AMOUNT",
-            "amount_off": 999
-        }
-        "tracking_id": "generated-or-passed-tracking-id"
+{
+    "code": "VOUCHER_CODE",
+    "valid": true,
+    "discount": {
+        "type": "AMOUNT",
+        "amount_off": 999,
     }
+    "tracking_id": "generated-or-passed-tracking-id"
+}
+```
 
-    OR
+Valid percentage discount response:
 
-    {
-        "valid": true,
-        "discount": {
-            "type": "PERCENT",
-            "percent_off": 15.0
-        }
-        "tracking_id": "generated-or-passed-tracking-id"
+```javascript
+{
+    "code": "VOUCHER_CODE",
+    "valid": true,
+    "discount": {
+        "type": "PERCENT",
+        "percent_off": 15.0,
     }
-    
-    OR
+    "tracking_id": "generated-or-passed-tracking-id"
+}
+```
 
-    {
-        "valid": true,
-        "discount": {
-            "type": "UNIT",
-            "unit_off": 1.0
-        }
-        "tracking_id": "generated-or-passed-tracking-id"
+Valid unit discount response:
+
+
+```javascript
+{
+    "code": "VOUCHER_CODE",
+    "valid": true,
+    "discount": {
+        "type": "UNIT",
+        "unit_off": 1.0,
     }
+    "tracking_id": "generated-or-passed-tracking-id"
+}
+```
 
-    OR
+Valid gift voucher response:
 
-    {
-        "valid": false,
-        "discount": null,
-        "tracking_id": "generated-or-passed-tracking-id"
+
+```javascript
+   {
+       "code": "VOUCHER_CODE",
+       "valid": true,
+       "gift": {
+           "amount": 10000
+       }
+       "tracking_id": "generated-or-passed-tracking-id"
+   }
+   ```
+
+Invalid voucher response:
+
+```javascript
+{
+    "code": "VOUCHER_CODE",
+    "valid": false,
+    "reason": "voucher expired",
+    "tracking_id": "generated-or-passed-tracking-id"
+}
+```
+
+Error response:
+
+```javascript
+{
+    "type": "error",
+    "message": "XHR error happened.",
+    "context": {
+        "readyState":4,
+        "responseJSON":{
+            "code": 400,
+            "message": "Missing amount",
+            "details": "Amount is required when redeeming a GIFT_VOUCHER"
+        },
+        "responseText": "...",
+        "status": 400,
+        "statusText": "Bad Request"
     }
-
-    OR
-
-    {
-        "type": "error",
-        "message": "More details will be here.",
-        "context": "Here you will receive context of that error."
-    }
-    */
-});
+}
 ```
 
 If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
@@ -129,6 +182,7 @@ Voucherify.validate("VOUCHER-CODE")
   .done(function (data) {
     /*
     {
+        "code": "VOUCHER_CODE",
         "valid": true,
         "discount": {
             "type": "AMOUNT",
@@ -140,6 +194,7 @@ Voucherify.validate("VOUCHER-CODE")
     OR
 
     {
+        "code": "VOUCHER_CODE",
         "valid": true,
         "discount": {
             "type": "PERCENT",
@@ -151,6 +206,7 @@ Voucherify.validate("VOUCHER-CODE")
     OR
     
     {
+        "code": "VOUCHER_CODE",
         "valid": true,
         "discount": {
             "type": "UNIT",
@@ -160,10 +216,22 @@ Voucherify.validate("VOUCHER-CODE")
     }
 
     OR
+    
+   {
+       "code": "VOUCHER_CODE",
+       "valid": true,
+       "gift": {
+           "amount": 10000
+       }
+       "tracking_id": "generated-or-passed-tracking-id"
+   }
+
+    OR
 
     {
+        "code": "VOUCHER_CODE",
         "valid": false,
-        "discount": null,
+        "reason": "voucher expired",
         "tracking_id": "generated-or-passed-tracking-id"
     }
     */
@@ -178,6 +246,15 @@ Voucherify.validate("VOUCHER-CODE")
     */
   });
 ```
+
+There are several reasons why validation may fail (`valid: false` response). 
+You can find the actual cause in the `reason` field:
+
+- `voucher is disabled`
+- `voucher not active yet`
+- `voucher expired`
+- `quantity exceeded`
+- `gift amount exceeded`
 
 ### 4. Use utils to calculate discount and price after discount
 
@@ -209,6 +286,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:
    - removed version number from dist files
    - added source maps
