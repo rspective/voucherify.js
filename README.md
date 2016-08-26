@@ -286,6 +286,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-06-22** - `1.6.0` - Removed Voucherify logo from template, added powered by caption.
 - **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:
    - removed version number from dist files
