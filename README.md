@@ -79,6 +79,7 @@ where params is an object including:
 
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that a customer is going to pay by voucher
+- `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
 
 Example - check if can redeem $50 from 'gift100' voucher:
 
@@ -255,6 +256,8 @@ You can find the actual cause in the `reason` field:
 - `voucher expired`
 - `quantity exceeded`
 - `gift amount exceeded`
+- `customer does not match segment rules`
+- `order does not match validation rules`
 
 ### 4. Use utils to calculate discount and price after discount
 
@@ -286,6 +289,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-08-31** - `1.6.0` - Pass order items (required for validation rules). 
 - **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:
    - removed version number from dist files
