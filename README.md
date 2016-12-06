@@ -78,7 +78,7 @@ or
 where params is an object including: 
 
 - `code` *(required)* - voucher's code
-- `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that a customer is going to pay by voucher
+- `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
 
 Example - check if can redeem $50 from 'gift100' voucher:
@@ -139,7 +139,8 @@ Valid gift voucher response:
        "code": "VOUCHER_CODE",
        "valid": true,
        "gift": {
-           "amount": 10000
+           "amount": 10000,
+           "balance": 7500
        }
        "tracking_id": "generated-or-passed-tracking-id"
    }
@@ -222,7 +223,8 @@ Voucherify.validate("VOUCHER-CODE")
        "code": "VOUCHER_CODE",
        "valid": true,
        "gift": {
-           "amount": 10000
+           "amount": 10000,
+           "balance": 7500
        }
        "tracking_id": "generated-or-passed-tracking-id"
    }
@@ -289,6 +291,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2016-12-01** - `1.6.1` - Extend utils to support gift vouchers. 
 - **2016-08-31** - `1.6.0` - Pass order items (required for validation rules). 
 - **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:

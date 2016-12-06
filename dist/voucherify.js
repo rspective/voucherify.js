@@ -222,6 +222,11 @@ window.Voucherify = (function (window, document, $) {
         var e = 100; // Number of digits after the decimal separator.
         var discount;
 
+        if (voucher.gift) {
+          discount = Math.min(voucher.gift.balance / e, basePrice);
+          return roundMoney(basePrice - discount);
+        }
+
         if (!voucher.discount) {
           throw new Error("Unsupported voucher type.");
         }
@@ -252,6 +257,11 @@ window.Voucherify = (function (window, document, $) {
       calculateDiscount: function(basePrice, voucher, unitPrice) {
         var e = 100; // Number of digits after the decimal separator.
         var discount;
+
+        if (voucher.gift) {
+          discount = Math.min(voucher.gift.balance / e, basePrice);
+          return roundMoney(discount);
+        }
 
         if (!voucher.discount) {
           throw new Error("Unsupported voucher type.");
