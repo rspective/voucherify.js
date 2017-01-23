@@ -291,6 +291,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
+- **2017-01-23** - `1.6.2` - Fix XHR InvalidStateError in IE11 (#22). 
 - **2016-12-01** - `1.6.1` - Extend utils to support gift vouchers. 
 - **2016-08-31** - `1.6.0` - Pass order items (required for validation rules). 
 - **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
