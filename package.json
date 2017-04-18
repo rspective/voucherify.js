@@ -1,10 +1,11 @@
 {
   "name": "voucherify.js",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "homepage": "http://www.voucherify.io",
   "description": "Client-side SDK for Voucherify.",
   "author": "rspective",
   "license": "MIT",
+  "main": "dist/voucherify.js",
   "scripts": {
     "build": "gulp build"
   },
