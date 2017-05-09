@@ -422,7 +422,7 @@ window.Voucherify = (function (window, document, $) {
     }
   };
 
-  if (module && module.exports) {
+  if (typeof module !== "undefined" && module.exports) {
     module.exports = voucherify;
   }
 
