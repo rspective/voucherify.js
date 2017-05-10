@@ -23,7 +23,19 @@ Attach `voucherify.min.js` to your page, somewhere near `</body>`:
 You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/voucherify.js):
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/voucherify.js/1.6.4/voucherify.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.js"></script>
+```
+
+Attach `voucherify.min.css` to your page, somewhere between `<head>` and `</head>`:
+
+```html
+<link type="text/css" rel="stylesheet" href="/libs/voucherify/voucherify.min.css" />
+```
+
+You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/voucherify.js):
+
+```html
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.css" />
 ```
 
 ### 2. Initialize settings
@@ -291,7 +303,8 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
-- **2017-05-09** - `1.6.4` - Fix undefined module in a browser.  
+- **2017-05-10** - `1.7.0` - Add client side redeem method
+- **2017-05-09** - `1.6.4` - Fix undefined module in a browser.
 - **2017-04-18** - `1.6.3` - Make possible to include voucherify.js as an npm dependency.
 - **2017-01-23** - `1.6.2` - Fix XHR InvalidStateError in IE11 (#22). 
 - **2016-12-01** - `1.6.1` - Extend utils to support gift vouchers. 
