@@ -1,14 +1,19 @@
 window.Voucherify = (function (window, document, $) {
   "use strict";
 
-  var OPTIONS = {
-    url: "https://api.voucherify.io/client/v1/validate"
+  var API_BASE = "https://api.voucherify.io";
+
+  var API = {
+      validate: API_BASE + "/client/v1/validate",
+      redeem:   API_BASE + "/client/v1/redeem"
   };
+
+  var OPTIONS = {};
 
   var xhrImplementation = null;
 
   if (!!$ && typeof($.ajax) === "function" && !!$.Deferred) {
-    xhrImplementation = function (queryString, callback) {
+    xhrImplementation = function (method, url, payload, callback) {
       var deferred = null;
 
       if (typeof(callback) !== "function") {
@@ -16,9 +21,11 @@ window.Voucherify = (function (window, document, $) {
       }
 
       $.ajax({
-        type: "GET",
+        type: method,
 
-        url: OPTIONS.url + queryString,
+        url: url,
+
+        data: JSON.stringify(payload),
 
         xhrFields: {
           withCredentials: true
@@ -26,6 +33,8 @@ window.Voucherify = (function (window, document, $) {
 
         dataType: "json",
         headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
           "X-Client-Application-Id": OPTIONS.applicationId,
           "X-Client-Token": OPTIONS.token,
           "X-Voucherify-Channel": "Voucherify.js"
@@ -35,7 +44,7 @@ window.Voucherify = (function (window, document, $) {
         success: function (data) {
           var result = null;
 
-          if (data && typeof(data.valid) === "boolean") {
+          if (data && (typeof(data.valid) === "boolean" || typeof(data.result) === "string")) {
             if (typeof(callback) === "function") {
               callback(data);
             } else {
@@ -78,13 +87,15 @@ window.Voucherify = (function (window, document, $) {
       }
     };
   } else {
-    xhrImplementation = function (queryString, callback) {
+    xhrImplementation = function (method, url, payload, callback) {
       var request = new window.XMLHttpRequest();
 
       request.withCredentials = true;
-      request.open("GET", OPTIONS.url + queryString, true);
+      request.open(method, url, true);
       request.timeout = OPTIONS.timeout;
 
+      request.setRequestHeader("Accept", "application/json");
+      request.setRequestHeader("Content-Type", "application/json");
       request.setRequestHeader("X-Client-Application-Id", OPTIONS.applicationId);
       request.setRequestHeader("X-Client-Token", OPTIONS.token);
       request.setRequestHeader("X-Voucherify-Channel", "Voucherify.js");
@@ -95,7 +106,7 @@ window.Voucherify = (function (window, document, $) {
         if (request.status >= 200 && request.status < 400) {
           var data = JSON.parse(request.responseText);
 
-          if (data && typeof(data.valid) === "boolean") {
+          if (data && (typeof(data.valid) === "boolean" || typeof(data.result) === "string")) {
             if (typeof(callback) === "function") {
               callback(data);
             }
@@ -135,7 +146,7 @@ window.Voucherify = (function (window, document, $) {
         }
       };
 
-      request.send();
+      request.send(JSON.stringify(payload));
     };
   }
 
@@ -214,7 +225,28 @@ window.Voucherify = (function (window, document, $) {
         queryString += "&tracking_id=" + encodeURIComponent(OPTIONS.trackingId);
       }
 
-      return xhrImplementation(queryString, callback);
+      return xhrImplementation("GET", API.validate + queryString, undefined, callback);
+    },
+
+    redeem: function (code, payload, callback) {
+      if (!OPTIONS.applicationId && !OPTIONS.token) {
+        console.error("Voucherify client could not redeem coupon - Lack of configuration - Missing Client Application ID or Token.");
+        return null;
+      }
+
+      if (!code) {
+        console.error("Voucherify client could not verify code, because it is missing - please provide Voucher Code.");
+        return null;
+      }
+
+      var queryString = "?code=" + encodeURIComponent(code.replace(/[\s\r\n]/g, ""));
+
+      // -- Tracking ID fallback
+      payload = payload || {};
+      payload.customer = payload.customer || {};
+      payload.customer.source_id = payload.customer.source_id || OPTIONS.trackingId;
+
+      return xhrImplementation("POST", API.redeem + queryString, payload, callback);
     },
 
     utils: {
