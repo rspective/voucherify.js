@@ -192,11 +192,13 @@ window.Voucherify = (function (window, document, $) {
       var amount;
       var items;
       var metadata;
+      var customer;
 
       if (typeof(code) === "object") {
         amount = code.amount;
         items = code.items;
         metadata = code.metadata;
+        customer = code.customer;
         code = code.code;
       }
 
@@ -226,6 +228,12 @@ window.Voucherify = (function (window, document, $) {
       if (metadata) {
         queryString += "&" + Object.keys(metadata).map(function(key) {
           return encodeURIComponent("metadata[" + key + "]") + "=" + encodeURIComponent(metadata[key]);
+        }).join("&");
+      }
+
+      if (customer) {
+        queryString += "&" + Object.keys(customer).map(function(key) {
+          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[key]);
         }).join("&");
       }
 
