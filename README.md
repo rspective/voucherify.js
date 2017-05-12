@@ -92,6 +92,7 @@ where params is an object including:
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
+- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
 - `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
 
 Example - check if can redeem $50 from 'gift100' voucher:
@@ -304,7 +305,7 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
-- **2017-05-12** - `1.8.0` - Enable validation of metadata.
+- **2017-05-12** - `1.8.0` - Enable validation of metadata. Pass customer id and/or source_id.
 - **2017-05-10** - `1.7.0` - Add client side redeem method
 - **2017-05-09** - `1.6.4` - Fix undefined module in a browser.
 - **2017-04-18** - `1.6.3` - Make possible to include voucherify.js as an npm dependency.
