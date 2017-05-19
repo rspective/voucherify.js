@@ -38,6 +38,7 @@
             Voucherify.setIdentity("gustav@purpleson.com");
             Voucherify.render("#voucher-checkout", {
                 textPlaceholder: "e.g. Testing7fjWdr",
+                amount: true,
                 onValidated: function(response) {
                     var newPrice = Voucherify.utils.calculatePrice(basePrice, response);
                     showPrice(newPrice);
