@@ -6,7 +6,8 @@ window.Voucherify = (function (window, document, $) {
   var API = {
       validate: API_BASE + "/client/v1/validate",
       redeem:   API_BASE + "/client/v1/redeem",
-      publish:  API_BASE + "/client/v1/publish"
+      publish:  API_BASE + "/client/v1/publish",
+      list:     API_BASE + "/client/v1/vouchers"
   };
 
   var OPTIONS = {};
@@ -296,6 +297,25 @@ window.Voucherify = (function (window, document, $) {
       payload.channel = payload.channel || "Voucherify.js";
 
       return xhrImplementation("POST", API.publish + queryString, payload, callback);
+    },
+
+    listVouchers: function (filters, callback) {
+      if (!isValidInit(OPTIONS)) {
+        return null;
+      }
+
+      if (typeof filters === "function" && !callback) {
+        callback = filters;
+        filters = {};
+      }
+
+      var queryString = "?" + Object.keys(filters)
+              .map(function(key) {
+                return encodeURIComponent(key) + "=" + encodeURIComponent(filters[key])
+              })
+              .join("&");
+
+      return xhrImplementation("GET", API.list + queryString, undefined, callback);
     },
 
     utils: {
