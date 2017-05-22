@@ -281,7 +281,7 @@ You can find the actual cause in the `reason` field:
 There is an option to publish vouchers through the client API. In order to do that
 you have to enable client-side publication in your project's configuration.
 
-`Voucherify.pubilsh(campaignName, context, function callback (response) { })`
+`Voucherify.publish(campaignName, context, function callback (response) { })`
 
 - `campaignName` - required, name of a campaign from which a voucher should be published
 - `context` - optional, an object consisting of
