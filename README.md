@@ -289,6 +289,19 @@ you have to enable client-side publication in your project's configuration.
   - `channel` - publication channel (`Voucherify.js` by default)
   - `metadata` - an object containing any additional data related with publication
 
+### List vouchers
+
+Use the `listVouchers` method if you want to show a list of vouchers from a specific campaign on category.
+If you want to use this method you have to enable it in your project's configuration.
+
+`Voucherify.listVouchers(filters, function callback (response) { })`
+
+- `filters` - optional, an object consisting of
+  - `campaign` - limit vouchers to the ones that belong to the specified campaign
+  - `category` - limit vouchers to the ones that are within the specified category
+  - `page` - a number greater than or equal to 1
+  - `limit` - a number between 1 and 100
+
 ### Use utils to calculate discount and price after discount
 
 `Voucherify.utils.calculatePrice(productPrice, voucher, unitPrice [optional])`
@@ -319,7 +332,9 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 ### Changelog
 
-- **2017-05-19** - `1.9.0` - Add client side publish method.
+- **2017-05-19** - `1.9.0` 
+  - Add client side publish method,
+  - Add a method to list vouchers
 - **2017-05-12** - `1.8.0` - Enable validation of metadata. Pass customer id and/or source_id.
 - **2017-05-10** - `1.7.0` - Add client side redeem method
 - **2017-05-09** - `1.6.4` - Fix undefined module in a browser.
