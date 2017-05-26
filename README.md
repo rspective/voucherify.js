@@ -319,19 +319,22 @@ If you need a quick UI to validate vouchers on your website then use `Voucherify
        - `classValidAnimation` - CSS class describing animation of the input field when entered code valid
        - `logoSrc` - source of the image appearing in the circle at the top
        - **`onValidated`** - a callback function invoked when the entered code is valid, it takes the validation response as a parameter
-       - `textPlaceholder` - text displayed as a placeholder in the input field
+       - `amount` - flag enables the amount input field
+       - `textPlaceholder` - text displayed as a placeholder in the code input field
+       - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
        - `textValidate` - a text displayed on the button (default: "Validate")
 
-The widget requires jQuery to work and voucherify.css to display properly.
+The widget requires jQuery to work and `voucherify.css` to display properly.
 
 This is how the widget looks like:
 
-![Discount Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
+![Voucherify Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
 
 You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
 
 ### Changelog
 
+- **2017-05-19** - `1.10.0` - Add the amount input field
 - **2017-05-19** - `1.9.0` 
   - Add client side publish method,
   - Add a method to list vouchers

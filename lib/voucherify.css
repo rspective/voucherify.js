@@ -72,13 +72,14 @@ div.voucherifyContainer input.voucherifydiscountType {
     display: none;
 }
 
-div.voucherifyContainer input.voucherifyCode {
+div.voucherifyContainer input.voucherifyCode,
+div.voucherifyContainer input.voucherifyAmount {
     display: block;
     box-sizing: border-box;
 
     height: 2.5em;
     width: 100%;
-	margin: 0;
+	margin: 0.5em 0;
 
     border: 1px solid #D1D1D1;
     padding: 0 1em;
@@ -87,12 +88,14 @@ div.voucherifyContainer input.voucherifyCode {
     text-align: center;
     outline: none;
 }
-div.voucherifyContainer input.voucherifyCode.voucherifyInvalid {
+div.voucherifyContainer input.voucherifyCode.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyAmount.voucherifyInvalid {
 	background-color: #f8dffe;
     border: 1px solid #EBD7F4;
 }
 
-div.voucherifyContainer input.voucherifyCode.voucherifyValid {
+div.voucherifyContainer input.voucherifyCode.voucherifyValid,
+div.voucherifyContainer input.voucherifyAmount.voucherifyValid {
     border: 1px solid #08ffb9;
     background-color: #08ffb9;
     color: rgba(63,49,49,.8);

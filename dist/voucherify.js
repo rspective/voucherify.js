@@ -12,7 +12,20 @@ window.Voucherify = (function (window, document, $) {
 
   var OPTIONS = {};
 
+  // Error keys returned from voucherify API
+  var INVALID_AMOUNT = "invalid_amount";
+  var INVALID_NUMBER = "invalid_number";
+  var MISSING_AMOUNT = "missing_amount";
+
   var xhrImplementation = null;
+
+  function isValidResponseStructure(data) {
+    return data && (typeof(data.valid) === "boolean" // validate
+       || typeof(data.result) === "string" // redeem
+       || typeof(data.voucher) === "object" // publish
+       || typeof(data.vouchers) === "object" // list
+    );
+  }
 
   if (!!$ && typeof($.ajax) === "function" && !!$.Deferred) {
     xhrImplementation = function (method, url, payload, callback) {
@@ -46,7 +59,7 @@ window.Voucherify = (function (window, document, $) {
         success: function (data) {
           var result = null;
 
-          if (data && (typeof(data.valid) === "boolean" || typeof(data.result) === "string")) {
+          if (isValidResponseStructure(data)) {
             if (typeof(callback) === "function") {
               callback(data);
             } else {
@@ -108,7 +121,7 @@ window.Voucherify = (function (window, document, $) {
         if (request.status >= 200 && request.status < 400) {
           var data = JSON.parse(request.responseText);
 
-          if (data && (typeof(data.valid) === "boolean" || typeof(data.result) === "string")) {
+          if (isValidResponseStructure(data)) {
             if (typeof(callback) === "function") {
               callback(data);
             }
@@ -445,6 +458,7 @@ window.Voucherify = (function (window, document, $) {
       var $logoContainer = create$control("figure", "logo", $container);
       var $logo          = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
       var $code          = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
+      var $amount        = create$control("input", "amount", $container, { type: options.amount ? "text" : "hidden", placeholder: typeof options.amountPlaceholder === "string" ? options.amountPlaceholder : "e.g. 52.22" });
       var $discountType  = create$control("input", "discountType", $container, { type: "hidden", configurable: true });
       var $percentOff    = create$control("input", "percentOff", $container, { type: "hidden", configurable: true });
       var $amountOff     = create$control("input", "amountOff", $container, { type: "hidden", configurable: true });
@@ -463,6 +477,10 @@ window.Voucherify = (function (window, document, $) {
         $code.toggleClass(classInvalidAnimation, false);
       });
 
+      $amount.on("keyup", function(event) {
+        $amount.toggleClass(classInvalidAnimation, false);
+      });
+
       $validate.on("click", function(event) {
         $discountType.val("");
         $amountOff.val("");
@@ -475,30 +493,60 @@ window.Voucherify = (function (window, document, $) {
 
         if (!$code.val()) {
           $code.toggleClass(classInvalidAnimation, true)
-              .delay(1000)
-              .queue(function(){
-                $code.toggleClass(classInvalidAnimation, false);
-                $code.dequeue();
-              });
+            .delay(1000)
+            .queue(function(){
+              $code.toggleClass(classInvalidAnimation, false);
+              $code.dequeue();
+            });
           return;
         }
 
-        self.validate($code.val(), function(response) {
+        var payload = {
+          code: $code.val(),
+          amount: parseInt(parseFloat($amount.val().replace(/\,/, ".")) * 100)
+        };
+
+        self.validate(payload, function(response) {
           if (!response || !response.valid) {
-            $validate.toggleClass(classInvalid, true);
-            $validate.toggleClass(classValid, false);
-            $code.toggleClass(classInvalid, true);
-            $code.toggleClass(classValid, false);
-            $code.toggleClass(classInvalidAnimation, true)
+
+            var setFieldInvalid = function ($field) {
+              $field.toggleClass(classInvalid, true);
+              $field.toggleClass(classValid, false);
+              $field.toggleClass(classInvalidAnimation, true)
                 .delay(1000)
                 .queue(function(){
-                  $code.toggleClass(classInvalidAnimation, false);
-                  $code.dequeue();
+                  $field.toggleClass(classInvalidAnimation, false);
+                  $field.dequeue();
                 });
+            };
+
+            $validate.toggleClass(classInvalid, true);
+            $validate.toggleClass(classValid, false);
+
+            var context         = response.context || {};
+            var responseJSON    = context.responseJSON || {};
+            var error_key       = responseJSON.key;
+
+            if (options.amount && (
+                error_key === INVALID_AMOUNT ||
+                error_key === INVALID_NUMBER ||
+                error_key === MISSING_AMOUNT)) {
+              setFieldInvalid($amount);
+            } else {
+              setFieldInvalid($code);
+            }
+
             return;
           }
 
+          if ($amount.val() >= 0) {
+            $amount.val(parseFloat($amount.val().replace(/\,/, ".")))
+          } else {
+            $amount.hide(100);
+          }
+
           $code.toggleClass(classInvalid, false);
+          $amount.toggleClass(classInvalid, false);
           $discountType.val(response.discount && response.discount.type || "");
           $amountOff.val(response.discount && response.discount.amount_off || 0);
           $unitOff.val(response.discount && response.discount.unit_off || 0);
@@ -506,14 +554,17 @@ window.Voucherify = (function (window, document, $) {
           $tracking.val(response.tracking_id || "");
 
           $code.prop("disabled", true);
+          $amount.prop("disabled", true);
           $validate.prop("disabled", true);
 
           $code.toggleClass(classValid, true);
+          $amount.toggleClass(classValid, true);
           $validate.toggleClass(classValid, true);
           $validate.toggleClass(classInvalid, false);
           $code.toggleClass(classInvalid, false);
 
-          $code.toggleClass(classValidAnimation, true)
+          $code.toggleClass(classValidAnimation, true);
+          $amount.toggleClass(classValidAnimation, true);
 
           if (options && options.onValidated && typeof options.onValidated === "function") {
             options.onValidated(response);
