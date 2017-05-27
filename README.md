@@ -332,8 +332,37 @@ This is how the widget looks like:
 
 You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
 
+### Get voucher widget
+
+If you need a quick UI to get vouchers for given client then use `Voucherify.renderPublish(selector, options)`:
+  
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - `classInvalid` - CSS class applied to the input when entered data are invalid
+       - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
+       - `classValid` - CSS class applied to the input when entered code is valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered data valid
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - **`onPublished`** - a callback function invoked when getting voucher will succeed, it takes  response as a parameter
+       - `customerFields` - list of the customer input fields that are displayed in widget
+       - `textPublish` - a text displayed on the button (default: "Get voucher")
+       - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
+       - `customerEmailPlaceholder` - text displayed as a placeholder in the email input field
+       - `customerPhonePlaceholder` - text displayed as a placeholder in the phone input field
+       - `customerLine1Placeholder` - text displayed as a placeholder in the first address line input field
+       - `customerLine2Placeholder` - text displayed as a placeholder in the second address line input field
+       - `customerPostalCodePlaceholder` - text displayed as a placeholder in the postal code input field
+       - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
+       - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
+       - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
+
+The widget requires jQuery to work and `voucherify.css` to display properly.
+
+You can find a working example in [example/publish-widget.html](example/publish-widget.html)
+
 ### Changelog
 
+- **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
 - **2017-05-19** - `1.9.0` 
   - Add client side publish method,

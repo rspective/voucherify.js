@@ -18,15 +18,21 @@ div.voucherifyContainer {
     -webkit-font-smoothing: antialiased;
 }
 
+div.voucherifyContainer.wide {
+    width: 22em;
+}
+
 div.voucherifyContainer figure.voucherifyLogo {
 	position: absolute;
 	top: -1.5em;
-	left: 5.5em;
+	left: 50%;
 
 	width: 2em;
 	height: 2em;
 
-	margin: 0 auto;
+	margin-top: 0;
+	margin-bottom: 0;
+    margin-left: -1.5em;
 	border: 1px solid #E5E5E5;
 	border-radius: 2em;
 	padding: 0.5em;
@@ -68,12 +74,31 @@ div.voucherifyContainer input.voucherifyPercentOff,
 div.voucherifyContainer input.voucherifyAmountOff,
 div.voucherifyContainer input.voucherifyUnitOff,
 div.voucherifyContainer input.voucherifyTracking,
-div.voucherifyContainer input.voucherifydiscountType {
+div.voucherifyContainer input.voucherifyCustomerName,
+div.voucherifyContainer input.voucherifyCustomerEmail,
+div.voucherifyContainer input.voucherifyCustomerPhone,
+div.voucherifyContainer input.voucherifyCustomerLine1,
+div.voucherifyContainer input.voucherifyCustomerLine2,
+div.voucherifyContainer input.voucherifyCustomerPostalCode,
+div.voucherifyContainer input.voucherifyCustomerCity,
+div.voucherifyContainer input.voucherifyCustomerState,
+div.voucherifyContainer input.voucherifyCustomerCountry,
+div.voucherifyContainer input.voucherifyPublishStatus {
     display: none;
 }
 
 div.voucherifyContainer input.voucherifyCode,
-div.voucherifyContainer input.voucherifyAmount {
+div.voucherifyContainer input.voucherifyAmount,
+div.voucherifyContainer input.voucherifyCustomerName,
+div.voucherifyContainer input.voucherifyCustomerEmail,
+div.voucherifyContainer input.voucherifyCustomerPhone,
+div.voucherifyContainer input.voucherifyCustomerLine1,
+div.voucherifyContainer input.voucherifyCustomerLine2,
+div.voucherifyContainer input.voucherifyCustomerPostalCode,
+div.voucherifyContainer input.voucherifyCustomerCity,
+div.voucherifyContainer input.voucherifyCustomerState,
+div.voucherifyContainer input.voucherifyCustomerCountry,
+div.voucherifyContainer input.voucherifyPublishStatus  {
     display: block;
     box-sizing: border-box;
 
@@ -89,22 +114,53 @@ div.voucherifyContainer input.voucherifyAmount {
     outline: none;
 }
 div.voucherifyContainer input.voucherifyCode.voucherifyInvalid,
-div.voucherifyContainer input.voucherifyAmount.voucherifyInvalid {
+div.voucherifyContainer input.voucherifyAmount.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerName.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerEmail.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerPhone.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerLine1.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerLine2.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerPostalCode.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerCity.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerState.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyCustomerCountry.voucherifyInvalid {
 	background-color: #f8dffe;
     border: 1px solid #EBD7F4;
 }
 
 div.voucherifyContainer input.voucherifyCode.voucherifyValid,
-div.voucherifyContainer input.voucherifyAmount.voucherifyValid {
+div.voucherifyContainer input.voucherifyAmount.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerName.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerEmail.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerPhone.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerLine1.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerLine2.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerPostalCode.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerCity.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerState.voucherifyValid,
+div.voucherifyContainer input.voucherifyCustomerCountry.voucherifyValid,
+div.voucherifyContainer button.voucherifyPublish.voucherifyValid {
     border: 1px solid #08ffb9;
     background-color: #08ffb9;
     color: rgba(63,49,49,.8);
     font-weight: bold;
 }
 
-div.voucherifyContainer button.voucherifyValidate {
+div.voucherifyContainer .voucherifyRow {
+    display: flex;
+}
+
+div.voucherifyContainer .voucherifyRow > input {
+    flex: 1;
+}
+
+div.voucherifyContainer .voucherifyRow > input:not(:last-of-type) {
+    margin-right: 0.8em;
+}
+
+div.voucherifyContainer button.voucherifyValidate,
+div.voucherifyContainer button.voucherifyPublish {
 	display: block;
-    height: 2.5em;
 
     margin: 1.5em auto 1.5em auto;
     border: none;
@@ -125,14 +181,26 @@ div.voucherifyContainer button.voucherifyValidate {
     color: rgba(63,49,49,.8);
 }
 
-div.voucherifyContainer button.voucherifyValidate:hover {
+div.voucherifyContainer button.voucherifyValidate:hover,
+div.voucherifyContainer button.voucherifyPublish:hover {
 	background-color: rgba(8,255,185,.8);
 }
 
-div.voucherifyContainer button.voucherifyValidate:disabled {
+div.voucherifyContainer button.voucherifyValidate:disabled,
+div.voucherifyContainer button.voucherifyPublish:disabled {
     background-color: #E5E5E5;
     color: #959595;
     cursor: default;
+}
+
+div.voucherifyContainer button.voucherifyPublish.voucherifyValid {
+    background-color: #08ffb9;
+    color: rgba(63,49,49,.8);
+    font-weight: bold;
+}
+
+div.voucherifyContainer button.voucherifyPublish.voucherifyInvalid {
+    background-color: #f8dffe;
 }
 
 /****
