@@ -88,6 +88,7 @@ div.voucherifyContainer input.voucherifyPublishStatus {
 }
 
 div.voucherifyContainer input.voucherifyCode,
+div.voucherifyContainer input.voucherifyAmount,
 div.voucherifyContainer input.voucherifyCustomerName,
 div.voucherifyContainer input.voucherifyCustomerEmail,
 div.voucherifyContainer input.voucherifyCustomerPhone,
@@ -113,6 +114,7 @@ div.voucherifyContainer input.voucherifyPublishStatus  {
     outline: none;
 }
 div.voucherifyContainer input.voucherifyCode.voucherifyInvalid,
+div.voucherifyContainer input.voucherifyAmount.voucherifyInvalid,
 div.voucherifyContainer input.voucherifyCustomerName.voucherifyInvalid,
 div.voucherifyContainer input.voucherifyCustomerEmail.voucherifyInvalid,
 div.voucherifyContainer input.voucherifyCustomerPhone.voucherifyInvalid,
@@ -127,6 +129,7 @@ div.voucherifyContainer input.voucherifyCustomerCountry.voucherifyInvalid {
 }
 
 div.voucherifyContainer input.voucherifyCode.voucherifyValid,
+div.voucherifyContainer input.voucherifyAmount.voucherifyValid,
 div.voucherifyContainer input.voucherifyCustomerName.voucherifyValid,
 div.voucherifyContainer input.voucherifyCustomerEmail.voucherifyValid,
 div.voucherifyContainer input.voucherifyCustomerPhone.voucherifyValid,
