@@ -1,4 +1,5 @@
 div.voucherifyContainer {
+    font-family: sans-serif;
     position: relative;
     display: block;
 
@@ -18,6 +19,27 @@ div.voucherifyContainer {
     -webkit-font-smoothing: antialiased;
 }
 
+div.voucherifyContainer.sticky {
+    padding-top: 0;
+}
+
+div.voucherifyContainer.sticky::after {
+    content: " ";
+    text-indent: -99999px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: inset 0 0 50px 15px #F1F1F1;
+    -moz-box-shadow: inset 0 0 50px 15px #F1F1F1;
+    box-shadow: inset 0 0 50px 15px #F1F1F1;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 1em;
+}
+
 div.voucherifyContainer *,
 div.voucherifyContainer *::before,
 div.voucherifyContainer *::after {
@@ -35,6 +57,7 @@ div.voucherifyContainer.wide {
 
 div.voucherifyContainer figure.voucherifyLogo {
 	position: absolute;
+    z-index: 2;
 	top: -1.5em;
 	left: 50%;
 
@@ -207,6 +230,44 @@ div.voucherifyContainer button.voucherifyPublish.voucherifyValid {
 
 div.voucherifyContainer button.voucherifyPublish.voucherifyInvalid {
     background-color: #f8dffe;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList {
+    position: relative;
+    min-height: 50px;
+    max-height: 350px;
+    overflow: auto;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList li.voucherifyVoucherItem {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    z-index: 0;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList li.voucherifyVoucherItem:not(:last-of-type) {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList li.voucherifyVoucherItem:first-child {
+    padding-top: 2.5em;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList li.voucherifyVoucherItem:last-child {
+    padding-bottom: 2.5em;
+}
+
+div.voucherifyContainer ul.voucherifyVouchersList li.voucherifyVoucherItem .voucherifyVoucherCode {
+    display: inline-block;
+    width: 100%;
+    line-height: 2.5em;
 }
 
 /****

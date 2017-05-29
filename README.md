@@ -360,8 +360,25 @@ The widget requires jQuery to work and `voucherify.css` to display properly.
 
 You can find a working example in [example/publish-widget.html](example/publish-widget.html)
 
+### List vouchers widget
+
+If you need a quick UI to list vouchers for given client then use `Voucherify.renderListVouchers(selector, options)`:
+  
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - `campaign` - name of campaign which contains requested vouchers
+       - `category` - name of category where voucher are assigned
+       - `limit` - number of vouchers displayed in widget
+       - **`onListed`** - a callback function invoked when getting vouchers will succeed, it takes response as a parameter
+
+The widget requires jQuery to work and `voucherify.css` to display properly.
+
+You can find a working example in [example/list-vouchers-widget.html](example/list-vouchers-widget.html)
+
 ### Changelog
 
+- **2017-05-26** - `1.12.0` - Add widget to list vouchers for given customer
 - **2017-05-26** - `1.11.1` - Add normalize styles 
 - **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
