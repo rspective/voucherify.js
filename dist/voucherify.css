@@ -18,6 +18,17 @@ div.voucherifyContainer {
     -webkit-font-smoothing: antialiased;
 }
 
+div.voucherifyContainer *,
+div.voucherifyContainer *::before,
+div.voucherifyContainer *::after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 div.voucherifyContainer.wide {
     width: 22em;
 }
@@ -73,17 +84,7 @@ div.voucherifyContainer input.voucherifyDiscountType,
 div.voucherifyContainer input.voucherifyPercentOff,
 div.voucherifyContainer input.voucherifyAmountOff,
 div.voucherifyContainer input.voucherifyUnitOff,
-div.voucherifyContainer input.voucherifyTracking,
-div.voucherifyContainer input.voucherifyCustomerName,
-div.voucherifyContainer input.voucherifyCustomerEmail,
-div.voucherifyContainer input.voucherifyCustomerPhone,
-div.voucherifyContainer input.voucherifyCustomerLine1,
-div.voucherifyContainer input.voucherifyCustomerLine2,
-div.voucherifyContainer input.voucherifyCustomerPostalCode,
-div.voucherifyContainer input.voucherifyCustomerCity,
-div.voucherifyContainer input.voucherifyCustomerState,
-div.voucherifyContainer input.voucherifyCustomerCountry,
-div.voucherifyContainer input.voucherifyPublishStatus {
+div.voucherifyContainer input.voucherifyTracking {
     display: none;
 }
 
@@ -101,6 +102,11 @@ div.voucherifyContainer input.voucherifyCustomerCountry,
 div.voucherifyContainer input.voucherifyPublishStatus  {
     display: block;
     box-sizing: border-box;
+    color: #444444;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-color: #FFFFFF;
 
     height: 2.5em;
     width: 100%;

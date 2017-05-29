@@ -362,6 +362,7 @@ You can find a working example in [example/publish-widget.html](example/publish-
 
 ### Changelog
 
+- **2017-05-26** - `1.11.1` - Add normalize styles 
 - **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
 - **2017-05-19** - `1.9.0` 
