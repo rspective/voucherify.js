@@ -825,6 +825,96 @@ window.Voucherify = (function (window, document, $) {
           }
         });
       });
+    },
+
+    renderListVouchers: function (selector, options) {
+      var $element = $(selector);
+
+      if (!$element || !$element.length) {
+          throw new Error("Element '" + selector + "' cannot be found");
+      }
+
+      options = options || {};
+
+      function getCapitalizedName(name) {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      }
+
+      function getPropertyName(prefix, name) {
+        return prefix + getCapitalizedName(name);
+      }
+
+      function getConfigProperty(prefix, name) {
+        return options[getPropertyName(prefix, name)];
+      }
+
+      function create$control(type, name, $container, config) {
+        config = config || {};
+        var $control = null;
+        var configured$control = getConfigProperty("selector", name);
+
+        if (config.configurable && configured$control) {
+          $control = $(configured$control);
+        }
+
+        if (!$control || !$control.length) {
+          $control = $(document.createElement(type));
+          $container.append($control);
+
+          for (var attribute in config) {
+            if (attribute !== "configurable" && config.hasOwnProperty(attribute)) {
+              $control.attr(attribute, config[attribute]);
+            }
+          }
+
+          if (type === "input") {
+            $control.attr("name", getPropertyName("voucherify", name));
+          }
+
+          if (type === "span" && config.text) {
+            $control.text(config.text);
+          }
+        }
+
+        $control.addClass(typeof getConfigProperty("class", name) === "string" ? getConfigProperty("class", name) : getPropertyName("voucherify", name));
+        return $control;
+      }
+
+      var self = this;
+
+      var possible_filters = ["campaign", "category", "limit"];
+
+      var filters = Array.prototype.reduce.call(Object.keys(options), function (filters, field) {
+        if (possible_filters.indexOf(field) > -1 && options[field]) {
+          filters[field] = options[field];
+        }
+        return filters;
+      }, {});
+
+      var $container     = create$control("div", "container", $element);
+      $container.addClass("sticky wide");
+      var $logoContainer = create$control("figure", "logo", $container);
+      var $logo          = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
+      var $vouchersList  = create$control("ul", "vouchersList", $container);
+
+      self.listVouchers(filters, function (response) {
+        if (!response && !response.vouchers) {
+          var context = response.context || {};
+          var responseJSON = context.responseJSON || {};
+
+          var error_key = responseJSON.key;
+          return;
+        }
+
+        Array.prototype.forEach.call(response.vouchers || [], function (voucher) {
+          var $voucherItem = create$control("li", "voucherItem", $vouchersList);
+          create$control("span", "voucherCode", $voucherItem, { text: voucher.code });
+        });
+
+        if (options && options.onListed && typeof options.onListed === "function") {
+          options.onListed(response);
+        }
+      });
     }
   };
 
