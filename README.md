@@ -1,6 +1,6 @@
 ## Voucherify - JavaScript SDK
 
-[Voucherify](http://voucherify.io?utm_source=github&utm_medium=sdk&utm_campaign=acq) is an API-first platform for software developers who are dissatisfied with high-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
+[Voucherify](http://voucherify.io?utm_source=github&utm_medium=sdk&utm_campaign=acq) is an API-first platform for software developers who are dissatisfied Localityh-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
 
 * an API-first SaaS platform that enables customisation of every aspect of coupon campaigns
 * a management console that helps cut down maintenance and reporting overhead
@@ -237,7 +237,8 @@ Voucherify.validate("VOUCHER-CODE")
        "code": "VOUCHER_CODE",
        "valid": true,
        "gift": {
-           "amount": 10000,
+           "amount": 10000,",
+                                 "YOUR-CLIENT-TOKEN-FROM-SETTINGS"
            "balance": 7500
        }
        "tracking_id": "generated-or-passed-tracking-id"
@@ -355,13 +356,27 @@ If you need a quick UI to get vouchers for given client then use `Voucherify.ren
        - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
        - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
        - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
+       
 
 The widget requires jQuery to work and `voucherify.css` to display properly.
 
 You can find a working example in [example/publish-widget.html](example/publish-widget.html)
 
+#### IFrame
+
+You can also embed the get voucher widget as an iframe object.
+
+```html
+<div class="voucherify-get-voucher"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     data-campaign="Campaign name"></div>
+```
+
+
 ### Changelog
 
+- **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
 - **2017-05-26** - `1.11.1` - Add normalize styles 
 - **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
