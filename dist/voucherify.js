@@ -828,6 +828,104 @@ window.Voucherify = (function (window, document, $) {
     }
   };
 
+  function renderIframes() {
+    if (!window) {
+      return false;
+    }
+
+    var helpers = {
+      bind: function (element, name, callback) {
+        if (element.addEventListener) {
+          return element.addEventListener(name, callback, false)
+        } else {
+          return element.attachEvent("on" + name, callback)
+        }
+      },
+      readOptions: function (element, allowed_options) {
+        return Array.prototype.reduce.call(allowed_options, function (options, allowed_option) {
+          var option_value = element.getAttribute("data-" + allowed_option);
+
+          if (option_value) {
+            options[allowed_option] = option_value;
+          }
+
+          return options;
+        }, {});
+      },
+      encodeOptions: function (options) {
+        var query_parameters = [];
+
+        Object.keys(options).forEach(function(option_key) {
+          query_parameters.push("[options]["+option_key+"]="+encodeURIComponent(options[option_key]));
+        });
+
+        return "?" + query_parameters.join("&");
+      }
+    };
+
+
+    function RenderIframe(element) {
+      var self = this;
+
+      self._host = "https://app.voucherify.io";
+      self._path = "/widgets/publish";
+
+      self._allowed_options = ["client-app-id", "client-token", "campaign"];
+      self._element = element;
+
+      self._options = helpers.readOptions(self._element, self._allowed_options);
+
+      self._iframe = null;
+
+      return this.renderIframe();
+    }
+
+    RenderIframe.prototype.renderIframe = function () {
+      var self = this;
+
+      if (self._iframe) {
+        return self;
+      }
+
+      var css_props = [
+        "width:400px;",
+        "height:450px;",
+        "background: transparent;",
+        "border: 0px none transparent;",
+        "overflow-x: hidden;",
+        "overflow-y: auto;",
+        "visibility: hidden;",
+        "margin: 0;",
+        "padding: 0;",
+        "-webkit-tap-highlight-color: transparent;",
+        "-webkit-touch-callout: none;"
+      ];
+
+      self._iframe = document.createElement("iframe");
+      self._iframe.setAttribute("frameBorder", "0");
+      self._iframe.setAttribute("allowtransparency", "true");
+      self._iframe.style.cssText = css_props.join("\n");
+
+      helpers.bind(self._iframe, "load", function () {
+        return self._iframe.style.visibility = "visible"
+      });
+
+      self._iframe.src = self._host + self._path + helpers.encodeOptions(self._options);
+
+      self._element.append(self._iframe);
+
+      return self;
+    };
+
+    var elements = window.document.querySelectorAll(".voucherify-get-voucher");
+
+    return Array.prototype.forEach.call(elements, function (element) {
+      return new RenderIframe(element);
+    })
+  }
+
+  renderIframes();
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = voucherify;
   }
