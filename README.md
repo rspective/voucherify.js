@@ -355,13 +355,28 @@ If you need a quick UI to get vouchers for given client then use `Voucherify.ren
        - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
        - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
        - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
-
+       
 The widget requires jQuery to work and `voucherify.css` to display properly.
 
 You can find a working example in [example/publish-widget.html](example/publish-widget.html)
 
+#### IFrame
+
+You can also embed the get voucher widget as an iframe object.
+
+```html
+<div class="voucherify-get-voucher"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     data-email-required="BOOLEAN"
+     data-campaign="Campaign name"></div>
+```
+
+
 ### Changelog
 
+- **2017-06-02** - `1.12.1` - Add required flag for customer email
+- **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
 - **2017-05-26** - `1.11.1` - Add normalize styles 
 - **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
