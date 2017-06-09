@@ -372,9 +372,60 @@ You can also embed the get voucher widget as an iframe object.
      data-campaign="Campaign name"></div>
 ```
 
+### Subscribe widget - Iframe 
+
+```html
+<div class="voucherify-subscribe"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-name-field="BOOLEAN"
+     data-name-field-required="BOOLEAN"
+     data-name-field-label="Field label"
+
+     data-email-field="BOOLEAN"
+     data-email-field-required="BOOLEAN"
+     data-email-field-label="Field label"
+
+     data-phone-field="BOOLEAN"
+     data-phone-field-required="BOOLEAN"
+     data-phone-field-label="Field label"
+
+     data-address-line-1-field="BOOLEAN"
+     data-address-line-1-field-required="BOOLEAN"
+     data-address-line-1-field-label="Field label"
+
+     data-address-line-2-field="BOOLEAN"
+     data-address-line-2-field-required="BOOLEAN"
+     data-address-line-2-field-label="Field label"
+
+     data-city-field="BOOLEAN"
+     data-city-field-required="BOOLEAN"
+     data-city-field-label="Field label"
+
+     data-postal-code-field="BOOLEAN"
+     data-postal-code-field-required="BOOLEAN"
+     data-postal-code-field-label="Field label"
+
+     
+     data-state-field="BOOLEAN"
+     data-state-field-required="BOOLEAN"
+     data-state-field-label="Field label"
+
+     data-country-field="BOOLEAN"
+     data-country-field-required="BOOLEAN"
+     data-country-field-label="Field label"
+
+     data-subscribe-label="Button label"
+
+     data-source="Metadata source value"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+```
+
 
 ### Changelog
 
+- **2017-06-02** - `1.13.0` - Add the subscribe widget
 - **2017-06-02** - `1.12.1` - Add required flag for customer email
 - **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
 - **2017-05-26** - `1.11.1` - Add normalize styles 
