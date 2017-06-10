@@ -338,6 +338,7 @@ If you need a quick UI to get vouchers for given client then use `Voucherify.ren
   
    - `selector` - identifies an HTML element that will be used as a container for the widget
    - `options`:
+       - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
        - `classInvalid` - CSS class applied to the input when entered data are invalid
        - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
        - `classValid` - CSS class applied to the input when entered code is valid
