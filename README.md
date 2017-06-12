@@ -373,9 +373,56 @@ You can also embed the get voucher widget as an iframe object.
      data-campaign="Campaign name"></div>
 ```
 
+### Subscribe widget - Iframe 
+
+It creates a customer profile in Voucherify. 
+
+```html
+<div class="voucherify-subscribe"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-name-field="true"
+     data-name-field-required="false"
+     data-name-field-label="Name"
+
+     data-email-field="true"
+     data-email-field-required="true"
+     data-email-field-label="Email"
+
+     data-subscribe-label="Subscribe to the list"
+
+     data-source="Landing_Page_1"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+```
+
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
+  
+  - `data-phone-field="BOOLEAN"`
+  - `data-phone-field-required="BOOLEAN"`
+  - `data-phone-field-label="Field label"`
+  - `data-address-line-1-field="BOOLEAN"`
+  - `data-address-line-1-field-required="BOOLEAN"`
+  - `data-address-line-1-field-label="Field label"`
+  - `data-address-line-2-field="BOOLEAN"`
+  - `data-address-line-2-field-required="BOOLEAN"`
+  - `data-address-line-2-field-label="Field label"`
+  - `data-city-field="BOOLEAN"`
+  - `data-city-field-required="BOOLEAN"`
+  - `data-city-field-label="Field label"`
+  - `data-postal-code-field="BOOLEAN"`
+  - `data-postal-code-field-required="BOOLEAN"`
+  - `data-postal-code-field-label="Field label"`
+  - `data-state-field="BOOLEAN"`
+  - `data-state-field-required="BOOLEAN"`
+  - `data-state-field-label="Field label"`
+  - `data-country-field="BOOLEAN"`
+  - `data-country-field-required="BOOLEAN"`
+  - `data-country-field-label="Field label"`
 
 ### Changelog
 
+- **2017-06-02** - `1.13.0` - Implementation of widget which acts as a subscribe form
 - **2017-06-02** - `1.12.1` - Add required flag for customer email
 - **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
 - **2017-05-26** - `1.11.1` - Add normalize styles 
