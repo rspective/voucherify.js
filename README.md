@@ -390,7 +390,6 @@ It creates a customer profile in Voucherify.
      data-email-field-required="true"
      data-email-field-label="Email"
 
-
      data-subscribe-label="Subscribe to the list"
 
      data-source="Landing_Page_1"
@@ -420,7 +419,6 @@ The widget is fully configurable. You can decide which fields are visible and re
   - `data-country-field="BOOLEAN"`
   - `data-country-field-required="BOOLEAN"`
   - `data-country-field-label="Field label"`
-
 
 ### Changelog
 
