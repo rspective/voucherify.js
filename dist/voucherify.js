@@ -833,6 +833,70 @@ window.Voucherify = (function (window, document, $) {
       return false;
     }
 
+    var host = "https://app.voucherify.io";
+
+    var iframes_widgets = {
+      "get-voucher": {
+        "path": "/widgets/publish",
+        "attributes": [
+          "client-app-id",
+          "client-token",
+
+          "campaign",
+
+          "email-required"
+        ]
+      },
+      "subscribe": {
+        "path": "/widgets/subscribe",
+        "attributes": [
+          "client-app-id",
+          "client-token",
+
+          "metadata",
+          "source",
+
+          "name-field",
+          "name-field-required",
+          "name-field-label",
+
+          "email-field",
+          "email-field-required",
+          "email-field-label",
+
+          "phone-field",
+          "phone-field-required",
+          "phone-field-label",
+
+          "address-line-1-field",
+          "address-line-1-field-required",
+          "address-line-1-field-label",
+
+          "address-line-2-field",
+          "address-line-2-field-required",
+          "address-line-2-field-label",
+
+          "city-field",
+          "city-field-required",
+          "city-field-label",
+
+          "postal-code-field",
+          "postal-code-field-required",
+          "postal-code-field-label",
+
+          "state-field",
+          "state-field-required",
+          "state-field-label",
+
+          "country-field",
+          "country-field-required",
+          "country-field-label",
+
+          "subscribe-label"
+        ]
+      }
+    };
+
     var helpers = {
       bind: function (element, name, callback) {
         if (element.addEventListener) {
@@ -864,16 +928,14 @@ window.Voucherify = (function (window, document, $) {
     };
 
 
-    function RenderIframe(element) {
+    function RenderIframe(element, options) {
       var self = this;
 
-      self._host = "https://app.voucherify.io";
-      self._path = "/widgets/publish";
-
-      self._allowed_options = ["client-app-id", "client-token", "campaign", "email-required"];
       self._element = element;
 
-      self._options = helpers.readOptions(self._element, self._allowed_options);
+      self._path = options.path;
+
+      self._options = helpers.readOptions(self._element, options.attributes);
 
       self._iframe = null;
 
@@ -910,18 +972,24 @@ window.Voucherify = (function (window, document, $) {
         return self._iframe.style.visibility = "visible"
       });
 
-      self._iframe.src = self._host + self._path + helpers.encodeOptions(self._options);
+      self._iframe.src = host + self._path + helpers.encodeOptions(self._options);
 
-      self._element.append(self._iframe);
+      self._element.appendChild(self._iframe);
 
       return self;
     };
 
-    var elements = window.document.querySelectorAll(".voucherify-get-voucher");
+    var widgets = [];
 
-    return Array.prototype.forEach.call(elements, function (element) {
-      return new RenderIframe(element);
-    })
+    Object.keys(iframes_widgets).forEach(function (widget_name) {
+      var elements = window.document.querySelectorAll(".voucherify-" + widget_name);
+
+      Array.prototype.forEach.call(elements, function (element) {
+        widgets.push(new RenderIframe(element, iframes_widgets[widget_name]));
+      })
+    });
+
+    return widgets;
   }
 
   renderIframes();
