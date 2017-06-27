@@ -422,6 +422,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Changelog
 
+- **2017-06-02** - `1.13.1` - Fix support for custom logo 
 - **2017-06-02** - `1.13.0` - Implementation of widget which acts as a subscribe form
 - **2017-06-02** - `1.12.1` - Add required flag for customer email
 - **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
