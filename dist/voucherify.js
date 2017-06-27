@@ -835,13 +835,17 @@ window.Voucherify = (function (window, document, $) {
 
     var host = "https://app.voucherify.io";
 
+    var common_attributes = [
+      "client-app-id",
+      "client-token",
+
+      "logo"
+    ];
+
     var iframes_widgets = {
       "get-voucher": {
         "path": "/widgets/publish",
         "attributes": [
-          "client-app-id",
-          "client-token",
-
           "campaign",
 
           "email-required"
@@ -935,7 +939,7 @@ window.Voucherify = (function (window, document, $) {
 
       self._path = options.path;
 
-      self._options = helpers.readOptions(self._element, options.attributes);
+      self._options = helpers.readOptions(self._element, common_attributes.concat(options.attributes));
 
       self._iframe = null;
 
