@@ -883,7 +883,8 @@ window.Voucherify = (function (window, document, $) {
   })("docReady", window);
 
   function renderIframes() {
-    var host = "https://app.voucherify.io";
+    // var host = "https://app.voucherify.io";
+    var host = "http://localhost:3000";
 
     var common_attributes = [
       "client-app-id",
@@ -898,7 +899,46 @@ window.Voucherify = (function (window, document, $) {
         "attributes": [
           "campaign",
 
-          "email-required"
+          "metadata",
+          "source",
+
+          "name-field",
+          "name-field-required",
+          "name-field-label",
+
+          "email-field",
+          "email-field-required",
+          "email-field-label",
+
+          "phone-field",
+          "phone-field-required",
+          "phone-field-label",
+
+          "address-line-1-field",
+          "address-line-1-field-required",
+          "address-line-1-field-label",
+
+          "address-line-2-field",
+          "address-line-2-field-required",
+          "address-line-2-field-label",
+
+          "city-field",
+          "city-field-required",
+          "city-field-label",
+
+          "postal-code-field",
+          "postal-code-field-required",
+          "postal-code-field-label",
+
+          "state-field",
+          "state-field-required",
+          "state-field-label",
+
+          "country-field",
+          "country-field-required",
+          "country-field-label",
+
+          "button-label"
         ]
       },
       "subscribe": {
