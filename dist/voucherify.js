@@ -883,8 +883,7 @@ window.Voucherify = (function (window, document, $) {
   })("docReady", window);
 
   function renderIframes() {
-    // var host = "https://app.voucherify.io";
-    var host = "http://localhost:3000";
+    var host = "https://app.voucherify.io";
 
     var common_attributes = [
       "client-app-id",
