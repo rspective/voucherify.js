@@ -369,9 +369,50 @@ You can also embed the get voucher widget as an iframe object.
 <div class="voucherify-get-voucher"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     data-email-required="BOOLEAN"
-     data-campaign="Campaign name"></div>
+     
+     data-campaign="Campaign name"
+     
+     data-name-field="true"
+     data-name-field-required="false"
+     data-name-field-label="Name"
+
+     data-email-field="true"
+     data-email-field-required="true"
+     data-email-field-label="Email"
+
+     data-subscribe-label="Subscribe to the list"
+
+     data-source="Landing_Page_1"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
+
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
+  
+- `data-campaign="STRING"`
+- `data-email-field="BOOLEAN"`
+- `data-email-field-required="BOOLEAN"`
+- `data-email-field-label="Field label"`
+- `data-phone-field="BOOLEAN"`
+- `data-phone-field-required="BOOLEAN"`
+- `data-phone-field-label="Field label"`
+- `data-address-line-1-field="BOOLEAN"`
+- `data-address-line-1-field-required="BOOLEAN"`
+- `data-address-line-1-field-label="Field label"`
+- `data-address-line-2-field="BOOLEAN"`
+- `data-address-line-2-field-required="BOOLEAN"`
+- `data-address-line-2-field-label="Field label"`
+- `data-city-field="BOOLEAN"`
+- `data-city-field-required="BOOLEAN"`
+- `data-city-field-label="Field label"`
+- `data-postal-code-field="BOOLEAN"`
+- `data-postal-code-field-required="BOOLEAN"`
+- `data-postal-code-field-label="Field label"`
+- `data-state-field="BOOLEAN"`
+- `data-state-field-required="BOOLEAN"`
+- `data-state-field-label="Field label"`
+- `data-country-field="BOOLEAN"`
+- `data-country-field-required="BOOLEAN"`
+- `data-country-field-label="Field label"`
 
 ### Subscribe widget - Iframe 
 
@@ -398,30 +439,31 @@ It creates a customer profile in Voucherify.
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
   
-  - `data-phone-field="BOOLEAN"`
-  - `data-phone-field-required="BOOLEAN"`
-  - `data-phone-field-label="Field label"`
-  - `data-address-line-1-field="BOOLEAN"`
-  - `data-address-line-1-field-required="BOOLEAN"`
-  - `data-address-line-1-field-label="Field label"`
-  - `data-address-line-2-field="BOOLEAN"`
-  - `data-address-line-2-field-required="BOOLEAN"`
-  - `data-address-line-2-field-label="Field label"`
-  - `data-city-field="BOOLEAN"`
-  - `data-city-field-required="BOOLEAN"`
-  - `data-city-field-label="Field label"`
-  - `data-postal-code-field="BOOLEAN"`
-  - `data-postal-code-field-required="BOOLEAN"`
-  - `data-postal-code-field-label="Field label"`
-  - `data-state-field="BOOLEAN"`
-  - `data-state-field-required="BOOLEAN"`
-  - `data-state-field-label="Field label"`
-  - `data-country-field="BOOLEAN"`
-  - `data-country-field-required="BOOLEAN"`
-  - `data-country-field-label="Field label"`
+- `data-phone-field="BOOLEAN"`
+- `data-phone-field-required="BOOLEAN"`
+- `data-phone-field-label="Field label"`
+- `data-address-line-1-field="BOOLEAN"`
+- `data-address-line-1-field-required="BOOLEAN"`
+- `data-address-line-1-field-label="Field label"`
+- `data-address-line-2-field="BOOLEAN"`
+- `data-address-line-2-field-required="BOOLEAN"`
+- `data-address-line-2-field-label="Field label"`
+- `data-city-field="BOOLEAN"`
+- `data-city-field-required="BOOLEAN"`
+- `data-city-field-label="Field label"`
+- `data-postal-code-field="BOOLEAN"`
+- `data-postal-code-field-required="BOOLEAN"`
+- `data-postal-code-field-label="Field label"`
+- `data-state-field="BOOLEAN"`
+- `data-state-field-required="BOOLEAN"`
+- `data-state-field-label="Field label"`
+- `data-country-field="BOOLEAN"`
+- `data-country-field-required="BOOLEAN"`
+- `data-country-field-label="Field label"`
 
 ### Changelog
 
+- **2017-06-02** - `1.15.0` - Add attributes to personalize the get voucher widget
 - **2017-06-02** - `1.14.0` - Add the custom logo url attribute
 - **2017-06-02** - `1.13.1` - Render iframes when document is ready
 - **2017-06-02** - `1.13.0` - Implementation of widget which acts as a subscribe form
