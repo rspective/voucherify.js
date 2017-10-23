@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="../lib/voucherify.css">
+    </head>
+    <body>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+        <script type="text/javascript" src="../lib/voucherify.js"></script>
+        <script>
+            (function () {
+                Voucherify.initialize(
+                    "011240bf-d5fc-4ef1-9e82-11eb68c43bf5",
+                    "9e2230c5-71fb-460a-91c6-fbee64707a20"
+                );
+                Voucherify.setIdentity("gustav@purpleson.com");
+
+                var customer = {
+                    name: "Gustav Purpleson"
+                };
+                var metadata = {
+                    lang: "en",
+                    test: true
+                };
+                Voucherify.track("custom event 123", metadata, customer)
+                    .then(function (result) {
+                        console.log(result);
+                    });
+            })();
+        </script>
+    </body>
+</html>
