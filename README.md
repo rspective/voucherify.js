@@ -288,7 +288,55 @@ where `payload` is an object which can include:
 - `order` - with at least
     - `amount`
 
+Success response 
 
+```javascript
+{
+  "object": "redemption",
+  "customer_id": "cust_vAZ0M5nQUDv3zDoAcT6QSYhb",
+  "tracking_id": "(tracking_id not set)"
+  "result": "SUCCESS",
+  "amount": 30,
+  "order": {
+    "amount": 30,
+    "discount_amount": 30,
+    "items": null,
+    "customer": {
+      "id": "cust_vAZ0M5nQUDv3zDoAcT6QSYhb",
+      "object": "customer"
+    },
+    "referrer": null,
+    "status": "CREATED",
+    "metadata": null
+  },
+  "voucher": {
+    "code": "gfct5ZWI1nL",
+    "campaign": "Gift Card Campaign",
+    "category": null,
+    "type": "GIFT_VOUCHER",
+    "discount": null,
+    "gift": {
+      "amount": 1000,
+      "balance": 970
+    },
+    "publish": {
+      "object": "list",
+      "count": 0
+    },
+    "redemption": {
+      "object": "list",
+      "quantity": 1,
+      "redeemed_quantity" :1,
+      "redeemed_amount": 30
+    },
+    "active": true,
+    "additional_info": null,
+    "metadata": null,
+    "is_referral_code": false,
+    "object":"voucher"
+  }
+}
+```
 
 ### Publish vouchers
 
