@@ -281,10 +281,12 @@ Beside validation you can also redeem vouchers:
 
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
-where payload is an object which can include: 
+where `payload` is an object which can include: 
 
 - `customer` - voucher customer object
-    - `source_id` - if not set, `tracking_id` will be used
+    - `source_id` - if not set, `tracking_id` will be used (if set)
+- `order` - with at least
+    - `amount`
 
 
 
