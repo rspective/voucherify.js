@@ -275,6 +275,18 @@ You can find the actual cause in the `reason` field:
 - `customer does not match segment rules`
 - `order does not match validation rules`
 
+### Redeem vouchers
+
+Beside validation you can also redeem vouchers:
+
+`Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
+
+where payload is an object which can include: 
+
+- `customer` - voucher customer object
+    - `source_id` - if not set, `tracking_id` will be used
+
+
 
 ### Publish vouchers
 
