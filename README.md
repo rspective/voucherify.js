@@ -338,6 +338,25 @@ Success response
 }
 ```
 
+If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
+
+```javascript
+Voucherify.validate("VOUCHER-CODE")
+  .done(function (data) {
+      /* response above */
+  }
+  .fail(function (error) {
+       /*
+       {
+            "code":400,
+            "message":"quantity exceeded",
+            "details":"gfct5ZWI1nL",
+            "key":"quantity_exceeded"
+        }
+       */
+  });
+ ```
+
 ### Publish vouchers
 
 There is an option to publish vouchers through the client API. In order to do that
