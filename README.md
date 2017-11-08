@@ -8,7 +8,7 @@
 
 This is a library to facilitate voucher codes validation on your web page.
 
-You can find full documentation on [voucherify.readme.io](https://voucherify.readme.io).
+You can find full documentation on [docs.voucherify.io](https://docs.voucherify.io).
 
 ### Usage
 
@@ -265,28 +265,26 @@ Voucherify.validate("VOUCHER-CODE")
 ```
 
 There are several reasons why validation may fail (`valid: false` response). 
-You can find the actual cause in the `reason` field:
-
-- `voucher is disabled`
-- `voucher not active yet`
-- `voucher expired`
-- `quantity exceeded`
-- `gift amount exceeded`
-- `customer does not match segment rules`
-- `order does not match validation rules`
+Actual cause will be in the `reason` field. You will find more explanation on [docs.voucherify.io](https://docs.voucherify.io/reference#errors)
 
 ### Redeem vouchers
 
-Beside validation you can also redeem vouchers:
+Besides validation you can also redeem vouchers. In order to do that you 
+have to enable **client-side redemptions** in your project's configuration.
 
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
 where `payload` is an object which can include: 
 
 - `customer` - voucher customer object
-    - `source_id` - if not set, `tracking_id` will be used (if set)
+    - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
 - `order` - with at least
     - `amount`
+
+Example - check if can redeem $50 from 'gift100' voucher:
+
+`Voucherify.redeem("gfct5ZWI1nL", { order: { amount: 5000 } }, function callback (response) { })`
+
 
 Success response 
 
@@ -341,7 +339,7 @@ Success response
 If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
 
 ```javascript
-Voucherify.validate("VOUCHER-CODE")
+Voucherify.redeem("VOUCHER-CODE", payload)
   .done(function (data) {
       /* response above */
   }
@@ -356,6 +354,8 @@ Voucherify.validate("VOUCHER-CODE")
        */
   });
  ```
+ 
+You can read more about request object and responses in full documentation on [docs.voucherify.io](http://docs.voucherify.io/reference#the-redemption-object)
 
 ### Publish vouchers
 
