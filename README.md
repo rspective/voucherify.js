@@ -414,6 +414,24 @@ This is how the widget looks like:
 
 You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
 
+### Get redeem widget
+
+If you need a quick UI to get vouchers for given client then use `Voucherify.renderRedeem(selector, options)`:
+
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+      - `options`:
+          - `classInvalid` - CSS class applied to the input when entered code is invalid
+          - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
+          - `classValid` - CSS class applied to the input when entered code is valid
+          - `classValidAnimation` - CSS class describing animation of the input field when entered code valid
+          - `logoSrc` - source of the image appearing in the circle at the top
+          - **`onRedeem`** - a callback function invoked when the entered code is redeemed, it takes the redemption response as a parameter
+          - `amount` - flag enables the amount input field
+          - `textPlaceholder` - text displayed as a placeholder in the code input field
+          - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
+          - `textRedeem` - a text displayed on the button (default: "Redeem")
+
+
 ### Get voucher widget
 
 If you need a quick UI to get vouchers for given client then use `Voucherify.renderPublish(selector, options)`:
