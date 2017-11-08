@@ -269,6 +269,9 @@ Actual cause will be in the `reason` field. You will find more explanation on [d
 
 ### Redeem vouchers
 
+[Redeem request reference on docs.voucherify.io](http://docs.voucherify.io/reference#the-redemption-object)
+
+
 Besides validation you can also redeem vouchers. In order to do that you 
 have to enable **client-side redemptions** in your project's configuration.
 
@@ -355,8 +358,6 @@ Voucherify.redeem("VOUCHER-CODE", payload)
   });
  ```
  
-You can read more about request object and responses in full documentation on [docs.voucherify.io](http://docs.voucherify.io/reference#the-redemption-object)
-
 ### Publish vouchers
 
 There is an option to publish vouchers through the client API. In order to do that
