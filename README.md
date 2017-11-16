@@ -304,7 +304,7 @@ If you want to use this method you have to enable it in your project's configura
   
 ### Track custom events
 
-This method allows sending custom event which can trigger subsequent actions. It is enabled by default. There is no need for changing project configuration.
+Custom events are actions taken by your customers. Those events are best suited for tracking high-value interactions with your app. Logging a custom event can trigger any number of subsequent operations (e.g.: email distribution). It is enabled by default. There is no need for changing project configuration.
 
 `Voucherify.track(eventName, metadata, customer, function callback (response) { })`
 
