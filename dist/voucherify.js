@@ -1,8 +1,7 @@
 window.Voucherify = (function (window, document, $) {
   "use strict";
 
-  // var API_BASE = "https://api.voucherify.io";
-  var API_BASE = "http://localhost:8089";
+  var API_BASE = "https://api.voucherify.io";
 
   var API = {
       validate: API_BASE + "/client/v1/validate",
