@@ -301,6 +301,16 @@ If you want to use this method you have to enable it in your project's configura
   - `category` - limit vouchers to the ones that are within the specified category
   - `page` - a number greater than or equal to 1
   - `limit` - a number between 1 and 100
+  
+### Track custom events
+
+Custom events are actions taken by your customers. Those events are best suited for tracking high-value interactions with your app. Logging a custom event can trigger any number of subsequent operations (e.g.: email distribution). It is enabled by default. There is no need for changing project configuration.
+
+`Voucherify.track(eventName, metadata, customer, function callback (response) { })`
+
+- `eventName` - required, an identifier of event 
+- `metadata` - required, an object containing data describing an event
+- `customer` - optional, customer details, by default Voucherify takes profile declared with method Voucherify.setIdentity()
 
 ### Use utils to calculate discount and price after discount
 
@@ -463,6 +473,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Changelog
 
+- **2017-10-23** - `1.16.0` - Add client side method for tracking custom events
 - **2017-06-02** - `1.15.0` - Add attributes to personalize the get voucher widget
 - **2017-06-02** - `1.14.0` - Add the custom logo url attribute
 - **2017-06-02** - `1.13.1` - Render iframes when document is ready
