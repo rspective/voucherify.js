@@ -304,14 +304,13 @@ If you want to use this method you have to enable it in your project's configura
   
 ### Track custom events
 
-This method allows send custom event which can trigger predefined actions.
-It is enabled by default. There is no need for changing project configuration.
+This method allows sending custom event which can trigger subsequent actions. It is enabled by default. There is no need for changing project configuration.
 
 `Voucherify.track(eventName, metadata, customer, function callback (response) { })`
 
 - `eventName` - required, an identifier of event 
-- `metadata` - required, an object containing data related with event
-- `customer` - optional, customer profile
+- `metadata` - required, an object containing data describing an event
+- `customer` - optional, customer details, by default Voucherify takes profile declared with method Voucherify.setIdentity()
 
 ### Use utils to calculate discount and price after discount
 
