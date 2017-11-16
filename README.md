@@ -473,6 +473,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Changelog
 
+- **2017-10-23** - `1.16.1` - Fix tracking custom events
 - **2017-10-23** - `1.16.0` - Add client side method for tracking custom events
 - **2017-06-02** - `1.15.0` - Add attributes to personalize the get voucher widget
 - **2017-06-02** - `1.14.0` - Add the custom logo url attribute
