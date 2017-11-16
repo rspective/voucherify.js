@@ -26,6 +26,7 @@ window.Voucherify = (function (window, document, $) {
        || typeof(data.result) === "string" // redeem
        || typeof(data.voucher) === "object" // publish
        || typeof(data.vouchers) === "object" // list
+       || (data.object === "event" && typeof(data.type) === "string") // track
     );
   }
 
@@ -372,6 +373,11 @@ window.Voucherify = (function (window, document, $) {
           discount = voucher.discount.percent_off;
           validatePercentDiscount(discount);
           var priceDiscount = basePrice * (discount / 100);
+
+          if (voucher.discount.amount_limit) {
+            priceDiscount = Math.min(voucher.discount.amount_limit / e, priceDiscount);
+          }
+
           return roundMoney(basePrice - priceDiscount);
 
         } else if (voucher.discount.type === 'AMOUNT') {
@@ -407,8 +413,13 @@ window.Voucherify = (function (window, document, $) {
         if (voucher.discount.type === 'PERCENT') {
           discount = voucher.discount.percent_off;
           validatePercentDiscount(discount);
-          return roundMoney(basePrice * (discount / 100));
+          var priceDiscount = basePrice * (discount / e);
 
+          if (voucher.discount.amount_limit) {
+            priceDiscount = Math.min(voucher.discount.amount_limit / e, priceDiscount);
+          }
+
+          return roundMoney(priceDiscount);
         } else if (voucher.discount.type === 'AMOUNT') {
           discount = voucher.discount.amount_off / e;
           validateAmountDiscount(discount);
