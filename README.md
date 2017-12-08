@@ -524,6 +524,61 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
 
+### Redeem widget - Iframe 
+
+It redeems the voucher in Voucherify. 
+
+```html
+<div class="voucherify-voucher-redeem"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-code-field="true"
+     data-code-field-label="Label"
+
+     data-amount-field="true"
+     data-amount-field-required="true"
+     data-amount-field-label="Email"
+
+     data-button-label="Redeem voucher"
+
+     data-logo="Logo"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+```
+
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
+  
+- `data-code-field="BOOLEAN"`
+- `data-code-field-label="Field label"`
+- `data-amount-field="BOOLEAN"`
+- `data-amount-field-required="BOOLEAN"`
+- `data-amount-field-label="Field label"`
+- `data-button-label="Button label"`
+- `data-email-field="BOOLEAN"`
+- `data-email-field-required="BOOLEAN"`
+- `data-email-field-label="Field label"`
+- `data-phone-field="BOOLEAN"`
+- `data-phone-field-required="BOOLEAN"`
+- `data-phone-field-label="Field label"`
+- `data-address-line-1-field="BOOLEAN"`
+- `data-address-line-1-field-required="BOOLEAN"`
+- `data-address-line-1-field-label="Field label"`
+- `data-address-line-2-field="BOOLEAN"`
+- `data-address-line-2-field-required="BOOLEAN"`
+- `data-address-line-2-field-label="Field label"`
+- `data-city-field="BOOLEAN"`
+- `data-city-field-required="BOOLEAN"`
+- `data-city-field-label="Field label"`
+- `data-postal-code-field="BOOLEAN"`
+- `data-postal-code-field-required="BOOLEAN"`
+- `data-postal-code-field-label="Field label"`
+- `data-state-field="BOOLEAN"`
+- `data-state-field-required="BOOLEAN"`
+- `data-state-field-label="Field label"`
+- `data-country-field="BOOLEAN"`
+- `data-country-field-required="BOOLEAN"`
+- `data-country-field-label="Field label"`
+
 ### Subscribe widget - Iframe 
 
 It creates a customer profile in Voucherify. 
@@ -570,6 +625,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field="BOOLEAN"`
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
+
 
 ### Changelog
 
