@@ -1,14 +1,26 @@
 ## Voucherify - JavaScript SDK
 
-[Voucherify](http://voucherify.io?utm_source=github&utm_medium=sdk&utm_campaign=acq) is an API-first platform for software developers who are dissatisfied with high-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
+[Voucherify](https://voucherify.io/?utm_campaign=sdk&utm_medium=docs&utm_source=github) is an API-first platform for software developers who are dissatisfied with high-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
 
 * an API-first SaaS platform that enables customisation of every aspect of coupon campaigns
 * a management console that helps cut down maintenance and reporting overhead
 * an infrastructure to scale up coupon activity in no time
 
-This is a library to facilitate voucher codes validation on your web page.
+This is a library to facilitate coupon codes validation and redemption on your website.
 
-You can find full documentation on [docs.voucherify.io](https://docs.voucherify.io).
+You can find the full API documentation on [docs.voucherify.io](https://docs.voucherify.io).
+
+Contents:
+
+* [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
+* [2](https://github.com/rspective/voucherify.js#validate-vouchers) - How to call [validation](https://docs.voucherify.io/reference/#vouchers-validate)
+* [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
+* [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons
+* [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
+* [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget 
+* [7](https://github.com/rspective/voucherify.js#redeem-widget) - Configuring redemption widget
+* [8](https://github.com/rspective/voucherify.js#publish-widget) - Configuring publish widget 
+* [9](https://github.com/rspective/voucherify.js#subscribe-widget---iframe) - Configuring customer profile widget 
 
 ### Usage
 
@@ -79,7 +91,9 @@ You will receive assigned value in the validation response. If you don't pass it
 
 ### Validate vouchers
 
-Now you can validate vouchers, by this simple *API*:
+Reference: [validation](https://docs.voucherify.io/reference/#vouchers-validate)
+
+You validate vouchers by invoking:
 
 `Voucherify.validate("VOUCHER-CODE", function callback (response) { })`
 
@@ -95,7 +109,7 @@ where params is an object including:
 - `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
 - `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
 
-Example - check if can redeem $50 from 'gift100' voucher:
+Example - check if one can redeem $50 from 'gift100' voucher:
 
 `Voucherify.validate({code: "gift100", amount: 5000}, function callback (response) { })`
 
@@ -264,16 +278,17 @@ Voucherify.validate("VOUCHER-CODE")
   });
 ```
 
-There are several reasons why validation may fail (`valid: false` response). 
-Actual cause will be in the `reason` field. You will find more explanation on [docs.voucherify.io](https://docs.voucherify.io/reference#errors)
+There are several reasons why validation may fail (`valid: false` response). You'll find the actual cause in the `reason` field. For more details, visit [error reference](https://docs.voucherify.io/reference#errors) section.
 
 ### Redeem vouchers
 
-[Redeem request reference on docs.voucherify.io](http://docs.voucherify.io/reference#the-redemption-object)
+Next to validation, the library allows you to [redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side) vouchers. 
+Note: you have to enable **client-side redemptions** in your project's configuration.
 
+Reference: [redemption object](http://docs.voucherify.io/reference#the-redemption-object), [client-side redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 
-Besides validation you can also redeem vouchers. In order to do that you 
-have to enable **client-side redemptions** in your project's configuration.
+How to use it:
+
 
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
@@ -284,7 +299,7 @@ where `payload` is an object which can include:
 - `order` - with at least
     - `amount`
 
-Example - check if can redeem $50 from 'gift100' voucher:
+Example:
 
 `Voucherify.redeem("gfct5ZWI1nL", { order: { amount: 5000 } }, function callback (response) { })`
 
@@ -399,7 +414,7 @@ Custom events are actions taken by your customers. Those events are best suited 
 `Voucherify.utils.calculatePrice(productPrice, voucher, unitPrice [optional])`
 `Voucherify.utils.calculateDiscount(productPrice, voucher, unitPrice [optional])`
 
-### Discount widget
+### Validation widget
 
 If you need a quick UI to validate vouchers on your website then use `Voucherify.render(selector, options)`:
   
@@ -424,9 +439,9 @@ This is how the widget looks like:
 
 You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
 
-### Get redeem widget
+### Redeem widget
 
-If you need a quick UI to get vouchers for given client then use `Voucherify.renderRedeem(selector, options)`:
+If you need a quick way to redeem vouchers on your website, you can use `Voucherify.renderRedeem(selector, options)`:
 
    - `selector` - identifies an HTML element that will be used as a container for the widget
       - `options`:
@@ -441,92 +456,9 @@ If you need a quick UI to get vouchers for given client then use `Voucherify.ren
           - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
           - `textRedeem` - a text displayed on the button (default: "Redeem")
 
+#### iframe 
 
-### Get voucher widget
-
-If you need a quick UI to get vouchers for given client then use `Voucherify.renderPublish(selector, options)`:
-  
-   - `selector` - identifies an HTML element that will be used as a container for the widget
-   - `options`:
-       - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
-       - `classInvalid` - CSS class applied to the input when entered data are invalid
-       - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
-       - `classValid` - CSS class applied to the input when entered code is valid
-       - `classValidAnimation` - CSS class describing animation of the input field when entered data valid
-       - `logoSrc` - source of the image appearing in the circle at the top
-       - **`onPublished`** - a callback function invoked when getting voucher will succeed, it takes  response as a parameter
-       - `customerFields` - list of the customer input fields that are displayed in widget
-       - `textPublish` - a text displayed on the button (default: "Get voucher")
-       - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
-       - `customerEmailPlaceholder` - text displayed as a placeholder in the email input field
-       - `customerPhonePlaceholder` - text displayed as a placeholder in the phone input field
-       - `customerLine1Placeholder` - text displayed as a placeholder in the first address line input field
-       - `customerLine2Placeholder` - text displayed as a placeholder in the second address line input field
-       - `customerPostalCodePlaceholder` - text displayed as a placeholder in the postal code input field
-       - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
-       - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
-       - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
-       
-The widget requires jQuery to work and `voucherify.css` to display properly.
-
-You can find a working example in [example/publish-widget.html](example/publish-widget.html)
-
-#### IFrame
-
-You can also embed the get voucher widget as an iframe object.
-
-```html
-<div class="voucherify-get-voucher"
-     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
-     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     
-     data-campaign="Campaign name"
-     
-     data-name-field="true"
-     data-name-field-required="false"
-     data-name-field-label="Name"
-
-     data-email-field="true"
-     data-email-field-required="true"
-     data-email-field-label="Email"
-
-     data-subscribe-label="Subscribe to the list"
-
-     data-source="Landing_Page_1"
-     data-metadata="{'example': true, 'lang': 'eng'}"></div>
-```
-
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
-  
-- `data-campaign="STRING"`
-- `data-email-field="BOOLEAN"`
-- `data-email-field-required="BOOLEAN"`
-- `data-email-field-label="Field label"`
-- `data-phone-field="BOOLEAN"`
-- `data-phone-field-required="BOOLEAN"`
-- `data-phone-field-label="Field label"`
-- `data-address-line-1-field="BOOLEAN"`
-- `data-address-line-1-field-required="BOOLEAN"`
-- `data-address-line-1-field-label="Field label"`
-- `data-address-line-2-field="BOOLEAN"`
-- `data-address-line-2-field-required="BOOLEAN"`
-- `data-address-line-2-field-label="Field label"`
-- `data-city-field="BOOLEAN"`
-- `data-city-field-required="BOOLEAN"`
-- `data-city-field-label="Field label"`
-- `data-postal-code-field="BOOLEAN"`
-- `data-postal-code-field-required="BOOLEAN"`
-- `data-postal-code-field-label="Field label"`
-- `data-state-field="BOOLEAN"`
-- `data-state-field-required="BOOLEAN"`
-- `data-state-field-label="Field label"`
-- `data-country-field="BOOLEAN"`
-- `data-country-field-required="BOOLEAN"`
-- `data-country-field-label="Field label"`
-
-### Redeem widget - Iframe 
-
-It redeems the voucher in Voucherify. 
+The iframe renders the redeem widget 
 
 ```html
 <div class="voucherify-voucher-redeem"
@@ -546,7 +478,7 @@ It redeems the voucher in Voucherify.
      data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
 
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
@@ -579,9 +511,92 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
 
-### Subscribe widget - Iframe 
 
-It creates a customer profile in Voucherify. 
+### Publish widget
+
+If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons from a particular campaign on your website, use `Voucherify.renderPublish(selector, options)`:
+  
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
+       - `classInvalid` - CSS class applied to the input when entered data are invalid
+       - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
+       - `classValid` - CSS class applied to the input when entered code is valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered data valid
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - **`onPublished`** - a callback function invoked when getting voucher will succeed, it takes  response as a parameter
+       - `customerFields` - list of the customer input fields that are displayed in widget
+       - `textPublish` - a text displayed on the button (default: "Get voucher")
+       - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
+       - `customerEmailPlaceholder` - text displayed as a placeholder in the email input field
+       - `customerPhonePlaceholder` - text displayed as a placeholder in the phone input field
+       - `customerLine1Placeholder` - text displayed as a placeholder in the first address line input field
+       - `customerLine2Placeholder` - text displayed as a placeholder in the second address line input field
+       - `customerPostalCodePlaceholder` - text displayed as a placeholder in the postal code input field
+       - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
+       - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
+       - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
+       
+The widget requires jQuery to work and `voucherify.css` to display properly.
+
+You can find a working example in [example/publish-widget.html](example/publish-widget.html)
+
+#### iframe
+
+You can also embed the "get voucher" widget as an iframe
+
+```html
+<div class="voucherify-get-voucher"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     
+     data-campaign="Campaign name"
+     
+     data-name-field="true"
+     data-name-field-required="false"
+     data-name-field-label="Name"
+
+     data-email-field="true"
+     data-email-field-required="true"
+     data-email-field-label="Email"
+
+     data-subscribe-label="Subscribe to the list"
+
+     data-source="Landing_Page_1"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+```
+
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
+  
+- `data-campaign="STRING"`
+- `data-email-field="BOOLEAN"`
+- `data-email-field-required="BOOLEAN"`
+- `data-email-field-label="Field label"`
+- `data-phone-field="BOOLEAN"`
+- `data-phone-field-required="BOOLEAN"`
+- `data-phone-field-label="Field label"`
+- `data-address-line-1-field="BOOLEAN"`
+- `data-address-line-1-field-required="BOOLEAN"`
+- `data-address-line-1-field-label="Field label"`
+- `data-address-line-2-field="BOOLEAN"`
+- `data-address-line-2-field-required="BOOLEAN"`
+- `data-address-line-2-field-label="Field label"`
+- `data-city-field="BOOLEAN"`
+- `data-city-field-required="BOOLEAN"`
+- `data-city-field-label="Field label"`
+- `data-postal-code-field="BOOLEAN"`
+- `data-postal-code-field-required="BOOLEAN"`
+- `data-postal-code-field-label="Field label"`
+- `data-state-field="BOOLEAN"`
+- `data-state-field-required="BOOLEAN"`
+- `data-state-field-label="Field label"`
+- `data-country-field="BOOLEAN"`
+- `data-country-field-required="BOOLEAN"`
+- `data-country-field-label="Field label"`
+
+### Subscribe widget - iframe 
+
+The iframe redners a widget which creates a customer a profile in Voucherify
 
 ```html
 <div class="voucherify-subscribe"
@@ -602,7 +617,7 @@ It creates a customer profile in Voucherify.
      data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
 
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you are able to change standard labels displayed in input fields as placeholders. Configuration: 
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
