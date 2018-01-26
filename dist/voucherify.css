@@ -164,6 +164,7 @@ div.voucherifyContainer .voucherifyRow > input:not(:last-of-type) {
     margin-right: 0.8em;
 }
 
+div.voucherifyContainer button.voucherifyRedeem,
 div.voucherifyContainer button.voucherifyValidate,
 div.voucherifyContainer button.voucherifyPublish {
 	display: block;
