@@ -470,7 +470,7 @@ The iframe renders the redeem widget
 
      data-amount-field="true"
      data-amount-field-required="true"
-     data-amount-field-label="Email"
+     data-amount-field-label="Amount"
 
      data-button-label="Redeem voucher"
 
