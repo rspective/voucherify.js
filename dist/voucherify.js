@@ -606,6 +606,164 @@ window.Voucherify = (function (window, document, $) {
       });
     },
 
+    renderRedeem: function(selector, options) {
+      var $element = $(selector);
+      if (!$element || !$element.length) {
+        throw new Error("Element '" + selector + "' cannot be found");
+      }
+      options = options || {};
+
+      function getCapitalizedName(name) {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      }
+
+      function getPropertyName(prefix, name) {
+        return prefix + getCapitalizedName(name);
+      }
+
+      function getConfigProperty(prefix, name) {
+        return options[getPropertyName(prefix, name)];
+      }
+
+      function create$control(type, name, $container, config) {
+        config = config || {};
+        var $control = null;
+        var configured$control = getConfigProperty("selector", name);
+
+        if (config.configurable && configured$control) {
+          $control = $(configured$control);
+        }
+
+        if (!$control || !$control.length) {
+          $control = $(document.createElement(type));
+          $container.append($control);
+
+          for (var attribute in config) {
+            if (attribute !== "configurable" && config.hasOwnProperty(attribute)) {
+              $control.attr(attribute, config[attribute]);
+            }
+          }
+
+          if (type === "input") {
+            $control.attr("name", getPropertyName("voucherify", name));
+          }
+
+          if (type === "span" && config.text) {
+            $control.text(config.text);
+          }
+        }
+
+        $control.addClass(typeof getConfigProperty("class", name) === "string" ? getConfigProperty("class", name) : getPropertyName("voucherify", name));
+        return $control;
+      }
+
+      var $container     = create$control("div", "container", $element);
+      var $logoContainer = create$control("figure", "logo", $container);
+      var $logo          = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
+      var $code          = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
+      var $amount        = create$control("input", "amount", $container, { type: options.amount ? "text" : "hidden", placeholder: typeof options.amountPlaceholder === "string" ? options.amountPlaceholder : "e.g. 52.22" });
+      var $tracking      = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
+      var $redeem      = create$control("button", "redeem", $container, {});
+      var $redeemText  = create$control("span", "redeemText", $redeem, { text: typeof options.textRedeem === "string" ? options.textRedeem : "Redeem" });
+
+      var self = this;
+      var classInvalid = options.classInvalid === "string" ? options.classInvalid : "voucherifyInvalid";
+      var classValid = typeof options.classValid === "string" ? options.classValid : "voucherifyValid";
+      var classInvalidAnimation = options.classInvalidAnimation === "string" ? options.classInvalidAnimation : "voucherifyAnimationShake";
+      var classValidAnimation = options.classValidAnimation === "string" ? options.classValidAnimation : "voucherifyAnimationTada";
+
+      $code.on("keyup", function(event) {
+        $code.toggleClass(classInvalidAnimation, false);
+      });
+
+      $amount.on("keyup", function(event) {
+        $amount.toggleClass(classInvalidAnimation, false);
+      });
+
+      $redeem.on("click", function(event) {
+        $tracking.val("");
+
+        $redeem.toggleClass(classInvalid, false);
+        $redeem.toggleClass(classValid, false);
+
+        if (!$code.val()) {
+          $code.toggleClass(classInvalidAnimation, true)
+            .delay(1000)
+            .queue(function(){
+              $code.toggleClass(classInvalidAnimation, false);
+              $code.dequeue();
+            });
+          return;
+        }
+
+        var payload = {
+          order: {
+            amount: parseInt(parseFloat($amount.val().replace(/\,/, ".")) * 100)
+          }
+        };
+
+        self.redeem($code.val(), payload, function(response) {
+          if (!response || response.result !== 'SUCCESS') {
+
+            var setFieldInvalid = function ($field) {
+              $field.toggleClass(classInvalid, true);
+              $field.toggleClass(classValid, false);
+              $field.toggleClass(classInvalidAnimation, true)
+                .delay(1000)
+                .queue(function(){
+                  $field.toggleClass(classInvalidAnimation, false);
+                  $field.dequeue();
+                });
+            };
+
+            $redeem.toggleClass(classInvalid, true);
+            $redeem.toggleClass(classValid, false);
+
+            var context         = response.context || {};
+            var responseJSON    = context.responseJSON || {};
+            var error_key       = responseJSON.key;
+
+            if (options.amount && (
+                error_key === INVALID_AMOUNT ||
+                error_key === INVALID_NUMBER ||
+                error_key === MISSING_AMOUNT)) {
+              setFieldInvalid($amount);
+            } else {
+              setFieldInvalid($code);
+            }
+            return;
+          }
+
+          if ($amount.val() >= 0) {
+            $amount.val(parseFloat($amount.val().replace(/\,/, ".")))
+          } else {
+            $amount.hide(100);
+          }
+
+          $code.toggleClass(classInvalid, false);
+          $amount.toggleClass(classInvalid, false);
+          $tracking.val(response.tracking_id || "");
+
+          $code.prop("disabled", true);
+          $amount.prop("disabled", true);
+          $redeem.prop("disabled", true);
+
+          $code.toggleClass(classValid, true);
+          $amount.toggleClass(classValid, true);
+          $redeem.toggleClass(classValid, true);
+          $redeem.toggleClass(classInvalid, false);
+          $code.toggleClass(classInvalid, false);
+
+          $code.toggleClass(classValidAnimation, true);
+          $amount.toggleClass(classValidAnimation, true);
+
+          if (options && options.onRedeem && typeof options.onRedeem === "function") {
+            options.onRedeem(response);
+          }
+        });
+      });
+    },
+
     renderPublish : function (selector, options) {
       var $element = $(selector);
       if (!$element || !$element.length) {
@@ -915,7 +1073,6 @@ window.Voucherify = (function (window, document, $) {
 
   function renderIframes() {
     var host = "https://app.voucherify.io";
-
     var common_attributes = [
       "client-app-id",
       "client-token",
@@ -924,6 +1081,56 @@ window.Voucherify = (function (window, document, $) {
     ];
 
     var iframes_widgets = {
+      "voucher-redeem": {
+        "path": "/widgets/redeem",
+        "attributes": [
+          "code-field",
+          "code-field-required",
+          "code-field-label",
+
+          "amount-field",
+          "amount-field-required",
+          "amount-field-label",
+
+          "name-field",
+          "name-field-required",
+          "name-field-label",
+
+          "email-field",
+          "email-field-required",
+          "email-field-label",
+
+          "phone-field",
+          "phone-field-required",
+          "phone-field-label",
+
+          "address-line-1-field",
+          "address-line-1-field-required",
+          "address-line-1-field-label",
+
+          "address-line-2-field",
+          "address-line-2-field-required",
+          "address-line-2-field-label",
+
+          "city-field",
+          "city-field-required",
+          "city-field-label",
+
+          "postal-code-field",
+          "postal-code-field-required",
+          "postal-code-field-label",
+
+          "state-field",
+          "state-field-required",
+          "state-field-label",
+
+          "country-field",
+          "country-field-required",
+          "country-field-label",
+
+          "button-label"
+        ]
+      },
       "get-voucher": {
         "path": "/widgets/publish",
         "attributes": [
@@ -1072,7 +1279,7 @@ window.Voucherify = (function (window, document, $) {
 
       var css_props = [
         "width:400px;",
-        "height:450px;",
+        "height:475px;",
         "background: transparent;",
         "border: 0px none transparent;",
         "overflow-x: hidden;",
