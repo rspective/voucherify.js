@@ -13,7 +13,7 @@ You can find the full API documentation on [docs.voucherify.io](https://docs.vou
 Contents:
 
 * [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
-* [2](https://github.com/rspective/voucherify.js#validate-vouchers) - How to call [validation](https://docs.voucherify.io/reference/#vouchers-validate)
+* [2](https://github.com/rspective/voucherify.js#validation) - How to validate [vouchers](https://docs.voucherify.io/reference/#vouchers-validate) and [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
 * [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 * [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons
 * [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
@@ -89,15 +89,13 @@ $(function () {
 
 You will receive assigned value in the validation response. If you don't pass it, we will generate an ID on the server side, and also we will attach it to the response.
 
-### Validate vouchers
+### Validation 
 
-Reference: [validation](https://docs.voucherify.io/reference/#vouchers-validate)
+Reference: 
+[vouchers](https://docs.voucherify.io/reference/#vouchers-validate)
+[promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
 
-You validate vouchers by invoking:
-
-`Voucherify.validate("VOUCHER-CODE", function callback (response) { })`
-
-or 
+You validate by invoking:
 
 `Voucherify.validate(params, function callback (response) { })`
 
@@ -108,6 +106,10 @@ where params is an object including:
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
 - `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
 - `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
+
+or (only voucher validation)
+
+`Voucherify.validate("VOUCHER-CODE", function callback (response) { })`
 
 Example - check if one can redeem $50 from 'gift100' voucher:
 
@@ -173,6 +175,28 @@ Valid gift voucher response:
        "tracking_id": "generated-or-passed-tracking-id"
    }
    ```
+ 
+Valid promotion response:
+ 
+ 
+```javascript
+  {
+      "valid": true,
+      "promotions": [
+          {
+              "object": "PROMO_TIER",
+              "id": "PROMO_ID",
+              "discount_amount": 1000,
+              "discount": {
+                  "type": "amount",
+                  "amount_off": 1000
+          }
+      ]
+      "tracking_id": "generated-or-passed-tracking-id"
+    }
+```
+   
+   
 
 Invalid voucher response:
 
@@ -644,6 +668,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Changelog
 
+- **2018-04-24** - `1.18.0` - Add client side method for promotion validation
 - **2017-12-12** - `1.17.0` - Add redeem iframe widget
 - **2017-10-23** - `1.16.1` - Fix tracking custom events
 - **2017-10-23** - `1.16.0` - Add client side method for tracking custom events
