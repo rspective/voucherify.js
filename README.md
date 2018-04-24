@@ -186,10 +186,13 @@ Valid promotion response:
           {
               "object": "PROMO_TIER",
               "id": "PROMO_ID",
+              "banner": "PROMO BANNER",
               "discount_amount": 1000,
               "discount": {
                   "type": "amount",
                   "amount_off": 1000
+              },
+              "metadata": {}
           }
       ]
       "tracking_id": "generated-or-passed-tracking-id"
