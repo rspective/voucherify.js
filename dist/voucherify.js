@@ -9,7 +9,8 @@ window.Voucherify = (function (window, document, $) {
       publish:  API_BASE + "/client/v1/publish",
       list:     API_BASE + "/client/v1/vouchers",
       track:    API_BASE + "/client/v1/events",
-      validatePromotion: API_BASE + "/client/v1/promotions/validation"
+      validatePromotion: API_BASE + "/client/v1/promotions/validation",
+      redeemPromotion: API_BASE + "/client/v1/promotions/tiers/"
   };
 
   var OPTIONS = {};
@@ -267,13 +268,14 @@ window.Voucherify = (function (window, document, $) {
       }
 
       if (customer) {
-        if(typeof(code) === "object") {
-          queryString += "&" + Object.keys(customer).map(function (key) {
-            return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[ key ]);
-          }).join("&");
-        } else {
-          queryString += "&customer=" + customer
+        if(typeof(customer) !== "object") {
+          console.error("Customer must be an object - please use instead { source_id: 'your_user' }");
+          return null;
         }
+
+        queryString += "&" + Object.keys(customer).map(function (key) {
+          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[ key ]);
+        }).join("&");
       }
 
       if (OPTIONS.trackingId) {
@@ -284,23 +286,40 @@ window.Voucherify = (function (window, document, $) {
     },
 
     redeem: function (code, payload, callback) {
+      var isPromotion = false;
+      var tier;
+
       if (!isValidInit(OPTIONS)) {
         return null;
       }
 
+      // if (!code) {
+      //   console.error("Voucherify client could not verify code, because it is missing - please provide Voucher Code.");
+      //   return null;
+      // }
+
       if (!code) {
-        console.error("Voucherify client could not verify code, because it is missing - please provide Voucher Code.");
-        return null;
+        if( !payload.tier ){
+          console.error("Voucherify client could not redeem promotion without tier, because it is missing.");
+          return null;
+        }
+        isPromotion = true;
+        tier = payload.tier;
+        delete payload.tier
       }
 
-      var queryString = "?code=" + encodeURIComponent(code.replace(/[\s\r\n]/g, ""));
+      var queryString = ""
+      if(!isPromotion){
+        queryString += "?code=" + encodeURIComponent(code.replace(/[\s\r\n]/g, ""));
+      }
 
       // -- Tracking ID fallback
       payload = payload || {};
       payload.customer = payload.customer || {};
       payload.customer.source_id = payload.customer.source_id || OPTIONS.trackingId;
 
-      return xhrImplementation("POST", API.redeem + queryString, payload, callback);
+
+      return xhrImplementation("POST", (isPromotion ? API.redeemPromotion + tier + "/redemption" : API.redeem) + queryString, payload, callback);
     },
 
     publish: function (campaign, payload, callback) {
