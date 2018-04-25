@@ -239,16 +239,14 @@ window.Voucherify = (function (window, document, $) {
         code = code.replace(/[\s\r\n]/g, "");
       }
 
-      var queryString = "";
+      var queryString = "?";
       if (!code) {
         isPromotion = true;
-        if(!amount) {
-          console.error("Voucherify client could not verify promotion, because amount is missing.");
-          return null;
+        if(amount) {
+          queryString += "amount=" + parseInt(amount);
         }
-        queryString += "?amount=" + parseInt(amount);
       } else {
-        queryString = "?code=" + encodeURIComponent(code);
+        queryString = "code=" + encodeURIComponent(code);
         if (amount) {
           queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
         }
@@ -269,9 +267,13 @@ window.Voucherify = (function (window, document, $) {
       }
 
       if (customer) {
-        queryString += "&" + Object.keys(customer).map(function(key) {
-          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[key]);
-        }).join("&");
+        if(typeof(code) === "object") {
+          queryString += "&" + Object.keys(customer).map(function (key) {
+            return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[ key ]);
+          }).join("&");
+        } else {
+          queryString += "&customer=" + customer
+        }
       }
 
       if (OPTIONS.trackingId) {
