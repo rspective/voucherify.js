@@ -8,7 +8,8 @@ window.Voucherify = (function (window, document, $) {
       redeem:   API_BASE + "/client/v1/redeem",
       publish:  API_BASE + "/client/v1/publish",
       list:     API_BASE + "/client/v1/vouchers",
-      track:    API_BASE + "/client/v1/events"
+      track:    API_BASE + "/client/v1/events",
+      validatePromotion: API_BASE + "/client/v1/promotions/validation"
   };
 
   var OPTIONS = {};
@@ -220,6 +221,7 @@ window.Voucherify = (function (window, document, $) {
         return null;
       }
 
+      var isPromotion = false;
       var amount;
       var items;
       var metadata;
@@ -237,15 +239,17 @@ window.Voucherify = (function (window, document, $) {
         code = code.replace(/[\s\r\n]/g, "");
       }
 
+      var queryString = "?";
       if (!code) {
-        console.error("Voucherify client could not verify code, because it is missing - please provide Voucher Code.");
-        return null;
-      }
-
-      var queryString = "?code=" + encodeURIComponent(code);
-
-      if (amount) {
-        queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
+        isPromotion = true;
+        if(amount) {
+          queryString += "amount=" + parseInt(amount);
+        }
+      } else {
+        queryString = "code=" + encodeURIComponent(code);
+        if (amount) {
+          queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
+        }
       }
 
       if (items) {
@@ -263,8 +267,13 @@ window.Voucherify = (function (window, document, $) {
       }
 
       if (customer) {
-        queryString += "&" + Object.keys(customer).map(function(key) {
-          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[key]);
+        if(typeof(customer) !== "object") {
+          console.error("Customer must be an object - please use instead { source_id: 'your_user' }");
+          return null;
+        }
+
+        queryString += "&" + Object.keys(customer).map(function (key) {
+          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[ key ]);
         }).join("&");
       }
 
@@ -272,7 +281,7 @@ window.Voucherify = (function (window, document, $) {
         queryString += "&tracking_id=" + encodeURIComponent(OPTIONS.trackingId);
       }
 
-      return xhrImplementation("GET", API.validate + queryString, undefined, callback);
+      return xhrImplementation("GET", (isPromotion ? API.validatePromotion : API.validateVoucher) + queryString, undefined, callback);
     },
 
     redeem: function (code, payload, callback) {
