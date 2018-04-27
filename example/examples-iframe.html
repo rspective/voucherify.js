@@ -8,9 +8,8 @@
 
 <h1>Iframe widgets examples</h1>
 
-<h2>Get Voucher</h2>
+<h2>1. Get Voucher</h2>
 
-<div>1</div>
 <div class="voucherify-get-voucher"
      data-client-app-id="011240bf-d5fc-4ef1-9e82-11eb68c43bf5"
      data-client-token="9e2230c5-71fb-460a-91c6-fbee64707a20"
@@ -53,42 +52,32 @@
 
 <h2>Subscribe</h2>
 
-<div>1</div>
+<h2>3. Subscribe</h2>
+
 <div class="voucherify-subscribe"
      data-client-app-id="011240bf-d5fc-4ef1-9e82-11eb68c43bf5"
      data-client-token="9e2230c5-71fb-460a-91c6-fbee64707a20"
 
-     data-name-field-required="false"
-     data-name-field-label="Your name"
-
+     data-name-field="false"
      data-email-field-label="Your email"
-
-     data-phone-field-required="false"
-     data-phone-field-label="Your phone number"
-
-     data-address-line-1-field-required="false"
-     data-address-line-1-field-label="Address line"
-
+     data-phone-field="false"
+     data-address-line-1-field="false"
      data-address-line-2-field="false"
-     data-address-line-2-field-required="false"
-     data-address-line-2-field-label="Same label"
-
-     data-city-field-required="false"
-     data-city-field-label="City where you live"
-
-     data-postal-code-field-required="false"
-
-     data-state-field-label="State"
-
-     data-country-field="true"
-     data-country-field-required="false"
-     data-country-field-label="Country"
+     data-city-field="false"
+     data-postal-code-field="false"
+     data-state-field="false"
+     data-country-field="false"
 
      data-subscribe-label="Subscribe to our newsletter"
 
      data-source="Voucherify Iframe Example"
 
-     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+     data-metadata="{'example': true, 'lang': 'eng', 'gdpr_test': true}"
+
+     data-privacy-description="Voucherify will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
+     data-subscription-options="Voucherify tips;Product news;Critical account updates;Blog Newsletters"
+     data-legal-text="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at support@voucherify.io. We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
+     data-privacy-policy="We use Voucherify as our marketing automation platform. By clicking below to submit this form, you acknowledge that the information you provide will be transferred to Voucherify for processing in accordance with their [Privacy Policy](https://www.voucherify.io/privacy-policy) and [Terms](https://www.voucherify.io/terms-of-service)."></div>
 
 <script type="text/javascript" src="../lib/voucherify.js"></script>
 </body>
