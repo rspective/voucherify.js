@@ -246,7 +246,7 @@ window.Voucherify = (function (window, document, $) {
           queryString += "amount=" + parseInt(amount);
         }
       } else {
-        queryString = "code=" + encodeURIComponent(code);
+        queryString += "code=" + encodeURIComponent(code);
         if (amount) {
           queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
         }
@@ -281,7 +281,7 @@ window.Voucherify = (function (window, document, $) {
         queryString += "&tracking_id=" + encodeURIComponent(OPTIONS.trackingId);
       }
 
-      return xhrImplementation("GET", (isPromotion ? API.validatePromotion : API.validateVoucher) + queryString, undefined, callback);
+      return xhrImplementation("GET", (isPromotion ? API.validatePromotion : API.validate) + queryString, undefined, callback);
     },
 
     redeem: function (code, payload, callback) {
