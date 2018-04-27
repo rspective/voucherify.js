@@ -247,7 +247,7 @@ window.Voucherify = (function (window, document, $) {
           queryString += "amount=" + parseInt(amount);
         }
       } else {
-        queryString = "code=" + encodeURIComponent(code);
+        queryString += "code=" + encodeURIComponent(code);
         if (amount) {
           queryString += "&amount=" + parseInt(amount); // in cents, amount=1000 means $10
         }
