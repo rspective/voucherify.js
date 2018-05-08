@@ -14,7 +14,7 @@ Contents:
 
 * [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
 * [2](https://github.com/rspective/voucherify.js#validation) - How to validate [vouchers](https://docs.voucherify.io/reference/#vouchers-validate) and [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
-* [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
+* [3](https://github.com/rspective/voucherify.js#redemption) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 * [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons
 * [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
 * [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget 
@@ -307,16 +307,16 @@ Voucherify.validate("VOUCHER-CODE")
 
 There are several reasons why validation may fail (`valid: false` response). You'll find the actual cause in the `reason` field. For more details, visit [error reference](https://docs.voucherify.io/reference#errors) section.
 
-### Redeem vouchers
+### Redemption
 
-Next to validation, the library allows you to [redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side) vouchers. 
+Next to validation, the library allows you to redeem [vouchers](https://docs.voucherify.io/reference/#redeem-voucher-client-side) and [promotions](https://docs.voucherify.io/reference/#redeem-promotion). 
 Note: you have to enable **client-side redemptions** in your project's configuration.
 
 Reference: [redemption object](http://docs.voucherify.io/reference#the-redemption-object), [client-side redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 
 How to use it:
 
-
+#### Vouchers 
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
 where `payload` is an object which can include: 
@@ -325,11 +325,11 @@ where `payload` is an object which can include:
     - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
 - `order` - with at least
     - `amount`
+- `metadata`     
 
 Example:
 
 `Voucherify.redeem("gfct5ZWI1nL", { order: { amount: 5000 } }, function callback (response) { })`
-
 
 Success response 
 
@@ -378,6 +378,89 @@ Success response
     "is_referral_code": false,
     "object":"voucher"
   }
+}
+```
+
+#### Promotion
+
+`Voucherify.redeem(null, payload, function callback (response) { })`
+
+where `payload` is an object which can include: 
+
+- `tier` - promotion tier ID
+- `customer` - voucher customer object
+    - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
+- `order` - with at least
+    - `amount`
+- `metadata`
+
+Example:
+
+`Voucherify.redeem(null, { tier: 'promo_yourpromotiontierid', order: { amount: 5000 } }, function callback (response) { })`
+
+Success response 
+
+```javascript
+{
+  "object": "redemption",
+  "customer_id": "cust_vAZ0M5nQUDv3zDoAcT6QSYhb",
+  "tracking_id": "(tracking_id not set)"
+  "result": "SUCCESS",
+  "amount": 30,
+  "order": {
+    "amount": 30,
+    "discount_amount": 30,
+    "items": null,
+    "customer": {
+      "id": "cust_vAZ0M5nQUDv3zDoAcT6QSYhb",
+      "object": "customer"
+    },
+    "referrer": null,
+    "status": "CREATED",
+    "metadata": null
+  },
+  "promotion_tier":{  
+      "id":"promo_TvPlKsF2tNXh3GhKPh0JKtDa",
+      "object":"promotion_tier",
+      "name":"tier_2",
+      "banner":null,
+      "campaign":{  
+        "id":"camp_mFxeXvEj7VeugrmFGdUNmKEp",
+        "object":"campaign",
+        "start_date":"2018-04-18T00:00:00Z",
+        "expiration_date":"2023-07-02T00:00:00Z",
+        "active":true
+      },
+      "condition":{  
+        "id":"val_TerxvCfNklYF",
+        "created_at":"2018-04-25T07:06:29Z",
+        "junction":"AND",
+        "orders":{  
+          "junction":"AND",
+          "any_order_item_price":{  
+            "$more_than":[  
+              1000000
+            ]
+          }
+        }
+      },
+      "action":{  
+        "discount":{  
+          "type":"AMOUNT",
+          "amount_off":100000
+        }
+      },
+      "metadata":null,
+      "summary":{  
+        "redemptions":{  
+          "total_redeemed":1
+        },
+        "orders":{  
+          "total_amount":0,
+          "total_discount_amount":0
+        }
+      }
+    }
 }
 ```
 
@@ -671,6 +754,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Changelog
 
+- **2018-04-25** - `1.19.0` - Add client side method for promotion redemption
 - **2018-04-24** - `1.18.0` - Add client side method for promotion validation
 - **2017-12-12** - `1.17.0` - Add redeem iframe widget
 - **2017-10-23** - `1.16.1` - Fix tracking custom events
