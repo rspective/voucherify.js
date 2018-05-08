@@ -1089,6 +1089,51 @@ window.Voucherify = (function (window, document, $) {
       "logo"
     ];
 
+    var customer_attributes = [
+      "name-field",
+      "name-field-required",
+      "name-field-label",
+
+      "email-field",
+      "email-field-required",
+      "email-field-label",
+
+      "phone-field",
+      "phone-field-required",
+      "phone-field-label",
+
+      "address-line-1-field",
+      "address-line-1-field-required",
+      "address-line-1-field-label",
+
+      "address-line-2-field",
+      "address-line-2-field-required",
+      "address-line-2-field-label",
+
+      "city-field",
+      "city-field-required",
+      "city-field-label",
+
+      "postal-code-field",
+      "postal-code-field-required",
+      "postal-code-field-label",
+
+      "state-field",
+      "state-field-required",
+      "state-field-label",
+
+      "country-field",
+      "country-field-required",
+      "country-field-label",
+    ];
+
+    var gdpr_attributes = [
+      "privacy-description",
+      "subscription-options",
+      "legal-text",
+      "privacy-policy"
+    ];
+
     var iframes_widgets = {
       "voucher-redeem": {
         "path": "/widgets/redeem",
@@ -1101,42 +1146,6 @@ window.Voucherify = (function (window, document, $) {
           "amount-field-required",
           "amount-field-label",
 
-          "name-field",
-          "name-field-required",
-          "name-field-label",
-
-          "email-field",
-          "email-field-required",
-          "email-field-label",
-
-          "phone-field",
-          "phone-field-required",
-          "phone-field-label",
-
-          "address-line-1-field",
-          "address-line-1-field-required",
-          "address-line-1-field-label",
-
-          "address-line-2-field",
-          "address-line-2-field-required",
-          "address-line-2-field-label",
-
-          "city-field",
-          "city-field-required",
-          "city-field-label",
-
-          "postal-code-field",
-          "postal-code-field-required",
-          "postal-code-field-label",
-
-          "state-field",
-          "state-field-required",
-          "state-field-label",
-
-          "country-field",
-          "country-field-required",
-          "country-field-label",
-
           "button-label"
         ]
       },
@@ -1148,42 +1157,6 @@ window.Voucherify = (function (window, document, $) {
           "metadata",
           "source",
 
-          "name-field",
-          "name-field-required",
-          "name-field-label",
-
-          "email-field",
-          "email-field-required",
-          "email-field-label",
-
-          "phone-field",
-          "phone-field-required",
-          "phone-field-label",
-
-          "address-line-1-field",
-          "address-line-1-field-required",
-          "address-line-1-field-label",
-
-          "address-line-2-field",
-          "address-line-2-field-required",
-          "address-line-2-field-label",
-
-          "city-field",
-          "city-field-required",
-          "city-field-label",
-
-          "postal-code-field",
-          "postal-code-field-required",
-          "postal-code-field-label",
-
-          "state-field",
-          "state-field-required",
-          "state-field-label",
-
-          "country-field",
-          "country-field-required",
-          "country-field-label",
-
           "button-label"
         ]
       },
@@ -1193,44 +1166,8 @@ window.Voucherify = (function (window, document, $) {
           "metadata",
           "source",
 
-          "name-field",
-          "name-field-required",
-          "name-field-label",
-
-          "email-field",
-          "email-field-required",
-          "email-field-label",
-
-          "phone-field",
-          "phone-field-required",
-          "phone-field-label",
-
-          "address-line-1-field",
-          "address-line-1-field-required",
-          "address-line-1-field-label",
-
-          "address-line-2-field",
-          "address-line-2-field-required",
-          "address-line-2-field-label",
-
-          "city-field",
-          "city-field-required",
-          "city-field-label",
-
-          "postal-code-field",
-          "postal-code-field-required",
-          "postal-code-field-label",
-
-          "state-field",
-          "state-field-required",
-          "state-field-label",
-
-          "country-field",
-          "country-field-required",
-          "country-field-label",
-
           "subscribe-label"
-        ]
+        ].concat(gdpr_attributes)
       }
     };
 
@@ -1272,7 +1209,7 @@ window.Voucherify = (function (window, document, $) {
 
       self._path = options.path;
 
-      self._options = helpers.readOptions(self._element, common_attributes.concat(options.attributes));
+      self._options = helpers.readOptions(self._element, common_attributes.concat(customer_attributes).concat(options.attributes));
 
       self._iframe = null;
 
