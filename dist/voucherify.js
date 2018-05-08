@@ -293,11 +293,6 @@ window.Voucherify = (function (window, document, $) {
         return null;
       }
 
-      // if (!code) {
-      //   console.error("Voucherify client could not verify code, because it is missing - please provide Voucher Code.");
-      //   return null;
-      // }
-
       if (!code) {
         if( !payload.tier ){
           console.error("Voucherify client could not redeem promotion without tier, because it is missing.");
