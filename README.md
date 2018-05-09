@@ -641,7 +641,12 @@ The iframe redners a widget which creates a customer a profile in Voucherify
      data-subscribe-label="Subscribe to the list"
 
      data-source="Landing_Page_1"
-     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+     data-metadata="{'example': true, 'lang': 'eng'}"
+     
+     data-label="Marketing Permissions"
+     data-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
+     data-options="Email;Phone"
+     data-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
@@ -667,12 +672,14 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field="BOOLEAN"`
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
-- `data-privacy-description="Privacy description"`
-- `data-subscription-options="Subscription option 1;Subscription option 2"`
-- `data-legal-text="Legal text"`
-- `data-privacy-policy="Privacy policy [Link description](http://example.com/privacy-policy)"`
+- `data-label="Section label"`
+- `data-description="Markdown text"`
+- `data-options="Option 1;Option 2"`
+- `data-legal="Markdown text"`
 
-Note: The privacy preferences attributes are available only for iframes.
+Note: 
+The privacy preferences attributes are available only for iframes.
+Description and legal fields do support markdown syntax. It means that you can user markdown to define the links to the external pages or format text, and by that improve experience for your users.
 
 
 ### Changelog
