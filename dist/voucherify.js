@@ -1127,11 +1127,11 @@ window.Voucherify = (function (window, document, $) {
       "country-field-label",
     ];
 
-    var gdpr_attributes = [
-      "privacy-description",
-      "subscription-options",
-      "legal-text",
-      "privacy-policy"
+    var gdpr_fields = [
+      "label",
+      "description",
+      "options",
+      "legal",
     ];
 
     var iframes_widgets = {
@@ -1167,7 +1167,7 @@ window.Voucherify = (function (window, document, $) {
           "source",
 
           "subscribe-label"
-        ].concat(gdpr_attributes)
+        ].concat(gdpr_fields)
       }
     };
 
