@@ -667,16 +667,17 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field="BOOLEAN"`
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
-
 - `data-privacy-description="Privacy description"`
 - `data-subscription-options="Subscription option 1;Subscription option 2"`
 - `data-legal-text="Legal text"`
 - `data-privacy-policy="Privacy policy [Link description](http://example.com/privacy-policy)"`
 
+Note: The privacy preferences attributes are available only for iframes.
+
 
 ### Changelog
 
-- **2018-05-02** - `1.19.0` - Add support for the privacy preferences to the subscribe widget
+- **2018-05-02** - `1.19.0` - Add support for the privacy preferences to the subscribe iframe widget
 - **2018-04-24** - `1.18.0` - Add client side method for promotion validation
 - **2017-12-12** - `1.17.0` - Add redeem iframe widget
 - **2017-10-23** - `1.16.1` - Fix tracking custom events
