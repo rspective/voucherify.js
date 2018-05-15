@@ -1023,6 +1023,12 @@ window.Voucherify = (function (window, document, $) {
           }
         });
       });
+    },
+    refreshIframes: function () {
+      window.docReady(function () {
+        console.info("Re-render voucherify iframes.");
+        renderIframes();
+      });
     }
   };
 
