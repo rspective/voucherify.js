@@ -684,7 +684,8 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
-- **2018-05-02** - `1.19.0` - Add support for the privacy preferences to the subscribe iframe widget
+- **2018-05-15** - `1.20.0` - Add support for the privacy preferences to the subscribe iframe widget
+- **2018-05-15** - `1.19.0` - Add method to refresh the iframe widgets
 - **2018-04-24** - `1.18.0` - Add client side method for promotion validation
 - **2017-12-12** - `1.17.0` - Add redeem iframe widget
 - **2017-10-23** - `1.16.1` - Fix tracking custom events
