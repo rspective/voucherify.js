@@ -1092,7 +1092,9 @@ window.Voucherify = (function (window, document, $) {
       "client-app-id",
       "client-token",
 
-      "logo"
+      "logo",
+
+      "widget-id"
     ];
 
     var customer_attributes = [
