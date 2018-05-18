@@ -507,6 +507,7 @@ The iframe renders the redeem widget
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
+- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
@@ -595,6 +596,7 @@ You can also embed the "get voucher" widget as an iframe
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
+- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.
 - `data-campaign="STRING"`
 - `data-email-field="BOOLEAN"`
 - `data-email-field-required="BOOLEAN"`
@@ -649,8 +651,9 @@ The iframe redners a widget which creates a customer a profile in Voucherify
      data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."></div>
 ```
 
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
-  
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
+ 
+- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
 - `data-phone-field-label="Field label"`
@@ -684,6 +687,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-05-18** - `1.22.0` - Allow to set iframe height 
 - **2018-05-15** - `1.21.0` - Add support for widget-id attribute
 - **2018-05-15** - `1.20.0` - Add support for the privacy preferences to the subscribe iframe widget
 - **2018-05-15** - `1.19.0` - Add method to refresh the iframe widgets
