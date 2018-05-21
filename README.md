@@ -507,7 +507,7 @@ The iframe renders the redeem widget
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="475px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 475px.
+- `data-height="480px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 480px.
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
@@ -596,7 +596,7 @@ You can also embed the "get voucher" widget as an iframe
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="420px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 420px.
+- `data-height="430px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 430px.
 - `data-campaign="STRING"`
 - `data-email-field="BOOLEAN"`
 - `data-email-field-required="BOOLEAN"`
@@ -653,7 +653,7 @@ The iframe redners a widget which creates a customer a profile in Voucherify
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
  
-- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.   
+- `data-height="220px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 220px.   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
 - `data-phone-field-label="Field label"`

@@ -1147,7 +1147,7 @@ window.Voucherify = (function (window, document, $) {
       "voucher-redeem": {
         "path": "/widgets/redeem",
         "defaults": {
-          "height": "475px"
+          "height": "480px"
         },
         "attributes": [
           "code-field",
@@ -1164,7 +1164,7 @@ window.Voucherify = (function (window, document, $) {
       "get-voucher": {
         "path": "/widgets/publish",
         "defaults": {
-          "height": "420px"
+          "height": "430px"
         },
         "attributes": [
           "campaign",
@@ -1178,7 +1178,7 @@ window.Voucherify = (function (window, document, $) {
       "subscribe": {
         "path": "/widgets/subscribe",
         "defaults": {
-          "height": "500px"
+          "height": "220px"
         },
         "attributes": [
           "metadata",
