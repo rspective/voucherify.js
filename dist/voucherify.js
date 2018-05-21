@@ -1233,7 +1233,7 @@ window.Voucherify = (function (window, document, $) {
       }
 
       // -- set custom height or fallback
-      var widget_height = self._options.height || "475px";
+      var widget_height = self._options.height || "500px";
       // -- remove custom height from options to prevent before sending it
       self._options.height = undefined;
 

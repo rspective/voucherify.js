@@ -507,7 +507,7 @@ The iframe renders the redeem widget
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.
+- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
@@ -596,7 +596,7 @@ You can also embed the "get voucher" widget as an iframe
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.
+- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.
 - `data-campaign="STRING"`
 - `data-email-field="BOOLEAN"`
 - `data-email-field-required="BOOLEAN"`
@@ -653,7 +653,7 @@ The iframe redners a widget which creates a customer a profile in Voucherify
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
  
-- `data-height="445px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 445px.   
+- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
 - `data-phone-field-label="Field label"`
@@ -687,6 +687,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-05-18** - `1.24.0` - Update default iframe height
 - **2018-05-18** - `1.23.0` - Change the consent options model
 - **2018-05-18** - `1.22.0` - Allow to set iframe height 
 - **2018-05-15** - `1.21.0` - Add support for widget-id attribute
