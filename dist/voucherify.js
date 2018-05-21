@@ -1146,6 +1146,9 @@ window.Voucherify = (function (window, document, $) {
     var iframes_widgets = {
       "voucher-redeem": {
         "path": "/widgets/redeem",
+        "defaults": {
+          "height": "480px"
+        },
         "attributes": [
           "code-field",
           "code-field-required",
@@ -1160,6 +1163,9 @@ window.Voucherify = (function (window, document, $) {
       },
       "get-voucher": {
         "path": "/widgets/publish",
+        "defaults": {
+          "height": "430px"
+        },
         "attributes": [
           "campaign",
 
@@ -1171,6 +1177,9 @@ window.Voucherify = (function (window, document, $) {
       },
       "subscribe": {
         "path": "/widgets/subscribe",
+        "defaults": {
+          "height": "220px"
+        },
         "attributes": [
           "metadata",
           "source",
@@ -1188,12 +1197,14 @@ window.Voucherify = (function (window, document, $) {
           return element.attachEvent("on" + name, callback)
         }
       },
-      readOptions: function (element, allowed_options) {
+      readOptions: function (element, allowed_options, defaults) {
         return Array.prototype.reduce.call(allowed_options, function (options, allowed_option) {
           var option_value = element.getAttribute("data-" + allowed_option);
 
           if (option_value) {
             options[allowed_option] = option_value;
+          } else if (defaults[allowed_option]) { // check if the default value is provided
+            options[allowed_option] = defaults[allowed_option];
           }
 
           return options;
@@ -1218,7 +1229,7 @@ window.Voucherify = (function (window, document, $) {
 
       self._path = options.path;
 
-      self._options = helpers.readOptions(self._element, common_attributes.concat(customer_attributes).concat(options.attributes));
+      self._options = helpers.readOptions(self._element, common_attributes.concat(customer_attributes).concat(options.attributes), options.defaults);
 
       self._iframe = null;
 
@@ -1233,7 +1244,7 @@ window.Voucherify = (function (window, document, $) {
       }
 
       // -- set custom height or fallback
-      var widget_height = self._options.height || "475px";
+      var widget_height = self._options.height;
       // -- remove custom height from options to prevent before sending it
       self._options.height = undefined;
 
