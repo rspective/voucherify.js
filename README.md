@@ -507,7 +507,7 @@ The iframe renders the redeem widget
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.
+- `data-height="475px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 475px.
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
@@ -596,7 +596,7 @@ You can also embed the "get voucher" widget as an iframe
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
   
-- `data-height="500px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 500px.
+- `data-height="420px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 420px.
 - `data-campaign="STRING"`
 - `data-email-field="BOOLEAN"`
 - `data-email-field-required="BOOLEAN"`
