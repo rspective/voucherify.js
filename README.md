@@ -679,6 +679,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-consent-description="Markdown text"`
 - `data-consent-options="{'option_key1':'Option label 1','option_key2':'Option label 2'}"`
 - `data-consent-legal="Markdown text"`
+- `data-consent-double-opt-in="BOOLEAN"`
 
 Note: 
 The privacy preferences attributes are available only for iframes.
@@ -687,6 +688,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-05-29** - `1.25.0` - Introduce double opt-in feature to the subscribe iframe 
 - **2018-05-18** - `1.24.0` - Update default iframe height
 - **2018-05-18** - `1.23.0` - Change the consent options model
 - **2018-05-18** - `1.22.0` - Allow to set iframe height 
