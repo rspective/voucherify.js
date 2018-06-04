@@ -1140,6 +1140,7 @@ window.Voucherify = (function (window, document, $) {
       "consent-label",
       "consent-description",
       "consent-options",
+      "consent-options-required",
       "consent-legal",
     ];
 
