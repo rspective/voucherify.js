@@ -336,11 +336,7 @@ window.Voucherify = (function (window, document, $) {
         filters = {};
       }
 
-      var queryString = "?" + Object.keys(filters)
-              .map(function(key) {
-                return encodeURIComponent(key) + "=" + encodeURIComponent(filters[key])
-              })
-              .join("&");
+      var queryString = "?" + $.param(filters);
 
       return xhrImplementation("GET", API.list + queryString, undefined, callback);
     },
