@@ -17,10 +17,10 @@ Contents:
 * [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 * [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons
 * [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
-* [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget 
+* [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget
 * [7](https://github.com/rspective/voucherify.js#redeem-widget) - Configuring redemption widget
-* [8](https://github.com/rspective/voucherify.js#publish-widget) - Configuring publish widget 
-* [9](https://github.com/rspective/voucherify.js#subscribe-widget---iframe) - Configuring customer profile widget 
+* [8](https://github.com/rspective/voucherify.js#publish-widget) - Configuring publish widget
+* [9](https://github.com/rspective/voucherify.js#subscribe-widget---iframe) - Configuring customer profile widget
 
 ### Usage
 
@@ -89,9 +89,9 @@ $(function () {
 
 You will receive assigned value in the validation response. If you don't pass it, we will generate an ID on the server side, and also we will attach it to the response.
 
-### Validation 
+### Validation
 
-Reference: 
+Reference:
 [vouchers](https://docs.voucherify.io/reference/#vouchers-validate)
 [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
 
@@ -99,7 +99,7 @@ You validate by invoking:
 
 `Voucherify.validate(params, function callback (response) { })`
 
-where params is an object including: 
+where params is an object including:
 
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
@@ -175,10 +175,10 @@ Valid gift voucher response:
        "tracking_id": "generated-or-passed-tracking-id"
    }
    ```
- 
+
 Valid promotion response:
- 
- 
+
+
 ```javascript
   {
       "valid": true,
@@ -198,8 +198,8 @@ Valid promotion response:
       "tracking_id": "generated-or-passed-tracking-id"
     }
 ```
-   
-   
+
+
 
 Invalid voucher response:
 
@@ -259,9 +259,9 @@ Voucherify.validate("VOUCHER-CODE")
         }
         "tracking_id": "generated-or-passed-tracking-id"
     }
-    
+
     OR
-    
+
     {
         "code": "VOUCHER_CODE",
         "valid": true,
@@ -273,7 +273,7 @@ Voucherify.validate("VOUCHER-CODE")
     }
 
     OR
-    
+
    {
        "code": "VOUCHER_CODE",
        "valid": true,
@@ -309,7 +309,7 @@ There are several reasons why validation may fail (`valid: false` response). You
 
 ### Redeem vouchers
 
-Next to validation, the library allows you to [redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side) vouchers. 
+Next to validation, the library allows you to [redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side) vouchers.
 Note: you have to enable **client-side redemptions** in your project's configuration.
 
 Reference: [redemption object](http://docs.voucherify.io/reference#the-redemption-object), [client-side redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
@@ -319,7 +319,7 @@ How to use it:
 
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
-where `payload` is an object which can include: 
+where `payload` is an object which can include:
 
 - `customer` - voucher customer object
     - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
@@ -331,7 +331,7 @@ Example:
 `Voucherify.redeem("gfct5ZWI1nL", { order: { amount: 5000 } }, function callback (response) { })`
 
 
-Success response 
+Success response
 
 ```javascript
 {
@@ -399,7 +399,7 @@ Voucherify.redeem("VOUCHER-CODE", payload)
        */
   });
  ```
- 
+
 ### Publish vouchers
 
 There is an option to publish vouchers through the client API. In order to do that
@@ -425,14 +425,14 @@ If you want to use this method you have to enable it in your project's configura
   - `category` - limit vouchers to the ones that are within the specified category
   - `page` - a number greater than or equal to 1
   - `limit` - a number between 1 and 100
-  
+
 ### Track custom events
 
 Custom events are actions taken by your customers. Those events are best suited for tracking high-value interactions with your app. Logging a custom event can trigger any number of subsequent operations (e.g.: email distribution). It is enabled by default. There is no need for changing project configuration.
 
 `Voucherify.track(eventName, metadata, customer, function callback (response) { })`
 
-- `eventName` - required, an identifier of event 
+- `eventName` - required, an identifier of event
 - `metadata` - required, an object containing data describing an event
 - `customer` - optional, customer details, by default Voucherify takes profile declared with method Voucherify.setIdentity()
 
@@ -444,7 +444,7 @@ Custom events are actions taken by your customers. Those events are best suited 
 ### Validation widget
 
 If you need a quick UI to validate vouchers on your website then use `Voucherify.render(selector, options)`:
-  
+
    - `selector` - identifies an HTML element that will be used as a container for the widget
    - `options`:
        - `classInvalid` - CSS class applied to the input when entered code is invalid
@@ -483,9 +483,9 @@ If you need a quick way to redeem vouchers on your website, you can use `Voucher
           - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
           - `textRedeem` - a text displayed on the button (default: "Redeem")
 
-#### iframe 
+#### iframe
 
-The iframe renders the redeem widget 
+The iframe renders the redeem widget
 
 ```html
 <div class="voucherify-voucher-redeem"
@@ -505,8 +505,8 @@ The iframe renders the redeem widget
      data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
 
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
-  
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
+
 - `data-height="480px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 480px.
 - `data-code-field="BOOLEAN"`
 - `data-code-field-label="Field label"`
@@ -543,7 +543,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 ### Publish widget
 
 If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons from a particular campaign on your website, use `Voucherify.renderPublish(selector, options)`:
-  
+
    - `selector` - identifies an HTML element that will be used as a container for the widget
    - `options`:
        - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
@@ -564,7 +564,7 @@ If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) 
        - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
        - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
        - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
-       
+
 The widget requires jQuery to work and `voucherify.css` to display properly.
 
 You can find a working example in [example/publish-widget.html](example/publish-widget.html)
@@ -577,9 +577,9 @@ You can also embed the "get voucher" widget as an iframe
 <div class="voucherify-get-voucher"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     
+
      data-campaign="Campaign name"
-     
+
      data-name-field="true"
      data-name-field-required="false"
      data-name-field-label="Name"
@@ -594,8 +594,8 @@ You can also embed the "get voucher" widget as an iframe
      data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
 
-The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration: 
-  
+The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
+
 - `data-height="430px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 430px.
 - `data-campaign="STRING"`
 - `data-email-field="BOOLEAN"`
@@ -623,7 +623,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
 
-### Subscribe widget - iframe 
+### Subscribe widget - iframe
 
 The iframe redners a widget which creates a customer a profile in Voucherify
 
@@ -644,7 +644,7 @@ The iframe redners a widget which creates a customer a profile in Voucherify
 
      data-source="Landing_Page_1"
      data-metadata="{'example': true, 'lang': 'eng'}"
-     
+
      data-consent-label="Marketing Permissions"
      data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
      data-consent-options="{'phone':'Phone','email':'Email'}"
@@ -653,7 +653,7 @@ The iframe redners a widget which creates a customer a profile in Voucherify
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
- 
+
 - `data-height="220px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 220px.   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
@@ -682,17 +682,18 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-consent-options-required="all"` - possible values: `none` (default) - checking the consent is not required; `all` - all consents must be checked; `any` - at least one consent must be checked
 - `data-consent-legal="Markdown text"`
 
-Note: 
+Note:
 The privacy preferences attributes are available only for iframes.
 Description and legal fields do support markdown syntax. It means that you can user markdown to define the links to the external pages or format text, and by that improve experience for your users.
 
 
 ### Changelog
 
+- **2018-07-30** - `1.25.1` - Bugfix resolving filter object to query params
 - **2018-05-18** - `1.25.0` - Allow to configure requirements for consents
 - **2018-05-18** - `1.24.0` - Update default iframe height
 - **2018-05-18** - `1.23.0` - Change the consent options model
-- **2018-05-18** - `1.22.0` - Allow to set iframe height 
+- **2018-05-18** - `1.22.0` - Allow to set iframe height
 - **2018-05-15** - `1.21.0` - Add support for widget-id attribute
 - **2018-05-15** - `1.20.0` - Add support for the privacy preferences to the subscribe iframe widget
 - **2018-05-15** - `1.19.0` - Add method to refresh the iframe widgets
@@ -706,20 +707,20 @@ Description and legal fields do support markdown syntax. It means that you can u
 - **2017-06-02** - `1.13.0` - Implementation of widget which acts as a subscribe form
 - **2017-06-02** - `1.12.1` - Add required flag for customer email
 - **2017-05-31** - `1.12.0` - Add support for the get voucher iframe
-- **2017-05-26** - `1.11.1` - Add normalize styles 
+- **2017-05-26** - `1.11.1` - Add normalize styles
 - **2017-05-26** - `1.11.0` - Add widget to get voucher for given customer
 - **2017-05-19** - `1.10.0` - Add the amount input field
-- **2017-05-19** - `1.9.0` 
+- **2017-05-19** - `1.9.0`
   - Add client side publish method,
   - Add a method to list vouchers
 - **2017-05-12** - `1.8.0` - Enable validation of metadata. Pass customer id and/or source_id.
 - **2017-05-10** - `1.7.0` - Add client side redeem method
 - **2017-05-09** - `1.6.4` - Fix undefined module in a browser.
 - **2017-04-18** - `1.6.3` - Make possible to include voucherify.js as an npm dependency.
-- **2017-01-23** - `1.6.2` - Fix XHR InvalidStateError in IE11 (#22). 
-- **2016-12-01** - `1.6.1` - Extend utils to support gift vouchers. 
-- **2016-08-31** - `1.6.0` - Pass order items (required for validation rules). 
-- **2016-06-22** - `1.5.0` - Added support for gift vouchers. 
+- **2017-01-23** - `1.6.2` - Fix XHR InvalidStateError in IE11 (#22).
+- **2016-12-01** - `1.6.1` - Extend utils to support gift vouchers.
+- **2016-08-31** - `1.6.0` - Pass order items (required for validation rules).
+- **2016-06-22** - `1.5.0` - Added support for gift vouchers.
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:
    - removed version number from dist files
    - added source maps
