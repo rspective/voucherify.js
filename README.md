@@ -462,9 +462,9 @@ The widget requires jQuery to work and `voucherify.css` to display properly.
 
 This is how the widget looks like:
 
-![Voucherify Widget](https://www.filepicker.io/api/file/rnJNaWbpSVu2MNkdbuo2)
+![Voucherify Widget](https://files.readme.io/ELRHbSAzRVKihIDWDqiF_145927574149336.gif)
 
-You can find a working example in [example/discount-widget.html](example/discount-widget.html) or [jsfiddle](https://jsfiddle.net/voucherify/25709bxo)
+You can find a working example in [example/discount-widget.html](example/discount-widget.html)
 
 ### Redeem widget
 
