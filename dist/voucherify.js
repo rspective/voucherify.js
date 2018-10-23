@@ -1147,6 +1147,8 @@ window.Voucherify = (function (window, document, $) {
           "height": "480px"
         },
         "attributes": [
+          "code",
+
           "code-field",
           "code-field-required",
           "code-field-label",
