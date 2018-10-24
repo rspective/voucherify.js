@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rspective/voucherify-nodejs-sdk.git"
+    "url": "https://github.com/rspective/voucherify.js.git"
   },
   "bugs": {
-    "url": "https://github.com/rspective/voucherify-nodejs-sdk/issues",
-    "email": "dev@rspective.pl"
+    "url": "https://github.com/rspective/voucherify.js/issues",
+    "email": "support@voucherify.io"
   },
   "keywords": [
     "voucherify",
