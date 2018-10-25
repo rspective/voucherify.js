@@ -1135,7 +1135,7 @@ window.Voucherify = (function (window, document, $) {
       "country-field-label",
     ];
 
-    var gdpr_fields = [
+    var consent_fields = [
       "consent-label",
       "consent-description",
       "consent-options",
@@ -1161,7 +1161,7 @@ window.Voucherify = (function (window, document, $) {
           "amount-field-label",
 
           "button-label"
-        ]
+        ].concat(consent_fields)
       },
       "get-voucher": {
         "path": "/widgets/publish",
@@ -1187,7 +1187,7 @@ window.Voucherify = (function (window, document, $) {
           "source",
 
           "subscribe-label"
-        ].concat(gdpr_fields)
+        ].concat(consent_fields)
       }
     };
 
