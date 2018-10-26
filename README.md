@@ -502,7 +502,13 @@ The iframe renders the redeem widget
      data-button-label="Redeem voucher"
 
      data-logo="Logo"
-     data-metadata="{'example': true, 'lang': 'eng'}"></div>
+     data-metadata="{'example': true, 'lang': 'eng'}"
+     
+     data-consent-label="Marketing Permissions"
+     data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
+     data-consent-options="{'phone':'Phone','email':'Email'}"
+     data-consent-options-required="any"
+     data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
@@ -540,6 +546,11 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-country-field="BOOLEAN"`
 - `data-country-field-required="BOOLEAN"`
 - `data-country-field-label="Field label"`
+- `data-consent-label="Section label"`
+- `data-consent-description="Markdown text"`
+- `data-consent-options="{'option_key1':'Option label 1','option_key2':'Option label 2'}"`
+- `data-consent-options-required="all"` - possible values: `none` (default) - checking the consent is not required; `all` - all consents must be checked; `any` - at least one consent must be checked
+- `data-consent-legal="Markdown text"`
 
 
 ### Publish widget
