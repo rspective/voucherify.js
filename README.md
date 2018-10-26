@@ -706,6 +706,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents 
 - **2018-10-23** - `1.26.0` - Add code attribute to the redeem widget which allows to set code value during initialization
 - **2018-07-30** - `1.25.1` - Bugfix resolving filter object to query params
 - **2018-05-18** - `1.25.0` - Allow to configure requirements for consents
