@@ -502,7 +502,8 @@ The iframe renders the redeem widget
      data-button-label="Redeem voucher"
 
      data-logo="Logo"
-     data-metadata="{'example': true, 'lang': 'eng'}"
+     data-redemption-metadata="{'example': true, 'lang': 'eng'}"
+     data-customer-metadata="{'example': true, 'lang': 'eng'}"
      
      data-consent-label="Marketing Permissions"
      data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
@@ -517,6 +518,9 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-code="STRING"` - Predefined voucher code
 - `data-success-message="STRING"` - Custom success result message
 - `data-failure-message="STRING"` - Custom failure result message
+- `data-redemption-metadata="{}"` - Metadata save with redemption
+- `data-customer-metadata="{}"` - Metadata save with customer
+- `data-metadata="{}"` - Metadata save with redemption
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
 - `data-amount-field-required="BOOLEAN"`
