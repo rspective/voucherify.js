@@ -509,6 +509,8 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 - `data-height="480px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 480px.
 - `data-code="STRING"` - Predefined voucher code
+- `data-success-message="STRING"` - Custom success result message
+- `data-failure-message="STRING"` - Custom failure result message
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
 - `data-amount-field-required="BOOLEAN"`
