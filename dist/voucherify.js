@@ -1153,7 +1153,10 @@ window.Voucherify = (function (window, document, $) {
         },
         "attributes": [
           "metadata",
-          "redeem-metadata",
+          "redemption-metadata",
+
+          "metadata-fields",
+
           "code",
 
           "code-field",
