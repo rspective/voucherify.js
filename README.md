@@ -505,6 +505,8 @@ The iframe renders the redeem widget
      data-redemption-metadata="{'example': true, 'lang': 'eng'}"
      data-customer-metadata="{'example': true, 'lang': 'eng'}"
      
+     data-metadata-fields="{'field_1_key': 'Field 1 Label', 'field_2_key': 'Field 2 Label'}"
+     
      data-consent-label="Marketing Permissions"
      data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
      data-consent-options="{'phone':'Phone','email':'Email'}"
@@ -521,6 +523,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-redemption-metadata="{}"` - Metadata save with redemption
 - `data-customer-metadata="{}"` - Metadata save with customer
 - `data-metadata="{}"` - Metadata save with redemption
+- `data-metadata-fields="{}"` - Predefined metadata fields
 - `data-code-field-label="Field label"`
 - `data-amount-field="BOOLEAN"`
 - `data-amount-field-required="BOOLEAN"`
@@ -706,6 +709,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value. 
 - **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents 
 - **2018-10-23** - `1.26.0` - Add code attribute to the redeem widget which allows to set code value during initialization
 - **2018-07-30** - `1.25.1` - Bugfix resolving filter object to query params
