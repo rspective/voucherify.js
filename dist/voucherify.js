@@ -1143,7 +1143,7 @@ window.Voucherify = (function (window, document, $) {
       "consent-options",
       "consent-options-required",
       "consent-legal",
-      "consent-voucherify"
+      "consent-voucherify-note-visible"
     ];
 
     var iframes_widgets = {
