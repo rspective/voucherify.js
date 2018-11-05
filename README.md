@@ -713,6 +713,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2018-11-05** - `1.29.0` - Web widgets - new attribute for hiding a note describing Voucherify privacy policy
 - **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value. 
 - **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents 
 - **2018-10-23** - `1.26.0` - Add code attribute to the redeem widget which allows to set code value during initialization
