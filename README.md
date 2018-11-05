@@ -512,7 +512,7 @@ The iframe renders the redeem widget
      data-consent-options="{'phone':'Phone','email':'Email'}"
      data-consent-options-required="any"
      data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
-     data-consent-voucherify-note-visible="false"></div>
+     data-consent-voucherify-note-visible="true"></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
