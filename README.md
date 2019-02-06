@@ -15,7 +15,7 @@ Contents:
 * [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
 * [2](https://github.com/rspective/voucherify.js#validation) - How to validate [vouchers](https://docs.voucherify.io/reference/#vouchers-validate) and [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
 * [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
-* [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons
+* [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference#create-publication) coupons
 * [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
 * [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget
 * [7](https://github.com/rspective/voucherify.js#redeem-widget) - Configuring redemption widget
@@ -32,7 +32,7 @@ Attach `voucherify.min.js` to your page, somewhere near `</body>`:
 <script type="text/javascript" src="/libs/voucherify/voucherify.min.js"></script>
 ```
 
-You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/voucherify.js):
+You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/voucherify.js):
 
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.js"></script>
@@ -44,7 +44,7 @@ Attach `voucherify.min.css` to your page, somewhere between `<head>` and `</head
 <link type="text/css" rel="stylesheet" href="/libs/voucherify/voucherify.min.css" />
 ```
 
-You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/voucherify.js):
+You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/voucherify.js):
 
 ```html
 <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.css" />
@@ -52,7 +52,7 @@ You can also link it from [jsdelivr CDN](http://www.jsdelivr.com/projects/vouche
 
 ### Initialize settings
 
-[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+[Log-in](https://app.voucherify.io/#/login) to Voucherify web interace and obtain your Client-side Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
 
 ![](https://www.filepicker.io/api/file/uOLcUZuSwaJFgIOvBpJA)
 
