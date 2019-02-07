@@ -79,7 +79,10 @@ $(function () {
 });
 ```
 
-We are tracking users which are validating vouchers with those who consume them, by a `tracking_id`. By that we are setting up an identity for the user. If you want to provide your custom value for `tracking_id`, you can do it with this simple function:
+We are tracking users which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the user.
+We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response.
+
+To provide your custom value use this simple function:
 
 ```javascript
 $(function () {
@@ -87,7 +90,15 @@ $(function () {
 });
 ```
 
-You will receive assigned value in the validation response. If you don't pass it, we will generate an ID on the server side, and also we will attach it to the response.
+You can provide a custom base URL to Voucherify servers in order to accomplish some more complex scenarios like selecting specific app region. Our library will add `https://` prefix in case you skip it, but will not validate the provided url.
+
+Use the following function to set it:
+
+```javascript
+$(function () {
+    Voucherify.setBaseUrl("https://<region1>.api.voucherify.io");
+});
+```
 
 ### Validation
 
@@ -219,7 +230,7 @@ Error response:
     "type": "error",
     "message": "XHR error happened.",
     "context": {
-        "readyState":4,
+        "readyState": 4,
         "responseJSON":{
             "code": 400,
             "message": "Missing amount",
@@ -310,7 +321,7 @@ There are several reasons why validation may fail (`valid: false` response). You
 ### Redeem vouchers
 
 Next to validation, the library allows you to [redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side) vouchers.
-Note: you have to enable **client-side redemptions** in your project's configuration.
+Note: you have to **enable client-side redemptions** in your project's configuration.
 
 Reference: [redemption object](http://docs.voucherify.io/reference#the-redemption-object), [client-side redeem](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
 
@@ -369,14 +380,14 @@ Success response
     "redemption": {
       "object": "list",
       "quantity": 1,
-      "redeemed_quantity" :1,
+      "redeemed_quantity": 1,
       "redeemed_amount": 30
     },
     "active": true,
     "additional_info": null,
     "metadata": null,
     "is_referral_code": false,
-    "object":"voucher"
+    "object": "voucher"
   }
 }
 ```
@@ -391,10 +402,10 @@ Voucherify.redeem("VOUCHER-CODE", payload)
   .fail(function (error) {
        /*
        {
-            "code":400,
-            "message":"quantity exceeded",
-            "details":"gfct5ZWI1nL",
-            "key":"quantity_exceeded"
+            "code": 400,
+            "message": "quantity exceeded",
+            "details": "gfct5ZWI1nL",
+            "key": "quantity_exceeded"
         }
        */
   });
@@ -403,7 +414,7 @@ Voucherify.redeem("VOUCHER-CODE", payload)
 ### Publish vouchers
 
 There is an option to publish vouchers through the client API. In order to do that
-you have to enable client-side publication in your project's configuration.
+you have to **enable client-side publication** in your project's configuration.
 
 `Voucherify.publish(campaignName, context, function callback (response) { })`
 
@@ -416,7 +427,7 @@ you have to enable client-side publication in your project's configuration.
 ### List vouchers
 
 Use the `listVouchers` method if you want to show a list of vouchers from a specific campaign on category.
-If you want to use this method you have to enable it in your project's configuration.
+If you want to use this method you have to **enable it in your project's configuration**.
 
 `Voucherify.listVouchers(filters, function callback (response) { })`
 
@@ -450,7 +461,7 @@ If you need a quick UI to validate vouchers on your website then use `Voucherify
        - `classInvalid` - CSS class applied to the input when entered code is invalid
        - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
        - `classValid` - CSS class applied to the input when entered code is valid
-       - `classValidAnimation` - CSS class describing animation of the input field when entered code valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
        - `logoSrc` - source of the image appearing in the circle at the top
        - **`onValidated`** - a callback function invoked when the entered code is valid, it takes the validation response as a parameter
        - `amount` - flag enables the amount input field
@@ -458,7 +469,7 @@ If you need a quick UI to validate vouchers on your website then use `Voucherify
        - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
        - `textValidate` - a text displayed on the button (default: "Validate")
 
-The widget requires jQuery to work and `voucherify.css` to display properly.
+The widget requires jQuery to work and `voucherify.css` to be displayed properly.
 
 This is how the widget looks like:
 
@@ -471,17 +482,17 @@ You can find a working example in [example/discount-widget.html](example/discoun
 If you need a quick way to redeem vouchers on your website, you can use `Voucherify.renderRedeem(selector, options)`:
 
    - `selector` - identifies an HTML element that will be used as a container for the widget
-      - `options`:
-          - `classInvalid` - CSS class applied to the input when entered code is invalid
-          - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
-          - `classValid` - CSS class applied to the input when entered code is valid
-          - `classValidAnimation` - CSS class describing animation of the input field when entered code valid
-          - `logoSrc` - source of the image appearing in the circle at the top
-          - **`onRedeem`** - a callback function invoked when the entered code is redeemed, it takes the redemption response as a parameter
-          - `amount` - flag enables the amount input field
-          - `textPlaceholder` - text displayed as a placeholder in the code input field
-          - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
-          - `textRedeem` - a text displayed on the button (default: "Redeem")
+   - `options`:
+      - `classInvalid` - CSS class applied to the input when entered code is invalid
+      - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
+      - `classValid` - CSS class applied to the input when entered code is valid
+      - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
+      - `logoSrc` - source of the image appearing in the circle at the top
+      - **`onRedeem`** - a callback function invoked when the entered code is redeemed, it takes the redemption response as a parameter
+      - `amount` - flag enables the amount input field
+      - `textPlaceholder` - text displayed as a placeholder in the code input field
+      - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
+      - `textRedeem` - a text displayed on the button (default: "Redeem")
 
 #### iframe
 
@@ -564,7 +575,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Publish widget
 
-If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) coupons from a particular campaign on your website, use `Voucherify.renderPublish(selector, options)`:
+If you need to [publish](https://docs.voucherify.io/reference#create-publication) coupons from a particular campaign on your website, use `Voucherify.renderPublish(selector, options)`:
 
    - `selector` - identifies an HTML element that will be used as a container for the widget
    - `options`:
@@ -572,9 +583,9 @@ If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) 
        - `classInvalid` - CSS class applied to the input when entered data are invalid
        - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
        - `classValid` - CSS class applied to the input when entered code is valid
-       - `classValidAnimation` - CSS class describing animation of the input field when entered data valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered data are valid
        - `logoSrc` - source of the image appearing in the circle at the top
-       - **`onPublished`** - a callback function invoked when getting voucher will succeed, it takes  response as a parameter
+       - **`onPublished`** - a callback function invoked when publishing voucher will succeed, it takes  response as a parameter
        - `customerFields` - list of the customer input fields that are displayed in widget
        - `textPublish` - a text displayed on the button (default: "Get voucher")
        - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
@@ -587,7 +598,7 @@ If you need to [publish](https://docs.voucherify.io/reference/#publish-voucher) 
        - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
        - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
 
-The widget requires jQuery to work and `voucherify.css` to display properly.
+The widget requires jQuery to work and `voucherify.css` to be displayed properly.
 
 You can find a working example in [example/publish-widget.html](example/publish-widget.html)
 
@@ -647,7 +658,7 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Subscribe widget - iframe
 
-The iframe redners a widget which creates a customer a profile in Voucherify
+The iframe redners a widget which creates a customer profile in Voucherify
 
 ```html
 <div class="voucherify-subscribe"
@@ -708,11 +719,12 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 Note:
 The privacy preferences attributes are available only for iframes.
-Description and legal fields do support markdown syntax. It means that you can user markdown to define the links to the external pages or format text, and by that improve experience for your users.
+Description and legal fields do support markdown syntax. It means that you can use markdown to define the links to the external pages or format text, and by that improve experience for your users.
 
 
 ### Changelog
 
+- **2019-02-05** - `1.30.0` - Add method for setting base app url 
 - **2018-11-05** - `1.29.0` - Web widgets - new attribute for hiding a note describing Voucherify privacy policy
 - **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value. 
 - **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents 

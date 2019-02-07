@@ -1,16 +1,18 @@
 window.Voucherify = (function (window, document, $) {
   "use strict";
 
-  var API_BASE = "https://api.voucherify.io";
+  var API = buildAPI("https://api.voucherify.io");
 
-  var API = {
-      validate: API_BASE + "/client/v1/validate",
-      redeem:   API_BASE + "/client/v1/redeem",
-      publish:  API_BASE + "/client/v1/publish",
-      list:     API_BASE + "/client/v1/vouchers",
-      track:    API_BASE + "/client/v1/events",
-      validatePromotion: API_BASE + "/client/v1/promotions/validation"
-  };
+  function buildAPI(baseUrl) {
+    return {
+      validate:          baseUrl + "/client/v1/validate",
+      redeem:            baseUrl + "/client/v1/redeem",
+      publish:           baseUrl + "/client/v1/publish",
+      list:              baseUrl + "/client/v1/vouchers",
+      track:             baseUrl + "/client/v1/events",
+      validatePromotion: baseUrl + "/client/v1/promotions/validation"
+    };
+  }
 
   var OPTIONS = {};
 
@@ -33,13 +35,9 @@ window.Voucherify = (function (window, document, $) {
 
   var xhrImplementation = null;
 
-  if (!!$ && typeof($.ajax) === "function" && !!$.Deferred) {
+  if ($ && typeof($.ajax) === "function" && $.Deferred) {
     xhrImplementation = function (method, url, payload, callback) {
-      var deferred = null;
-
-      if (typeof(callback) !== "function") {
-        deferred = $.Deferred();
-      }
+      var deferred = typeof(callback) === "function" ? { resolve: callback, reject: callback } : $.Deferred();
 
       $.ajax({
         type: method,
@@ -63,52 +61,36 @@ window.Voucherify = (function (window, document, $) {
         timeout: OPTIONS.timeout,
 
         success: function (data) {
-          var result = null;
-
           if (isValidResponseStructure(data)) {
-            if (typeof(callback) === "function") {
-              callback(data);
-            } else {
-              deferred.resolve(data);
-            }
-          } else {
-            result = {
-              type: "error",
-              message: "Unexpected response structure.",
-              context: data
-            };
-
-            if (typeof(callback) === "function") {
-              callback(result);
-            } else {
-              deferred.reject(result);
-            }
+            deferred.resolve(data);
+            return;
           }
+
+          deferred.reject({
+            type: "error",
+            message: "Unexpected response structure.",
+            context: data
+          });
         },
 
         error: function (error) {
-          var result = {
+          deferred.reject({
             type: "error",
             message: "XHR error happened.",
             context: error
-          };
-
-          if (typeof(callback) === "function") {
-            callback(result);
-          } else {
-            deferred.reject(result);
-          }
+          });
         }
       });
 
       if (typeof(callback) !== "function") {
         return deferred.promise();
-      } else {
-        return undefined;
       }
     };
   } else {
     xhrImplementation = function (method, url, payload, callback) {
+      callback = typeof(callback) === "function" ? callback : function () {
+      };
+
       var request = new window.XMLHttpRequest();
 
       request.withCredentials = true;
@@ -121,50 +103,43 @@ window.Voucherify = (function (window, document, $) {
       request.setRequestHeader("X-Client-Token", OPTIONS.token);
       request.setRequestHeader("X-Voucherify-Channel", "Voucherify.js");
 
-      request.onload = function() {
-        var result = null;
-
+      request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
-          var data = JSON.parse(request.responseText);
+          try {
+            var data = JSON.parse(request.responseText);
 
-          if (isValidResponseStructure(data)) {
-            if (typeof(callback) === "function") {
+            if (isValidResponseStructure(data)) {
               callback(data);
+              return;
             }
-          } else {
-            result = {
+
+            callback({
               type: "error",
               message: "Unexpected response structure.",
               context: data
-            };
-
-            if (typeof(callback) === "function") {
-              callback(result);
-            }
+            });
+          } catch (error) {
+            callback({
+              type: "error",
+              message: "Unparsable response.",
+              context: error
+            });
           }
         } else {
-          result = {
+          callback({
             type: "error",
             message: "Unexpected status code.",
             context: request.status
-          };
-
-          if (typeof(callback) === "function") {
-            callback(result);
-          }
+          });
         }
       };
 
       request.onerror = function (error) {
-        var result = {
+        callback({
           type: "error",
           message: "XHR error happened.",
           context: error
-        };
-
-        if (typeof(callback) === "function") {
-          callback(result);
-        }
+        });
       };
 
       request.send(JSON.stringify(payload));
@@ -177,7 +152,7 @@ window.Voucherify = (function (window, document, $) {
 
   function validatePercentDiscount(discount) {
     if (!discount || discount < 0 || discount > 100) {
-      throw new Error('Invalid voucher, percent discount should be between 0-100.');
+      throw new Error("Invalid voucher, percent discount should be between 0-100.");
     }
   }
 
@@ -216,6 +191,16 @@ window.Voucherify = (function (window, document, $) {
       OPTIONS.trackingId = trackingId;
     },
 
+    setBaseUrl: function (baseUrl) {
+      baseUrl = baseUrl || "";
+
+      if (baseUrl.indexOf("https://") !== 0 && baseUrl.indexOf("http://") !== 0) {
+        baseUrl = "https://" + baseUrl;
+      }
+
+      API = buildAPI(baseUrl);
+    },
+
     validate: function (code, callback) {
       if (!isValidInit(OPTIONS)) {
         return null;
@@ -242,7 +227,7 @@ window.Voucherify = (function (window, document, $) {
       var queryString = "?";
       if (!code) {
         isPromotion = true;
-        if(amount) {
+        if (amount) {
           queryString += "amount=" + parseInt(amount);
         }
       } else {
@@ -253,27 +238,27 @@ window.Voucherify = (function (window, document, $) {
       }
 
       if (items) {
-        queryString += "&" + items.map(function(item, index) {
-          return Object.keys(item).map(function(key) {
+        queryString += "&" + items.map(function (item, index) {
+          return Object.keys(item).map(function (key) {
             return encodeURIComponent("item[" + index + "][" + key + "]") + "=" + encodeURIComponent(item[key]);
           }).join("&");
         }).join("&");
       }
 
       if (metadata) {
-        queryString += "&" + Object.keys(metadata).map(function(key) {
+        queryString += "&" + Object.keys(metadata).map(function (key) {
           return encodeURIComponent("metadata[" + key + "]") + "=" + encodeURIComponent(metadata[key]);
         }).join("&");
       }
 
       if (customer) {
-        if(typeof(customer) !== "object") {
+        if (typeof(customer) !== "object") {
           console.error("Customer must be an object - please use instead { source_id: 'your_user' }");
           return null;
         }
 
         queryString += "&" + Object.keys(customer).map(function (key) {
-          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[ key ]);
+          return encodeURIComponent("customer[" + key + "]") + "=" + encodeURIComponent(customer[key]);
         }).join("&");
       }
 
@@ -402,7 +387,7 @@ window.Voucherify = (function (window, document, $) {
         }
       },
 
-      calculateDiscount: function(basePrice, voucher, unitPrice) {
+      calculateDiscount: function (basePrice, voucher, unitPrice) {
         var e = 100; // Number of digits after the decimal separator.
         var discount;
 
@@ -442,7 +427,7 @@ window.Voucherify = (function (window, document, $) {
         }
       }
     },
-    render: function(selector, options) {
+    render: function (selector, options) {
       var $element = $(selector);
       if (!$element || !$element.length) {
         throw new Error("Element '" + selector + "' cannot be found");
@@ -512,15 +497,15 @@ window.Voucherify = (function (window, document, $) {
       var classInvalidAnimation = options.classInvalidAnimation === "string" ? options.classInvalidAnimation : "voucherifyAnimationShake";
       var classValidAnimation = options.classValidAnimation === "string" ? options.classValidAnimation : "voucherifyAnimationTada";
 
-      $code.on("keyup", function(event) {
+      $code.on("keyup", function (event) {
         $code.toggleClass(classInvalidAnimation, false);
       });
 
-      $amount.on("keyup", function(event) {
+      $amount.on("keyup", function (event) {
         $amount.toggleClass(classInvalidAnimation, false);
       });
 
-      $validate.on("click", function(event) {
+      $validate.on("click", function (event) {
         $discountType.val("");
         $amountOff.val("");
         $unitOff.val("");
@@ -533,7 +518,7 @@ window.Voucherify = (function (window, document, $) {
         if (!$code.val()) {
           $code.toggleClass(classInvalidAnimation, true)
             .delay(1000)
-            .queue(function(){
+            .queue(function () {
               $code.toggleClass(classInvalidAnimation, false);
               $code.dequeue();
             });
@@ -545,7 +530,7 @@ window.Voucherify = (function (window, document, $) {
           amount: parseInt(parseFloat($amount.val().replace(/\,/, ".")) * 100)
         };
 
-        self.validate(payload, function(response) {
+        self.validate(payload, function (response) {
           if (!response || !response.valid) {
 
             var setFieldInvalid = function ($field) {
@@ -562,9 +547,9 @@ window.Voucherify = (function (window, document, $) {
             $validate.toggleClass(classInvalid, true);
             $validate.toggleClass(classValid, false);
 
-            var context         = response.context || {};
-            var responseJSON    = context.responseJSON || {};
-            var error_key       = responseJSON.key;
+            var context      = response.context || {};
+            var responseJSON = context.responseJSON || {};
+            var error_key    = responseJSON.key;
 
             if (options.amount && (
                 error_key === INVALID_AMOUNT ||
@@ -578,7 +563,7 @@ window.Voucherify = (function (window, document, $) {
           }
 
           if ($amount.val() >= 0) {
-            $amount.val(parseFloat($amount.val().replace(/\,/, ".")))
+            $amount.val(parseFloat($amount.val().replace(/\,/, ".")));
           } else {
             $amount.hide(100);
           }
@@ -611,7 +596,7 @@ window.Voucherify = (function (window, document, $) {
       });
     },
 
-    renderRedeem: function(selector, options) {
+    renderRedeem: function (selector, options) {
       var $element = $(selector);
       if (!$element || !$element.length) {
         throw new Error("Element '" + selector + "' cannot be found");
@@ -668,8 +653,8 @@ window.Voucherify = (function (window, document, $) {
       var $code          = create$control("input", "code", $container, { type: "text", placeholder: typeof options.textPlaceholder === "string" ? options.textPlaceholder : "e.g. abc-123" });
       var $amount        = create$control("input", "amount", $container, { type: options.amount ? "text" : "hidden", placeholder: typeof options.amountPlaceholder === "string" ? options.amountPlaceholder : "e.g. 52.22" });
       var $tracking      = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
-      var $redeem      = create$control("button", "redeem", $container, {});
-      var $redeemText  = create$control("span", "redeemText", $redeem, { text: typeof options.textRedeem === "string" ? options.textRedeem : "Redeem" });
+      var $redeem        = create$control("button", "redeem", $container, {});
+      var $redeemText    = create$control("span", "redeemText", $redeem, { text: typeof options.textRedeem === "string" ? options.textRedeem : "Redeem" });
 
       var self = this;
       var classInvalid = options.classInvalid === "string" ? options.classInvalid : "voucherifyInvalid";
@@ -677,15 +662,15 @@ window.Voucherify = (function (window, document, $) {
       var classInvalidAnimation = options.classInvalidAnimation === "string" ? options.classInvalidAnimation : "voucherifyAnimationShake";
       var classValidAnimation = options.classValidAnimation === "string" ? options.classValidAnimation : "voucherifyAnimationTada";
 
-      $code.on("keyup", function(event) {
+      $code.on("keyup", function (event) {
         $code.toggleClass(classInvalidAnimation, false);
       });
 
-      $amount.on("keyup", function(event) {
+      $amount.on("keyup", function (event) {
         $amount.toggleClass(classInvalidAnimation, false);
       });
 
-      $redeem.on("click", function(event) {
+      $redeem.on("click", function (event) {
         $tracking.val("");
 
         $redeem.toggleClass(classInvalid, false);
@@ -694,7 +679,7 @@ window.Voucherify = (function (window, document, $) {
         if (!$code.val()) {
           $code.toggleClass(classInvalidAnimation, true)
             .delay(1000)
-            .queue(function(){
+            .queue(function () {
               $code.toggleClass(classInvalidAnimation, false);
               $code.dequeue();
             });
@@ -707,7 +692,7 @@ window.Voucherify = (function (window, document, $) {
           }
         };
 
-        self.redeem($code.val(), payload, function(response) {
+        self.redeem($code.val(), payload, function (response) {
           if (!response || response.result !== 'SUCCESS') {
 
             var setFieldInvalid = function ($field) {
@@ -715,7 +700,7 @@ window.Voucherify = (function (window, document, $) {
               $field.toggleClass(classValid, false);
               $field.toggleClass(classInvalidAnimation, true)
                 .delay(1000)
-                .queue(function(){
+                .queue(function () {
                   $field.toggleClass(classInvalidAnimation, false);
                   $field.dequeue();
                 });
@@ -724,9 +709,9 @@ window.Voucherify = (function (window, document, $) {
             $redeem.toggleClass(classInvalid, true);
             $redeem.toggleClass(classValid, false);
 
-            var context         = response.context || {};
-            var responseJSON    = context.responseJSON || {};
-            var error_key       = responseJSON.key;
+            var context      = response.context || {};
+            var responseJSON = context.responseJSON || {};
+            var error_key    = responseJSON.key;
 
             if (options.amount && (
                 error_key === INVALID_AMOUNT ||
@@ -740,7 +725,7 @@ window.Voucherify = (function (window, document, $) {
           }
 
           if ($amount.val() >= 0) {
-            $amount.val(parseFloat($amount.val().replace(/\,/, ".")))
+            $amount.val(parseFloat($amount.val().replace(/\,/, ".")));
           } else {
             $amount.hide(100);
           }
@@ -769,7 +754,7 @@ window.Voucherify = (function (window, document, $) {
       });
     },
 
-    renderPublish : function (selector, options) {
+    renderPublish: function (selector, options) {
       var $element = $(selector);
       if (!$element || !$element.length) {
         throw new Error("Element '" + selector + "' cannot be found");
@@ -788,15 +773,15 @@ window.Voucherify = (function (window, document, $) {
       }
 
       function containsCustomer(prop) {
-          return contains(options.customerFields, prop);
+        return contains(options.customerFields, prop);
       }
 
       function isRequired(prop) {
-          var field = Array.prototype.find.call(options.customerFields || [], function (field) {
-              return field.name === prop;
-          });
+        var field = Array.prototype.find.call(options.customerFields || [], function (field) {
+          return field.name === prop;
+        });
 
-          return field && field.required || false;
+        return field && field.required || false;
       }
 
       function getCapitalizedName(name) {
@@ -843,30 +828,30 @@ window.Voucherify = (function (window, document, $) {
         return $control;
       }
 
-      var $container     = create$control("div", "container", $element);
+      var $container          = create$control("div", "container", $element);
       $container.addClass("wide");
-      var $logoContainer = create$control("figure", "logo", $container);
-      var $logo          = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
+      var $logoContainer      = create$control("figure", "logo", $container);
+      var $logo               = create$control("img", "logo", $logoContainer, { src: typeof options.logoSrc === "string" ? options.logoSrc : "https://app.voucherify.io/images/favicon.png" });
 
-      var $customerName  = containsCustomer("name") && create$control("input", "customerName", $container, { type: "text", placeholder: typeof options.customerNamePlaceholder === "string" ? options.customerNamePlaceholder : "Name" });
-      var $row1          = create$control("div", "row", $container);
-      var $customerEmail = containsCustomer("email") && create$control("input", "customerEmail", $row1, { type: "email", placeholder: typeof options.customerEmailPlaceholder === "string" ? options.customerEmailPlaceholder : "Email" });
-      var $customerPhone = containsCustomer("phone") && create$control("input", "customerPhone", $row1, { type: "text", placeholder: typeof options.customerPhonePlaceholder === "string" ? options.customerPhonePlaceholder : "Phone" });
-      var $customerLine1 = containsCustomer("line_1") && create$control("input", "customerLine1", $container, { type: "text", placeholder: typeof options.customerLine1Placeholder === "string" ? options.customerLine1Placeholder : "Address line 1" });
-      var $customerLine2 = containsCustomer("line_2") && create$control("input", "customerLine2", $container, { type: "text", placeholder: typeof options.customerLine2Placeholder === "string" ? options.customerLine2Placeholder : "Address line 2" });
-      var $row3          = create$control("div", "row", $container);
+      var $customerName       = containsCustomer("name") && create$control("input", "customerName", $container, { type: "text", placeholder: typeof options.customerNamePlaceholder === "string" ? options.customerNamePlaceholder : "Name" });
+      var $row1               = create$control("div", "row", $container);
+      var $customerEmail      = containsCustomer("email") && create$control("input", "customerEmail", $row1, { type: "email", placeholder: typeof options.customerEmailPlaceholder === "string" ? options.customerEmailPlaceholder : "Email" });
+      var $customerPhone      = containsCustomer("phone") && create$control("input", "customerPhone", $row1, { type: "text", placeholder: typeof options.customerPhonePlaceholder === "string" ? options.customerPhonePlaceholder : "Phone" });
+      var $customerLine1      = containsCustomer("line_1") && create$control("input", "customerLine1", $container, { type: "text", placeholder: typeof options.customerLine1Placeholder === "string" ? options.customerLine1Placeholder : "Address line 1" });
+      var $customerLine2      = containsCustomer("line_2") && create$control("input", "customerLine2", $container, { type: "text", placeholder: typeof options.customerLine2Placeholder === "string" ? options.customerLine2Placeholder : "Address line 2" });
+      var $row3               = create$control("div", "row", $container);
       var $customerPostalCode = containsCustomer("postal_code") && create$control("input", "customerPostalCode", $row3, { type: "text", placeholder: typeof options.customerPostalCodePlaceholder === "string" ? options.customerPostalCodePlaceholder : "Postal Code" });
-      var $customerCity = containsCustomer("city") && create$control("input", "customerCity", $row3, { type: "text", placeholder: typeof options.customerCityPlaceholder === "string" ? options.customerCityPlaceholder : "City" });
-      var $row4          = create$control("div", "row", $container);
-      var $customerState = containsCustomer("state") && create$control("input", "customerState", $row4, { type: "text", placeholder: typeof options.customerStatePlaceholder === "string" ? options.customerStatePlaceholder : "State" });
-      var $customerCountry = containsCustomer("country") && create$control("input", "customerCountry", $row4, { type: "text", placeholder: typeof options.customerCountryPlaceholder === "string" ? options.customerCountryPlaceholder : "Country" });
+      var $customerCity       = containsCustomer("city") && create$control("input", "customerCity", $row3, { type: "text", placeholder: typeof options.customerCityPlaceholder === "string" ? options.customerCityPlaceholder : "City" });
+      var $row4               = create$control("div", "row", $container);
+      var $customerState      = containsCustomer("state") && create$control("input", "customerState", $row4, { type: "text", placeholder: typeof options.customerStatePlaceholder === "string" ? options.customerStatePlaceholder : "State" });
+      var $customerCountry    = containsCustomer("country") && create$control("input", "customerCountry", $row4, { type: "text", placeholder: typeof options.customerCountryPlaceholder === "string" ? options.customerCountryPlaceholder : "Country" });
 
-      var $tracking      = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
+      var $tracking           = create$control("input", "tracking", $container, { type: "hidden", configurable: true });
 
-      var $publishStatus = create$control("input", "publishStatus", $container, { type: "text" });
+      var $publishStatus      = create$control("input", "publishStatus", $container, { type: "text" });
 
-      var $publish       = create$control("button", "publish", $container, {});
-      var $publishText   = create$control("span", "publishText", $publish, { text: typeof options.textPublish === "string" ? options.textPublish : "Get voucher" });
+      var $publish            = create$control("button", "publish", $container, {});
+      var $publishText        = create$control("span", "publishText", $publish, { text: typeof options.textPublish === "string" ? options.textPublish : "Get voucher" });
 
       $publishStatus.prop("readonly", true).hide();
 
@@ -881,7 +866,7 @@ window.Voucherify = (function (window, document, $) {
         $control.toggleClass(classValid, false);
         $control.toggleClass(classInvalidAnimation, true)
           .delay(1000)
-          .queue(function(){
+          .queue(function () {
             $control.toggleClass(classInvalidAnimation, false);
             $control.toggleClass(classInvalid, false);
             $control.toggleClass(classValid, false);
@@ -889,7 +874,7 @@ window.Voucherify = (function (window, document, $) {
           });
       }
 
-      $publish.on("click", function(event) {
+      $publish.on("click", function (event) {
         $tracking.val("");
 
         $publish.toggleClass(classInvalid, false);
@@ -908,18 +893,18 @@ window.Voucherify = (function (window, document, $) {
 
         if (containsCustomer("email")) {
           if (!$customerEmail.val() && isRequired("email")) {
-              return error$control($customerEmail);
+            return error$control($customerEmail);
           }
           if ($customerEmail.val() && !EMAIL_PATTERN.test($customerEmail.val())) {
-              return error$control($customerEmail);
+            return error$control($customerEmail);
           }
           payload.customer["email"] = $customerEmail.val();
           payload.customer["source_id"] = payload.customer["email"];
         }
 
-        if (containsCustomer("phone") ) {
+        if (containsCustomer("phone")) {
           if (!$customerPhone.val() && isRequired("phone")) {
-              return error$control($customerPhone);
+            return error$control($customerPhone);
           }
           if ($customerPhone.val()) {
             payload.customer["phone"] = $customerPhone.val();
@@ -974,14 +959,14 @@ window.Voucherify = (function (window, document, $) {
           if (!$customerCountry.val() && isRequired("country")) {
             return error$control($customerCountry);
           }
-          payload.customer["address"]["country"] = $customerCountry.val()
+          payload.customer["address"]["country"] = $customerCountry.val();
         }
 
-        self.publish(options.campaignName, payload, function(response) {
+        self.publish(options.campaignName, payload, function (response) {
           if (!response || !response.voucher || !response.voucher.code) {
-            var context         = response.context || {};
-            var responseJSON    = context.responseJSON || {};
-            var error_key       = responseJSON.key;
+            var context      = response.context || {};
+            var responseJSON = context.responseJSON || {};
+            var error_key    = responseJSON.key;
 
             error$control($publish);
 
@@ -1028,7 +1013,7 @@ window.Voucherify = (function (window, document, $) {
     }
   };
 
-  (function(funcName, baseObj) {
+  (function (funcName, baseObj) {
     "use strict";
 
     if (!baseObj) {
@@ -1052,20 +1037,22 @@ window.Voucherify = (function (window, document, $) {
     }
 
     function readyStateChange() {
-      if ( document.readyState === "complete" ) {
+      if (document.readyState === "complete") {
         ready();
       }
     }
 
-    baseObj[funcName] = function(callback, context) {
+    baseObj[funcName] = function (callback, context) {
       if (typeof callback !== "function") {
         throw new TypeError("callback for docReady(fn) must be a function");
       }
       if (readyFired) {
-        setTimeout(function() {callback(context);}, 1);
+        setTimeout(function () {
+          callback(context);
+        }, 1);
         return;
       } else {
-        readyList.push({fn: callback, ctx: context});
+        readyList.push({ fn: callback, ctx: context });
       }
       if (document.readyState === "complete" || (!document.attachEvent && document.readyState === "interactive")) {
         setTimeout(ready, 1);
@@ -1079,7 +1066,7 @@ window.Voucherify = (function (window, document, $) {
         }
         readyEventHandlersInstalled = true;
       }
-    }
+    };
   })("docReady", window);
 
   function renderIframes() {
@@ -1202,9 +1189,9 @@ window.Voucherify = (function (window, document, $) {
     var helpers = {
       bind: function (element, name, callback) {
         if (element.addEventListener) {
-          return element.addEventListener(name, callback, false)
+          return element.addEventListener(name, callback, false);
         } else {
-          return element.attachEvent("on" + name, callback)
+          return element.attachEvent("on" + name, callback);
         }
       },
       readOptions: function (element, allowed_options, defaults) {
@@ -1223,8 +1210,8 @@ window.Voucherify = (function (window, document, $) {
       encodeOptions: function (options) {
         var query_parameters = [];
 
-        Object.keys(options).forEach(function(option_key) {
-          query_parameters.push("[options]["+option_key+"]="+encodeURIComponent(options[option_key]));
+        Object.keys(options).forEach(function (option_key) {
+          query_parameters.push("[options][" + option_key + "]=" + encodeURIComponent(options[option_key]));
         });
 
         return "?" + query_parameters.join("&");
@@ -1278,7 +1265,7 @@ window.Voucherify = (function (window, document, $) {
       self._iframe.style.cssText = css_props.join("\n");
 
       helpers.bind(self._iframe, "load", function () {
-        return self._iframe.style.visibility = "visible"
+        return self._iframe.style.visibility = "visible";
       });
 
       self._iframe.src = host + self._path + helpers.encodeOptions(self._options);
@@ -1295,7 +1282,7 @@ window.Voucherify = (function (window, document, $) {
 
       Array.prototype.forEach.call(elements, function (element) {
         widgets.push(new RenderIframe(element, iframes_widgets[widget_name]));
-      })
+      });
     });
 
     return widgets;
@@ -1314,4 +1301,4 @@ window.Voucherify = (function (window, document, $) {
   }
 
   return voucherify;
-} (window, window.document, window.jQuery));
+}(window, window.document, window.jQuery));
