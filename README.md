@@ -435,7 +435,7 @@ If you want to use this method you have to **enable it in your project's configu
   - `campaign` - limit vouchers to the ones that belong to the specified campaign
   - `category` - limit vouchers to the ones that are within the specified category
   - `page` - a number greater than or equal to 1
-  - `limit` - a number between 1 and 100
+  - `limit` - a number between 1 and 100 222
 
 ### Track custom events
 
