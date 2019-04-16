@@ -2,9 +2,9 @@
 
 [Voucherify](https://voucherify.io/?utm_campaign=sdk&utm_medium=docs&utm_source=github) is an API-first platform for software developers who are dissatisfied with high-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
 
-- an API-first SaaS platform that enables customisation of every aspect of coupon campaigns
-- a management console that helps cut down maintenance and reporting overhead
-- an infrastructure to scale up coupon activity in no time
+* an API-first SaaS platform that enables customisation of every aspect of coupon campaigns
+* a management console that helps cut down maintenance and reporting overhead
+* an infrastructure to scale up coupon activity in no time
 
 This is a library to facilitate coupon codes validation and redemption on your website.
 
@@ -12,15 +12,15 @@ You can find the full API documentation on [docs.voucherify.io](https://docs.vou
 
 Contents:
 
-- [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
-- [2](https://github.com/rspective/voucherify.js#validation) - How to validate [vouchers](https://docs.voucherify.io/reference/#vouchers-validate) and [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
-- [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
-- [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference#create-publication) coupons
-- [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
-- [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget
-- [7](https://github.com/rspective/voucherify.js#redeem-widget) - Configuring redemption widget
-- [8](https://github.com/rspective/voucherify.js#publish-widget) - Configuring publish widget
-- [9](https://github.com/rspective/voucherify.js#subscribe-widget---iframe) - Configuring customer profile widget
+* [1](https://github.com/rspective/voucherify.js#initialize-settings) - Installation and client-side authentication
+* [2](https://github.com/rspective/voucherify.js#validation) - How to validate [vouchers](https://docs.voucherify.io/reference/#vouchers-validate) and [promotions](https://docs.voucherify.io/reference/#validate-promotions-1)
+* [3](https://github.com/rspective/voucherify.js#redeem-vouchers) - How to call [redemption](https://docs.voucherify.io/reference/#redeem-voucher-client-side)
+* [4](https://github.com/rspective/voucherify.js#publish-vouchers) - How to call [publish](https://docs.voucherify.io/reference#create-publication) coupons
+* [5](https://github.com/rspective/voucherify.js#list-vouchers) - How to call [list](https://docs.voucherify.io/reference/#list-vouchers) coupons
+* [6](https://github.com/rspective/voucherify.js#validation-widget) - Configuring validation widget
+* [7](https://github.com/rspective/voucherify.js#redeem-widget) - Configuring redemption widget
+* [8](https://github.com/rspective/voucherify.js#publish-widget) - Configuring publish widget
+* [9](https://github.com/rspective/voucherify.js#subscribe-widget---iframe) - Configuring customer profile widget
 
 ### Usage
 
@@ -29,39 +29,25 @@ Contents:
 Attach `voucherify.min.js` to your page, somewhere near `</body>`:
 
 ```html
-<script
-  type="text/javascript"
-  src="/libs/voucherify/voucherify.min.js"
-></script>
+<script type="text/javascript" src="/libs/voucherify/voucherify.min.js"></script>
 ```
 
 You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/voucherify.js):
 
 ```html
-<script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.js"
-></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.js"></script>
 ```
 
 Attach `voucherify.min.css` to your page, somewhere between `<head>` and `</head>`:
 
 ```html
-<link
-  type="text/css"
-  rel="stylesheet"
-  href="/libs/voucherify/voucherify.min.css"
-/>
+<link type="text/css" rel="stylesheet" href="/libs/voucherify/voucherify.min.css" />
 ```
 
 You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/voucherify.js):
 
 ```html
-<link
-  type="text/css"
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.css"
-/>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rspective/voucherify.js@latest/dist/voucherify.min.css" />
 ```
 
 ### Initialize settings
@@ -73,23 +59,23 @@ You can also link it from [jsdelivr CDN](https://www.jsdelivr.com/projects/vouch
 Invoke `Voucherify.initialize(...)` when your application starts up:
 
 ```javascript
-$(function() {
-  Voucherify.initialize(
-    "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
-    "YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-  );
+$(function () {
+    Voucherify.initialize(
+        "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
+        "YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+    );
 });
 ```
 
-As a third argument you can specify a timeout setting (in _milliseconds_):
+As a third argument you can specify a timeout setting (in *milliseconds*):
 
 ```javascript
-$(function() {
-  Voucherify.initialize(
-    "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
-    "YOUR-CLIENT-TOKEN-FROM-SETTINGS",
-    2000
-  );
+$(function () {
+    Voucherify.initialize(
+        "YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS",
+        "YOUR-CLIENT-TOKEN-FROM-SETTINGS",
+        2000
+    );
 });
 ```
 
@@ -99,10 +85,8 @@ We will generate a `tracking_id` on the server side unless you specify it on you
 To provide your custom value use this simple function:
 
 ```javascript
-$(function() {
-  Voucherify.setIdentity(
-    "Your format of tracking_id e.g. Phone number or Email address."
-  );
+$(function () {
+    Voucherify.setIdentity("Your format of tracking_id e.g. Phone number or Email address.");
 });
 ```
 
@@ -111,8 +95,8 @@ You can provide a custom base URL to Voucherify servers in order to accomplish s
 Use the following function to set it:
 
 ```javascript
-$(function() {
-  Voucherify.setBaseUrl("https://<region1>.api.voucherify.io");
+$(function () {
+    Voucherify.setBaseUrl("https://<region1>.api.voucherify.io");
 });
 ```
 
@@ -128,23 +112,24 @@ You validate by invoking:
 
 where params is an object including:
 
-- `code` _(required)_ - voucher's code
-- `amount` _(required for gift vouchers, integer, value in cents)_ - order's amount that is going to be paid by voucher (entirely or partially)
-- `items` _(required for order validation rules)_ - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
-- `customer` _(optional)_ - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
-- `metadata` _(required for metadata validation rules)_ - on object containing values of any type (boolean, number, string)
+- `code` *(required)* - voucher's code
+- `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
+- `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
+- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
+- `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
 
 or (only voucher validation)
 
 `Voucherify.validate("VOUCHER-CODE", function callback (response) { })`
 
-Example - check if one can redeem \$50 from 'gift100' voucher:
+Example - check if one can redeem $50 from 'gift100' voucher:
 
 `Voucherify.validate({code: "gift100", amount: 5000}, function callback (response) { })`
 
 Example responses:
 
 Valid amount discount response:
+
 
 ```javascript
 {
@@ -174,6 +159,7 @@ Valid percentage discount response:
 
 Valid unit discount response:
 
+
 ```javascript
 {
     "code": "VOUCHER_CODE",
@@ -188,6 +174,7 @@ Valid unit discount response:
 
 Valid gift voucher response:
 
+
 ```javascript
    {
        "code": "VOUCHER_CODE",
@@ -198,9 +185,10 @@ Valid gift voucher response:
        }
        "tracking_id": "generated-or-passed-tracking-id"
    }
-```
+   ```
 
 Valid promotion response:
+
 
 ```javascript
   {
@@ -221,6 +209,8 @@ Valid promotion response:
       "tracking_id": "generated-or-passed-tracking-id"
     }
 ```
+
+
 
 Invalid voucher response:
 
@@ -253,11 +243,11 @@ Error response:
 }
 ```
 
-If you are using _jQuery_ in version higher than _1.5_, you can use its implementation of promises (remember to load `voucherify.js` script after loading _jQuery_):
+If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
 
 ```javascript
 Voucherify.validate("VOUCHER-CODE")
-  .done(function(data) {
+  .done(function (data) {
     /*
     {
         "code": "VOUCHER_CODE",
@@ -315,7 +305,7 @@ Voucherify.validate("VOUCHER-CODE")
     }
     */
   })
-  .fail(function(error) {
+  .fail(function (error) {
     /*
     {
         "type": "error",
@@ -337,18 +327,20 @@ Reference: [redemption object](http://docs.voucherify.io/reference#the-redemptio
 
 How to use it:
 
+
 `Voucherify.redeem("VOUCHER-CODE", payload, function callback (response) { })`
 
 where `payload` is an object which can include:
 
 - `customer` - voucher customer object
-  - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
+    - `source_id` - if not set, `tracking_id` will be used (if `tracking_id` is set)
 - `order` - with at least
-  - `amount`
+    - `amount`
 
 Example:
 
 `Voucherify.redeem("gfct5ZWI1nL", { order: { amount: 5000 } }, function callback (response) { })`
+
 
 Success response
 
@@ -400,7 +392,7 @@ Success response
 }
 ```
 
-If you are using _jQuery_ in version higher than _1.5_, you can use its implementation of promises (remember to load `voucherify.js` script after loading _jQuery_):
+If you are using *jQuery* in version higher than *1.5*, you can use its implementation of promises (remember to load `voucherify.js` script after loading *jQuery*):
 
 ```javascript
 Voucherify.redeem("VOUCHER-CODE", payload)
@@ -417,7 +409,7 @@ Voucherify.redeem("VOUCHER-CODE", payload)
         }
        */
   });
-```
+ ```
 
 ### Publish vouchers
 
@@ -448,6 +440,8 @@ If you want to use this method you have to **enable it in your project's configu
   - `created_at` - a filter on the list based on the object created_at field. Options: before, after
   - `updated_at` - a filter on the list based on the object updated_at field. Options: before, after
 
+
+
 ### Track custom events
 
 Custom events are actions taken by your customers. Those events are best suited for tracking high-value interactions with your app. Logging a custom event can trigger any number of subsequent operations (e.g.: email distribution). It is enabled by default. There is no need for changing project configuration.
@@ -467,18 +461,18 @@ Custom events are actions taken by your customers. Those events are best suited 
 
 If you need a quick UI to validate vouchers on your website then use `Voucherify.render(selector, options)`:
 
-- `selector` - identifies an HTML element that will be used as a container for the widget
-- `options`:
-  - `classInvalid` - CSS class applied to the input when entered code is invalid
-  - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
-  - `classValid` - CSS class applied to the input when entered code is valid
-  - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
-  - `logoSrc` - source of the image appearing in the circle at the top
-  - **`onValidated`** - a callback function invoked when the entered code is valid, it takes the validation response as a parameter
-  - `amount` - flag enables the amount input field
-  - `textPlaceholder` - text displayed as a placeholder in the code input field
-  - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
-  - `textValidate` - a text displayed on the button (default: "Validate")
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - `classInvalid` - CSS class applied to the input when entered code is invalid
+       - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
+       - `classValid` - CSS class applied to the input when entered code is valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - **`onValidated`** - a callback function invoked when the entered code is valid, it takes the validation response as a parameter
+       - `amount` - flag enables the amount input field
+       - `textPlaceholder` - text displayed as a placeholder in the code input field
+       - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
+       - `textValidate` - a text displayed on the button (default: "Validate")
 
 The widget requires jQuery to work and `voucherify.css` to be displayed properly.
 
@@ -492,45 +486,49 @@ You can find a working example in [example/discount-widget.html](example/discoun
 
 If you need a quick way to redeem vouchers on your website, you can use `Voucherify.renderRedeem(selector, options)`:
 
-- `selector` - identifies an HTML element that will be used as a container for the widget
-- `options`:
-  - `classInvalid` - CSS class applied to the input when entered code is invalid
-  - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
-  - `classValid` - CSS class applied to the input when entered code is valid
-  - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
-  - `logoSrc` - source of the image appearing in the circle at the top
-  - **`onRedeem`** - a callback function invoked when the entered code is redeemed, it takes the redemption response as a parameter
-  - `amount` - flag enables the amount input field
-  - `textPlaceholder` - text displayed as a placeholder in the code input field
-  - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
-  - `textRedeem` - a text displayed on the button (default: "Redeem")
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+      - `classInvalid` - CSS class applied to the input when entered code is invalid
+      - `classInvalidAnimation` - CSS class describing animation of the input field when entered code is invalid
+      - `classValid` - CSS class applied to the input when entered code is valid
+      - `classValidAnimation` - CSS class describing animation of the input field when entered code is valid
+      - `logoSrc` - source of the image appearing in the circle at the top
+      - **`onRedeem`** - a callback function invoked when the entered code is redeemed, it takes the redemption response as a parameter
+      - `amount` - flag enables the amount input field
+      - `textPlaceholder` - text displayed as a placeholder in the code input field
+      - `amountPlaceholder` - text displayed as a placeholder in the amount input field (`amount: true` is required)
+      - `textRedeem` - a text displayed on the button (default: "Redeem")
 
 #### iframe
 
 The iframe renders the redeem widget
 
 ```html
-<div
-  class="voucherify-voucher-redeem"
-  data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
-  data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-  data-code-field="true"
-  data-code-field-label="Label"
-  data-amount-field="true"
-  data-amount-field-required="true"
-  data-amount-field-label="Amount"
-  data-button-label="Redeem voucher"
-  data-logo="Logo"
-  data-redemption-metadata="{'example': true, 'lang': 'eng'}"
-  data-customer-metadata="{'example': true, 'lang': 'eng'}"
-  data-metadata-fields="{'field_1_key': 'Field 1 Label', 'field_2_key': 'Field 2 Label'}"
-  data-consent-label="Marketing Permissions"
-  data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
-  data-consent-options="{'phone':'Phone','email':'Email'}"
-  data-consent-options-required="any"
-  data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
-  data-consent-voucherify-note-visible="true"
-></div>
+<div class="voucherify-voucher-redeem"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-code-field="true"
+     data-code-field-label="Label"
+
+     data-amount-field="true"
+     data-amount-field-required="true"
+     data-amount-field-label="Amount"
+
+     data-button-label="Redeem voucher"
+
+     data-logo="Logo"
+     data-redemption-metadata="{'example': true, 'lang': 'eng'}"
+     data-customer-metadata="{'example': true, 'lang': 'eng'}"
+     
+     data-metadata-fields="{'field_1_key': 'Field 1 Label', 'field_2_key': 'Field 2 Label'}"
+     
+     data-consent-label="Marketing Permissions"
+     data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
+     data-consent-options="{'phone':'Phone','email':'Email'}"
+     data-consent-options-required="any"
+     data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
+     data-consent-voucherify-note-visible="true"></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
@@ -579,30 +577,31 @@ The widget is fully configurable. You can decide which fields are visible and re
 - `data-consent-legal="Markdown text"`
 - `data-consent-voucherify-note-visible="BOOLEAN"` - default true
 
+
 ### Publish widget
 
 If you need to [publish](https://docs.voucherify.io/reference#create-publication) coupons from a particular campaign on your website, use `Voucherify.renderPublish(selector, options)`:
 
-- `selector` - identifies an HTML element that will be used as a container for the widget
-- `options`:
-  - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
-  - `classInvalid` - CSS class applied to the input when entered data are invalid
-  - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
-  - `classValid` - CSS class applied to the input when entered code is valid
-  - `classValidAnimation` - CSS class describing animation of the input field when entered data are valid
-  - `logoSrc` - source of the image appearing in the circle at the top
-  - **`onPublished`** - a callback function invoked when publishing voucher will succeed, it takes response as a parameter
-  - `customerFields` - list of the customer input fields that are displayed in widget
-  - `textPublish` - a text displayed on the button (default: "Get voucher")
-  - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
-  - `customerEmailPlaceholder` - text displayed as a placeholder in the email input field
-  - `customerPhonePlaceholder` - text displayed as a placeholder in the phone input field
-  - `customerLine1Placeholder` - text displayed as a placeholder in the first address line input field
-  - `customerLine2Placeholder` - text displayed as a placeholder in the second address line input field
-  - `customerPostalCodePlaceholder` - text displayed as a placeholder in the postal code input field
-  - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
-  - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
-  - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
+   - `selector` - identifies an HTML element that will be used as a container for the widget
+   - `options`:
+       - **`campaignName`** - identifier of a [campaign object](https://docs.voucherify.io/reference#the-campaign-object) which will provide unique codes
+       - `classInvalid` - CSS class applied to the input when entered data are invalid
+       - `classInvalidAnimation` - CSS class describing animation of the input field when entered data are invalid
+       - `classValid` - CSS class applied to the input when entered code is valid
+       - `classValidAnimation` - CSS class describing animation of the input field when entered data are valid
+       - `logoSrc` - source of the image appearing in the circle at the top
+       - **`onPublished`** - a callback function invoked when publishing voucher will succeed, it takes  response as a parameter
+       - `customerFields` - list of the customer input fields that are displayed in widget
+       - `textPublish` - a text displayed on the button (default: "Get voucher")
+       - `customerNamePlaceholder` - text displayed as a placeholder in the name input field
+       - `customerEmailPlaceholder` - text displayed as a placeholder in the email input field
+       - `customerPhonePlaceholder` - text displayed as a placeholder in the phone input field
+       - `customerLine1Placeholder` - text displayed as a placeholder in the first address line input field
+       - `customerLine2Placeholder` - text displayed as a placeholder in the second address line input field
+       - `customerPostalCodePlaceholder` - text displayed as a placeholder in the postal code input field
+       - `customerCityPlaceholder` - text displayed as a placeholder in the city input field
+       - `customerStatePlaceholder` - text displayed as a placeholder in the state input field
+       - `customerCountryPlaceholder` - text displayed as a placeholder in the country input field
 
 The widget requires jQuery to work and `voucherify.css` to be displayed properly.
 
@@ -613,21 +612,24 @@ You can find a working example in [example/publish-widget.html](example/publish-
 You can also embed the "get voucher" widget as an iframe
 
 ```html
-<div
-  class="voucherify-get-voucher"
-  data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
-  data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-  data-campaign="Campaign name"
-  data-name-field="true"
-  data-name-field-required="false"
-  data-name-field-label="Name"
-  data-email-field="true"
-  data-email-field-required="true"
-  data-email-field-label="Email"
-  data-subscribe-label="Subscribe to the list"
-  data-source="Landing_Page_1"
-  data-metadata="{'example': true, 'lang': 'eng'}"
-></div>
+<div class="voucherify-get-voucher"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-campaign="Campaign name"
+
+     data-name-field="true"
+     data-name-field-required="false"
+     data-name-field-label="Name"
+
+     data-email-field="true"
+     data-email-field-required="true"
+     data-email-field-label="Email"
+
+     data-subscribe-label="Subscribe to the list"
+
+     data-source="Landing_Page_1"
+     data-metadata="{'example': true, 'lang': 'eng'}"></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
@@ -664,31 +666,34 @@ The widget is fully configurable. You can decide which fields are visible and re
 The iframe redners a widget which creates a customer profile in Voucherify
 
 ```html
-<div
-  class="voucherify-subscribe"
-  data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
-  data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-  data-name-field="true"
-  data-name-field-required="false"
-  data-name-field-label="Name"
-  data-email-field="true"
-  data-email-field-required="true"
-  data-email-field-label="Email"
-  data-subscribe-label="Subscribe to the list"
-  data-source="Landing_Page_1"
-  data-metadata="{'example': true, 'lang': 'eng'}"
-  data-consent-label="Marketing Permissions"
-  data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
-  data-consent-options="{'phone':'Phone','email':'Email'}"
-  data-consent-options-required="any"
-  data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
-  data-consent-voucherify-note-visible="true"
-></div>
+<div class="voucherify-subscribe"
+     data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
+     data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+
+     data-name-field="true"
+     data-name-field-required="false"
+     data-name-field-label="Name"
+
+     data-email-field="true"
+     data-email-field-required="true"
+     data-email-field-label="Email"
+
+     data-subscribe-label="Subscribe to the list"
+
+     data-source="Landing_Page_1"
+     data-metadata="{'example': true, 'lang': 'eng'}"
+
+     data-consent-label="Marketing Permissions"
+     data-consent-description="The Company Name will use the information you provide on this form to be in touch with you and to provide updates and marketing. Please let us know all the ways you would like to hear from us:"
+     data-consent-options="{'phone':'Phone','email':'Email'}"
+     data-consent-options-required="any"
+     data-consent-legal="You can change your mind at any time by clicking the unsubscribe link in the footer of any email you receive from us, or by contacting us at [support@comapny.com](mailto:support@comapny.com). We will treat your information with respect. For more information about our privacy practices please visit our website. By clicking below, you agree that we may process your information in accordance with these terms."
+     data-consent-voucherify-note-visible="true"></div>
 ```
 
 The widget is fully configurable. You can decide which fields are visible and required. Moreover, you can change the standard labels displayed in the input fields as placeholders. Configuration:
 
-- `data-height="220px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 220px.
+- `data-height="220px""` - The Height of iframe is configurable. Value must include height unit (px, %, em etc.) Default height is 220px.   
 - `data-phone-field="BOOLEAN"`
 - `data-phone-field-required="BOOLEAN"`
 - `data-phone-field-label="Field label"`
@@ -721,12 +726,13 @@ Note:
 The privacy preferences attributes are available only for iframes.
 Description and legal fields do support markdown syntax. It means that you can use markdown to define the links to the external pages or format text, and by that improve experience for your users.
 
+
 ### Changelog
 
-- **2019-02-05** - `1.30.0` - Add method for setting base app url
+- **2019-02-05** - `1.30.0` - Add method for setting base app url 
 - **2018-11-05** - `1.29.0` - Web widgets - new attribute for hiding a note describing Voucherify privacy policy
-- **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value.
-- **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents
+- **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value. 
+- **2018-10-23** - `1.27.0` - For redeem widget. Introduce separated attributes for redemption metadata and customer metadata, introduce custom result message attributes, add consents 
 - **2018-10-23** - `1.26.0` - Add code attribute to the redeem widget which allows to set code value during initialization
 - **2018-07-30** - `1.25.1` - Bugfix resolving filter object to query params
 - **2018-05-18** - `1.25.0` - Allow to configure requirements for consents
@@ -761,8 +767,8 @@ Description and legal fields do support markdown syntax. It means that you can u
 - **2016-08-31** - `1.6.0` - Pass order items (required for validation rules).
 - **2016-06-22** - `1.5.0` - Added support for gift vouchers.
 - **2016-04-14** - `1.4.5` - Prepared for CDN hosting:
-  - removed version number from dist files
-  - added source maps
+   - removed version number from dist files
+   - added source maps
 - **2016-04-04** - `1.4.4` - Updated API URL.
 - **2016-03-31** - `1.4.3` - Fixed logo.
 - **2016-03-31** - `1.4.2` - Fixed input names.
