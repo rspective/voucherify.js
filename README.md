@@ -90,6 +90,8 @@ $(function () {
 });
 ```
 
+#### API Endpoint
+
 You can provide a custom base URL to Voucherify servers in order to accomplish some more complex scenarios like selecting specific app region. Our library will add `https://` prefix in case you skip it, but will not validate the provided url.
 
 Use the following function to set it:
