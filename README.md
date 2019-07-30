@@ -421,10 +421,10 @@ you have to **enable client-side publication** in your project's configuration.
 `Voucherify.publish(campaignName, context, function callback (response) { })`
 
 - `campaignName` - required, name of a campaign from which a voucher should be published
-- `context` - optional, an object consisting of
-  - `customer` - customer profile
-  - `channel` - publication channel (`Voucherify.js` by default)
-  - `metadata` - an object containing any additional data related with publication
+- `context` - required, an object consisting of
+  - `customer` - required, customer profile
+  - `channel` - optional, publication channel (`Voucherify.js` by default)
+  - `metadata` - optional, an object containing any additional data related with publication
 
 ### List vouchers
 
