@@ -117,7 +117,7 @@ where params is an object including:
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
-- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`
+- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`. The object can also define customer's `metadata` used for validation.
 - `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
 
 or (only voucher validation)
@@ -127,6 +127,10 @@ or (only voucher validation)
 Example - check if one can redeem $50 from 'gift100' voucher:
 
 `Voucherify.validate({code: "gift100", amount: 5000}, function callback (response) { })`
+
+Example - check for 'code1' voucher including customer metadata:
+
+`Voucherify.validate({code: "code1", customer: { metadata: { country: "PL" } }}, function callback (response) { })`
 
 Example responses:
 
@@ -257,7 +261,7 @@ Voucherify.validate("VOUCHER-CODE")
         "discount": {
             "type": "AMOUNT",
             "amount_off": 2523
-        }
+        },
         "tracking_id": "generated-or-passed-tracking-id"
     }
 
@@ -731,6 +735,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
 - **2018-11-05** - `1.29.0` - Web widgets - new attribute for hiding a note describing Voucherify privacy policy
 - **2018-10-23** - `1.28.0` - For redeem widget. Introduce attribute which allows the end consumer to sent predefined metadata value. 
