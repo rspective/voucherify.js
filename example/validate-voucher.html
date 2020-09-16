@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="../lib/voucherify.css">
+    </head>
+    <body>
+        <div id="voucher-validate"></div>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+        <script type="text/javascript" src="../lib/voucherify.js"></script>
+        <script>
+            Voucherify.initialize(
+                "011240bf-d5fc-4ef1-9e82-11eb68c43bf5",
+                "9e2230c5-71fb-460a-91c6-fbee64707a20"
+            );
+            Voucherify.setIdentity("gustav@purpleson.com");
+            Voucherify.validate({
+                code: "CODE1",
+                items: [{ product_id: "prod_f1r5Tpr0DuC7" }],
+                orderMetadata: {
+                    source: "website"
+                }
+            })
+                .done(console.log)
+                .fail(console.log);
+        </script>
+    </body>
+</html>
