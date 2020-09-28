@@ -118,7 +118,8 @@ where params is an object including:
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
 - `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`. The object can also define customer's `metadata` used for validation.
-- `metadata` *(required for metadata validation rules)* - on object containing values of any type (boolean, number, string)
+- `orderMetadata` *(required for metadata validation rules)* - order metadata, an object containing values of any type (boolean, number, string)
+- `metadata` *(required for metadata validation rules)* - redemption metadata, an object containing values of any type (boolean, number, string)
 
 or (only voucher validation)
 
@@ -735,6 +736,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
 - **2018-11-05** - `1.29.0` - Web widgets - new attribute for hiding a note describing Voucherify privacy policy
