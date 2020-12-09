@@ -79,8 +79,8 @@ $(function () {
 });
 ```
 
-We are tracking users which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the user.
-We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response. In case you provide `source_id` for customer, always use it also as user's itenditiy. Otherwise  the `ambiguous_tracking_id` error can be returned.
+We are tracking customers which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the customer.
+We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response. In case you provide `source_id`, always use it also as customer's identity. Otherwise  the `ambiguous_tracking_id` error can be returned.
 
 To provide your custom value use this simple function:
 
