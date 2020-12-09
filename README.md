@@ -80,7 +80,7 @@ $(function () {
 ```
 
 We are tracking users which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the user.
-We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response.
+We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response. In case you provide `source_id` for customer, always use it also as user's itenditiy. Otherwise  the `ambiguous_tracking_id` error can be returned.
 
 To provide your custom value use this simple function:
 
@@ -117,7 +117,7 @@ where params is an object including:
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
-- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`. The object can also define customer's `metadata` used for validation.
+- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer. If `source_id` is provided then it has higher precedence than `tracking_id`, but in case it is not defined then `tracking_id` must match existing customer's source id, otherwise `ambiguous_tracking_id` error will be returned. The object can also define customer's `metadata` used for validation.
 - `orderMetadata` *(required for metadata validation rules)* - order metadata, an object containing values of any type (boolean, number, string)
 - `metadata` *(required for metadata validation rules)* - redemption metadata, an object containing values of any type (boolean, number, string)
 
