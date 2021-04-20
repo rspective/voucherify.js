@@ -1,3 +1,9 @@
+## ⚠️ Deprecation notice ⚠️
+
+Please note that this SDK is now deprecated. Instead, please use [voucherify-js-sdk](https://github.com/voucherifyio/voucherify-js-sdk) - which is a brand new library that combines both client-side JavaScript and server-side node.js SDK features, and adds TypeScript support.
+
+ ------------------
+ 
 ## Voucherify - JavaScript SDK
 
 [Voucherify](https://voucherify.io/?utm_campaign=sdk&utm_medium=docs&utm_source=github) is an API-first platform for software developers who are dissatisfied with high-maintenance custom coupon software. Our product is a coupon infrastructure through API that provides a quicker way to build coupon generation, distribution and tracking. Unlike legacy coupon software we have:
@@ -736,6 +742,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
+- **2021-04-20** - `(no new release)` - Add deprecation notice
 - **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
