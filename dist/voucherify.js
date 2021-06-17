@@ -1,7 +1,7 @@
 window.Voucherify = (function (window, document, $) {
   "use strict";
 
-  var API = buildAPI("localhost:8000");
+  var API = buildAPI("https://api.voucherify.io");
 
   function buildAPI(baseUrl) {
     return {
