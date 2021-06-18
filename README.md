@@ -739,7 +739,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
-- **2021-06-20** - `1.32.1` - Add possibility of configuring API endpoint for iframe widgets
+- **2021-06-20** - `1.33.0` - Add possibility of configuring API endpoint for iframe widgets
 - **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
