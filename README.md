@@ -514,7 +514,7 @@ The iframe renders the redeem widget
 <div class="voucherify-voucher-redeem"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     data-client-app-url="API-ENDPOINT; optional; defaults to https://app.voucherify.io"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-code-field="true"
      data-code-field-label="Label"
@@ -623,7 +623,7 @@ You can also embed the "get voucher" widget as an iframe
 <div class="voucherify-get-voucher"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     data-client-app-url="API-ENDPOINT; optional; defaults to https://app.voucherify.io"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-campaign="Campaign name"
 
@@ -678,7 +678,7 @@ The iframe renders a widget which creates a customer profile in Voucherify
 <div class="voucherify-subscribe"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
-     data-client-app-url="API-ENDPOINT; optional; defaults to https://app.voucherify.io"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-name-field="true"
      data-name-field-required="false"
@@ -739,7 +739,8 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
-- **2021-06-20** - `1.33.0` - Add possibility of configuring API endpoint for iframe widgets
+- **2021-06-18** - `1.33.1` - Updated Readme
+- **2021-06-17** - `1.33.0` - Add possibility of configuring region for iframe widgets
 - **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
