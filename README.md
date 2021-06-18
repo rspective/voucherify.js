@@ -739,7 +739,7 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
-- **2021-06-18** - `1.33.1` - Updated Readme
+- **2021-06-18** - `1.33.1` - Updated readme
 - **2021-06-17** - `1.33.0` - Add possibility of configuring region for iframe widgets
 - **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
