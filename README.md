@@ -2,6 +2,8 @@
 
 Please note that this SDK is now deprecated. Instead, please use [voucherify-js-sdk](https://github.com/voucherifyio/voucherify-js-sdk) - which is a brand new library that combines both client-side JavaScript and server-side node.js SDK features, and adds TypeScript support.
 
+ℹ️ Note about **widgets**: The new SDK changes the way voucherify widgets are embedded on web pages. While the deprecated SDK relies on jQuery and (optionally) iframes, the new SDK implements widgets with React, but without iframes. If for any reasons you can't do without iframes, then that might be the only reason to stay with the deprecated SDK.
+
  ------------------
  
 ## Voucherify - JavaScript SDK
