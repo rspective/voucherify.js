@@ -87,8 +87,8 @@ $(function () {
 });
 ```
 
-We are tracking users which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the user.
-We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response.
+We are tracking customers which are validating vouchers with those who consume them by a `tracking_id`. For that we are setting up an identity for the customer.
+We will generate a `tracking_id` on the server side unless you specify it on your own. In both cases you will receive it in the validation response. In case you provide `source_id`, always use it also as customer's identity. Otherwise  the `ambiguous_tracking_id` error can be returned.
 
 To provide your custom value use this simple function:
 
@@ -125,7 +125,7 @@ where params is an object including:
 - `code` *(required)* - voucher's code
 - `amount` *(required for gift vouchers, integer, value in cents)* - order's amount that is going to be paid by voucher (entirely or partially)
 - `items` *(required for order validation rules)* - order items, an array of objects with following properties `product_id`, `sku_id` and `quantity`
-- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer, if provided then it has higher precedence than `tracking_id`. The object can also define customer's `metadata` used for validation.
+- `customer` *(optional)* - an object including `id` and/or `source_id` of a customer. If `source_id` is provided then it has higher precedence than `tracking_id`, but in case it is not defined then `tracking_id` must match existing customer's source id, otherwise `ambiguous_tracking_id` error will be returned. The object can also define customer's `metadata` used for validation.
 - `orderMetadata` *(required for metadata validation rules)* - order metadata, an object containing values of any type (boolean, number, string)
 - `metadata` *(required for metadata validation rules)* - redemption metadata, an object containing values of any type (boolean, number, string)
 
@@ -522,6 +522,7 @@ The iframe renders the redeem widget
 <div class="voucherify-voucher-redeem"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-code-field="true"
      data-code-field-label="Label"
@@ -630,6 +631,7 @@ You can also embed the "get voucher" widget as an iframe
 <div class="voucherify-get-voucher"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-campaign="Campaign name"
 
@@ -678,12 +680,13 @@ The widget is fully configurable. You can decide which fields are visible and re
 
 ### Subscribe widget - iframe
 
-The iframe redners a widget which creates a customer profile in Voucherify
+The iframe renders a widget which creates a customer profile in Voucherify
 
 ```html
 <div class="voucherify-subscribe"
      data-client-app-id="YOUR-CLIENT-APPLICATION-ID-FROM-SETTINGS"
      data-client-token="YOUR-CLIENT-TOKEN-FROM-SETTINGS"
+     data-client-app-url="APP-REGION-URL; optional, defaults to https://app.voucherify.io; example: https://as1.app.voucherify.io"
 
      data-name-field="true"
      data-name-field-required="false"
@@ -744,7 +747,9 @@ Description and legal fields do support markdown syntax. It means that you can u
 
 ### Changelog
 
-- **2021-04-20** - `(no new release)` - Add deprecation notice
+- **2021-06-22** - `(no new release)` - Add deprecation notice
+- **2021-06-18** - `1.33.1` - Updated readme
+- **2021-06-17** - `1.33.0` - Add possibility of configuring region for iframe widgets
 - **2020-09-16** - `1.32.0` - Add possibility to send order metadata with validation request
 - **2019-12-23** - `1.31.0` - Add possibility to send customer metadata with validation request
 - **2019-02-05** - `1.30.0` - Add method for setting base app url 
